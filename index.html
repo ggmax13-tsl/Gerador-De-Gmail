@@ -2,22 +2,22 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Painel Futurista – Gerador de Gmail</title>
+  <title>Painel Rochxz – Gerador de Gmail</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #05060c;
-      --panel: rgba(15, 18, 35, 0.8);
+      --bg: #03040b;
+      --panel: rgba(12, 15, 30, 0.82);
       --glass: rgba(255, 255, 255, 0.06);
       --border: rgba(255, 255, 255, 0.08);
-      --accent: #63f5ff;
-      --accent-2: #8a5bff;
-      --accent-3: #16f2a8;
-      --text: #f4f7ff;
-      --muted: #8fa3c6;
+      --accent: #7cf3ff;
+      --accent-2: #9a6bff;
+      --accent-3: #1cf0b5;
+      --text: #f6f8ff;
+      --muted: #9ab0d8;
       --error: #ff6b6b;
-      --radius: 16px;
-      --shadow: 0 20px 80px rgba(0,0,0,0.55);
+      --radius: 18px;
+      --shadow: 0 25px 100px rgba(0,0,0,0.65);
       --mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Courier New", monospace;
       --sans: "Inter", "Space Grotesk", system-ui, -apple-system, sans-serif;
     }
@@ -26,27 +26,27 @@
       margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--sans);
       display: grid; place-items: center; padding: 28px; overflow: hidden;
     }
-    body::before, body::after {
-      content: ""; position: fixed; inset: 0; pointer-events: none;
+    /* Fundo com glow e linhas */
+    body::before {
+      content: ""; position: fixed; inset: -10%; pointer-events: none;
       background:
-        radial-gradient(circle at 25% 20%, rgba(99,245,255,0.08), transparent 30%),
-        radial-gradient(circle at 80% 30%, rgba(138,91,255,0.12), transparent 32%),
-        radial-gradient(circle at 50% 80%, rgba(22,242,168,0.08), transparent 28%);
-      filter: blur(0px);
+        radial-gradient(circle at 20% 20%, rgba(124,243,255,0.12), transparent 32%),
+        radial-gradient(circle at 80% 25%, rgba(156,107,255,0.14), transparent 36%),
+        radial-gradient(circle at 60% 80%, rgba(28,240,181,0.12), transparent 32%);
+      filter: blur(12px);
       z-index: 0;
     }
     body::after {
-      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      content: ""; position: fixed; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
       background-size: 48px 48px;
-      opacity: 0.5;
-      mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.9), transparent 70%);
+      opacity: 0.35;
+      mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.95), transparent 68%);
+      z-index: 0;
     }
-    .shell {
-      width: min(1100px, 100%);
-      position: relative;
-      z-index: 1;
-    }
+    .shell { width: min(1100px, 100%); position: relative; z-index: 1; }
     .card {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -55,14 +55,15 @@
       padding: 24px;
       backdrop-filter: blur(14px) saturate(1.2);
     }
-    h1 { margin: 0 0 6px; letter-spacing: -0.5px; font-weight: 700; }
+    h1 { margin: 0 0 6px; letter-spacing: -0.5px; font-weight: 800; }
     .lead { margin: 0 0 18px; color: var(--muted); }
     .badge {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 8px 12px; border-radius: 999px;
-      background: linear-gradient(120deg, rgba(99,245,255,0.16), rgba(138,91,255,0.16));
+      background: linear-gradient(120deg, rgba(124,243,255,0.16), rgba(156,107,255,0.18));
       border: 1px solid var(--border);
-      color: var(--text); font-weight: 600; font-size: 0.95rem;
+      color: var(--text); font-weight: 650; font-size: 0.96rem;
+      box-shadow: 0 10px 30px rgba(124,243,255,0.15);
     }
     .grid { display: grid; gap: 16px; }
     .controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 14px; }
@@ -81,7 +82,7 @@
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       color: #05060c;
       border: none;
-      box-shadow: 0 12px 30px rgba(99,245,255,0.25);
+      box-shadow: 0 14px 36px rgba(124,243,255,0.25);
     }
     button:hover { transform: translateY(-1px) scale(1.01); border-color: var(--accent); }
     button:active { transform: translateY(0); }
@@ -89,7 +90,7 @@
     table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.97rem; }
     th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
     th { color: var(--muted); font-weight: 700; font-size: 0.92rem; }
-    tr:hover td { background: rgba(99,245,255,0.04); }
+    tr:hover td { background: rgba(124,243,255,0.05); }
     .mono { font-family: var(--mono); letter-spacing: 0.15px; }
     .pill {
       display: inline-flex; align-items: center; gap: 6px;
@@ -100,23 +101,31 @@
     }
     .actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .error { color: var(--error); font-weight: 700; min-height: 20px; }
+    /* cartões menores */
+    .mini {
+      padding: 16px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    /* Login overlay */
     .gate {
       position: fixed; inset: 0; display: grid; place-items: center;
-      background: radial-gradient(circle at 50% 35%, rgba(99,245,255,0.08), rgba(5,6,12,0.92));
+      background: radial-gradient(circle at 50% 35%, rgba(124,243,255,0.08), rgba(3,4,11,0.93));
       z-index: 5;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(5px);
       padding: 20px;
     }
     .gate-card {
       width: min(420px, 100%);
-      background: rgba(12,14,25,0.9);
+      background: rgba(10,12,22,0.95);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 20px;
       padding: 24px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(16px);
     }
-    .gate-title { margin: 0 0 10px; font-size: 1.4rem; }
+    .gate-title { margin: 0 0 10px; font-size: 1.45rem; font-weight: 800; }
     .gate-sub { margin: 0 0 18px; color: var(--muted); }
     .gate .grid { gap: 12px; }
     @media (max-width: 720px) {
@@ -128,7 +137,7 @@
 </head>
 <body>
   <div class="shell">
-    <div class="badge">◉ Painel Futurista • Gerador Gmail + Senha</div>
+    <div class="badge">◉ Painel Rochxz • Gerador Gmail + Senha</div>
     <h1>Painel de Geração</h1>
     <p class="lead">Protegido por login. Gere emails Gmail aleatórios e senhas fortes, copie ou exporte CSV.</p>
 
@@ -142,14 +151,14 @@
       </div>
 
       <div class="grid" id="current">
-        <div class="card" style="padding:16px; background:rgba(255,255,255,0.03); border-color:var(--border);">
+        <div class="mini">
           <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 6px;">Email atual</div>
           <div class="mono" id="current-email">—</div>
           <div class="actions" style="margin-top:10px;">
             <button id="copy-email">Copiar email</button>
           </div>
         </div>
-        <div class="card" style="padding:16px; background:rgba(255,255,255,0.03); border-color:var(--border);">
+        <div class="mini">
           <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 6px;">Senha atual</div>
           <div class="mono" id="current-pass">—</div>
           <div class="actions" style="margin-top:10px;">
@@ -172,7 +181,7 @@
     <div class="gate-card">
       <div class="badge">Acesso restrito</div>
       <h2 class="gate-title">Digite suas credenciais</h2>
-      <p class="gate-sub">Somente usuários autorizados. (Edite ALLOWED_USERS no código.)</p>
+      <p class="gate-sub">Somente usuários autorizados.</p>
       <div class="grid">
         <input id="login-user" placeholder="Usuário" autocomplete="off" />
         <input id="login-pass" placeholder="Senha" type="password" />
@@ -183,7 +192,7 @@
   </div>
 
   <script>
-    /* LISTA DE USUÁRIOS E SENHAS PERMITIDOS */
+    /* Lista de usuários e senhas permitidos */
     const ALLOWED_USERS = {
       "Rochxz": "30114818",
       "neonflux": "Ar!7yX9cVdQ2",
@@ -210,9 +219,7 @@
     const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
     const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-    function slugify(str) {
-      return str.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 12);
-    }
+    function slugify(str) { return str.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 12); }
     function randomEmail() {
       const adj = rand(adjectives);
       const noun = rand(nouns);
@@ -271,9 +278,7 @@
     document.getElementById("btn-export").onclick = exportCSV;
     document.getElementById("copy-email").onclick = () => copyText(emailEl.textContent);
     document.getElementById("copy-pass").onclick = () => copyText(passEl.textContent);
-    tableBody.addEventListener("click", (e) => {
-      if (e.target.dataset?.copy) copyText(e.target.dataset.copy);
-    });
+    tableBody.addEventListener("click", (e) => { if (e.target.dataset?.copy) copyText(e.target.dataset.copy); });
 
     // Login gate (multi-usuário)
     const gate = document.getElementById("gate");
