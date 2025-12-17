@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #03040b;
-      --panel: rgba(12, 15, 30, 0.82);
+      --bg: #02030a;
+      --panel: rgba(10, 14, 30, 0.82);
       --glass: rgba(255, 255, 255, 0.06);
+      --glass-2: rgba(255, 255, 255, 0.03);
       --border: rgba(255, 255, 255, 0.08);
       --accent: #7cf3ff;
       --accent-2: #9a6bff;
@@ -16,8 +17,8 @@
       --text: #f6f8ff;
       --muted: #9ab0d8;
       --error: #ff6b6b;
-      --radius: 18px;
-      --shadow: 0 25px 100px rgba(0,0,0,0.65);
+      --radius: 20px;
+      --shadow: 0 28px 120px rgba(0,0,0,0.7);
       --mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Courier New", monospace;
       --sans: "Inter", "Space Grotesk", system-ui, -apple-system, sans-serif;
     }
@@ -26,14 +27,15 @@
       margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--sans);
       display: grid; place-items: center; padding: 28px; overflow: hidden;
     }
-    /* Fundo com glow e linhas */
+    /* Fundo com luzes e rede */
     body::before {
-      content: ""; position: fixed; inset: -10%; pointer-events: none;
+      content: ""; position: fixed; inset: -12%; pointer-events: none;
       background:
-        radial-gradient(circle at 20% 20%, rgba(124,243,255,0.12), transparent 32%),
-        radial-gradient(circle at 80% 25%, rgba(156,107,255,0.14), transparent 36%),
-        radial-gradient(circle at 60% 80%, rgba(28,240,181,0.12), transparent 32%);
-      filter: blur(12px);
+        radial-gradient(circle at 18% 22%, rgba(124,243,255,0.15), transparent 32%),
+        radial-gradient(circle at 78% 18%, rgba(156,107,255,0.16), transparent 35%),
+        radial-gradient(circle at 65% 80%, rgba(28,240,181,0.14), transparent 36%),
+        radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.05), transparent 45%);
+      filter: blur(8px);
       z-index: 0;
     }
     body::after {
@@ -41,32 +43,35 @@
       background-image:
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 48px 48px;
+      background-size: 52px 52px;
       opacity: 0.35;
       mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.95), transparent 68%);
       z-index: 0;
     }
-    .shell { width: min(1100px, 100%); position: relative; z-index: 1; }
+    .shell { width: min(1180px, 100%); position: relative; z-index: 1; }
     .card {
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 24px;
-      backdrop-filter: blur(14px) saturate(1.2);
+      backdrop-filter: blur(16px) saturate(1.2);
     }
-    h1 { margin: 0 0 6px; letter-spacing: -0.5px; font-weight: 800; }
+    h1 { margin: 0 0 6px; letter-spacing: -0.6px; font-weight: 800; font-size: 1.9rem; }
     .lead { margin: 0 0 18px; color: var(--muted); }
     .badge {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 12px; border-radius: 999px;
-      background: linear-gradient(120deg, rgba(124,243,255,0.16), rgba(156,107,255,0.18));
+      padding: 9px 13px; border-radius: 999px;
+      background: linear-gradient(120deg, rgba(124,243,255,0.18), rgba(156,107,255,0.2));
       border: 1px solid var(--border);
       color: var(--text); font-weight: 650; font-size: 0.96rem;
-      box-shadow: 0 10px 30px rgba(124,243,255,0.15);
+      box-shadow: 0 12px 32px rgba(124,243,255,0.2);
     }
     .grid { display: grid; gap: 16px; }
-    .controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 14px; }
+    .controls {
+      display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 14px;
+      padding: 10px; border-radius: 14px; background: var(--glass-2); border: 1px solid var(--border);
+    }
     button, input {
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -75,44 +80,88 @@
       padding: 12px 14px;
       font-weight: 700;
       letter-spacing: 0.2px;
-      transition: transform 0.08s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.09s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
     button { cursor: pointer; }
     button.primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       color: #05060c;
       border: none;
-      box-shadow: 0 14px 36px rgba(124,243,255,0.25);
+      box-shadow: 0 16px 40px rgba(124,243,255,0.28);
+    }
+    button.ghost {
+      background: transparent;
+      border: 1px dashed var(--border);
+      color: var(--muted);
     }
     button:hover { transform: translateY(-1px) scale(1.01); border-color: var(--accent); }
     button:active { transform: translateY(0); }
     input:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
     table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.97rem; }
-    th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
-    th { color: var(--muted); font-weight: 700; font-size: 0.92rem; }
+    th, td { padding: 12px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+    th { color: var(--muted); font-weight: 700; font-size: 0.92rem; text-transform: uppercase; letter-spacing: 0.5px; }
     tr:hover td { background: rgba(124,243,255,0.05); }
     .mono { font-family: var(--mono); letter-spacing: 0.15px; }
     .pill {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 7px 11px; border-radius: 999px;
-      background: rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.05);
       border: 1px solid var(--border);
       color: var(--muted); font-size: 0.9rem; font-weight: 600;
     }
     .actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .error { color: var(--error); font-weight: 700; min-height: 20px; }
-    /* cartões menores */
     .mini {
       padding: 16px;
       background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
       border: 1px solid var(--border);
       border-radius: var(--radius);
     }
+    /* Barra superior */
+    .header-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 14px 18px; border-radius: 16px;
+      background: linear-gradient(120deg, rgba(124,243,255,0.08), rgba(156,107,255,0.08));
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+    .status-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--accent-3);
+      box-shadow: 0 0 12px rgba(28,240,181,0.8);
+    }
+    /* Modal CSV */
+    .overlay {
+      position: fixed; inset: 0; display: none; place-items: center;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
+      z-index: 10;
+    }
+    .modal {
+      width: min(720px, 92%);
+      background: rgba(10,12,22,0.94);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .modal h3 { margin: 0 0 10px; letter-spacing: -0.3px; }
+    .modal p { margin: 0 0 14px; color: var(--muted); }
+    .textarea {
+      width: 100%;
+      min-height: 180px;
+      background: var(--glass-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--text);
+      font-family: var(--mono);
+      resize: vertical;
+    }
+    .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; margin-top: 12px; }
     /* Login overlay */
     .gate {
       position: fixed; inset: 0; display: grid; place-items: center;
-      background: radial-gradient(circle at 50% 35%, rgba(124,243,255,0.08), rgba(3,4,11,0.93));
-      z-index: 5;
+      background: radial-gradient(circle at 50% 35%, rgba(124,243,255,0.1), rgba(3,4,11,0.94));
+      z-index: 20;
       backdrop-filter: blur(5px);
       padding: 20px;
     }
@@ -120,7 +169,7 @@
       width: min(420px, 100%);
       background: rgba(10,12,22,0.95);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 24px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(16px);
@@ -132,22 +181,35 @@
       th:nth-child(3), td:nth-child(3) { display: none; }
       button, input { width: 100%; }
       .controls { flex-direction: column; }
+      .header-bar { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
   <div class="shell">
-    <div class="badge">◉ Painel Rochxz • Gerador Gmail + Senha</div>
-    <h1>Painel de Geração</h1>
-    <p class="lead">Protegido por login. Gere emails Gmail aleatórios e senhas fortes, copie ou exporte CSV.</p>
+    <div class="header-bar">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="status-dot"></div>
+        <div>
+          <div class="badge">Painel Rochxz • Gerador Gmail + Senha</div>
+          <div style="color:var(--muted); font-size:0.9rem; margin-top:4px;">Acesso restrito • Neon Secure</div>
+        </div>
+      </div>
+      <div class="actions">
+        <span class="pill">Domínio: gmail.com</span>
+        <span class="pill">Senha: 16-20 chars</span>
+      </div>
+    </div>
+
+    <h1 style="margin-top:16px;">Painel de Geração</h1>
+    <p class="lead">Gere emails Gmail aleatórios, senhas fortes, copie individualmente ou exporte CSV (visual bonito).</p>
 
     <div class="card">
       <div class="controls">
         <button class="primary" id="btn-generate">Gerar 1</button>
         <button id="btn-generate-10">Gerar 10</button>
-        <button id="btn-export">Exportar CSV</button>
-        <span class="pill">Domínio: gmail.com</span>
-        <span class="pill">Senha: 16-20 chars</span>
+        <button id="btn-export">Abrir CSV</button>
+        <button class="ghost" id="btn-clear">Limpar lista</button>
       </div>
 
       <div class="grid" id="current">
@@ -173,6 +235,20 @@
         </thead>
         <tbody></tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- Modal CSV -->
+  <div class="overlay" id="csv-overlay">
+    <div class="modal">
+      <h3>Exportar CSV</h3>
+      <p>Visualize, copie ou baixe o CSV com emails e senhas gerados.</p>
+      <textarea class="textarea" id="csv-text" readonly></textarea>
+      <div class="modal-actions">
+        <button id="csv-copy">Copiar CSV</button>
+        <button id="csv-download" class="primary">Baixar CSV</button>
+        <button id="csv-close" class="ghost">Fechar</button>
+      </div>
     </div>
   </div>
 
@@ -216,6 +292,12 @@
     const emailEl = document.getElementById("current-email");
     const passEl = document.getElementById("current-pass");
 
+    const overlay = document.getElementById("csv-overlay");
+    const csvText = document.getElementById("csv-text");
+    const csvClose = document.getElementById("csv-close");
+    const csvCopy = document.getElementById("csv-copy");
+    const csvDownload = document.getElementById("csv-download");
+
     const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
     const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -255,30 +337,49 @@
       setCurrent(email, pass);
       addRow(email, pass);
     }
-    function exportCSV() {
+    function exportCSVText() {
       const rows = [["email","senha"]];
       tableBody.querySelectorAll("tr").forEach(tr => {
         const tds = tr.querySelectorAll("td");
         if (tds.length >= 2) rows.push([tds[0].textContent, tds[1].textContent]);
       });
-      const csv = rows.map(r => r.map(x => `"${x.replace(/"/g, '""')}"`).join(",")).join("\n");
+      return rows.map(r => r.map(x => `"${x.replace(/"/g, '""')}"`).join(",")).join("\n");
+    }
+    function openCSVModal() {
+      const csv = exportCSVText();
+      csvText.value = csv || "email,senha";
+      overlay.style.display = "grid";
+    }
+    function closeCSVModal() {
+      overlay.style.display = "none";
+    }
+    async function copyText(text) {
+      try { await navigator.clipboard.writeText(text); alert("Copiado!"); }
+      catch { alert("Não foi possível copiar."); }
+    }
+    function downloadCSV(csv) {
       const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url; a.download = "gmails.csv"; a.click();
       URL.revokeObjectURL(url);
     }
-    async function copyText(text) {
-      try { await navigator.clipboard.writeText(text); alert("Copiado!"); }
-      catch { alert("Não foi possível copiar."); }
-    }
 
     document.getElementById("btn-generate").onclick = () => generateOne();
     document.getElementById("btn-generate-10").onclick = () => { for (let i=0;i<10;i++) generateOne(); };
-    document.getElementById("btn-export").onclick = exportCSV;
+    document.getElementById("btn-export").onclick = openCSVModal;
+    document.getElementById("btn-clear").onclick = () => { tableBody.innerHTML = ""; emailEl.textContent = "—"; passEl.textContent = "—"; };
+
     document.getElementById("copy-email").onclick = () => copyText(emailEl.textContent);
     document.getElementById("copy-pass").onclick = () => copyText(passEl.textContent);
-    tableBody.addEventListener("click", (e) => { if (e.target.dataset?.copy) copyText(e.target.dataset.copy); });
+    tableBody.addEventListener("click", (e) => {
+      if (e.target.dataset?.copy) copyText(e.target.dataset.copy);
+    });
+
+    csvClose.onclick = closeCSVModal;
+    csvCopy.onclick = () => copyText(csvText.value);
+    csvDownload.onclick = () => downloadCSV(csvText.value);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) closeCSVModal(); });
 
     // Login gate (multi-usuário)
     const gate = document.getElementById("gate");
