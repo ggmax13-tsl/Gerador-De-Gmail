@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Painel Futurista – Gerador de Gmail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #05060c;
+      --panel: rgba(15, 18, 35, 0.8);
+      --glass: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #63f5ff;
+      --accent-2: #8a5bff;
+      --accent-3: #16f2a8;
+      --text: #f4f7ff;
+      --muted: #8fa3c6;
+      --error: #ff6b6b;
+      --radius: 16px;
+      --shadow: 0 20px 80px rgba(0,0,0,0.55);
+      --mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Courier New", monospace;
+      --sans: "Inter", "Space Grotesk", system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--sans);
+      display: grid; place-items: center; padding: 28px; overflow: hidden;
+    }
+    body::before, body::after {
+      content: ""; position: fixed; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(99,245,255,0.08), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(138,91,255,0.12), transparent 32%),
+        radial-gradient(circle at 50% 80%, rgba(22,242,168,0.08), transparent 28%);
+      filter: blur(0px);
+      z-index: 0;
+    }
+    body::after {
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.5;
+      mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.9), transparent 70%);
+    }
+    .shell {
+      width: min(1100px, 100%);
+      position: relative;
+      z-index: 1;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      backdrop-filter: blur(14px) saturate(1.2);
+    }
+    h1 { margin: 0 0 6px; letter-spacing: -0.5px; font-weight: 700; }
+    .lead { margin: 0 0 18px; color: var(--muted); }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 999px;
+      background: linear-gradient(120deg, rgba(99,245,255,0.16), rgba(138,91,255,0.16));
+      border: 1px solid var(--border);
+      color: var(--text); font-weight: 600; font-size: 0.95rem;
+    }
+    .grid { display: grid; gap: 16px; }
+    .controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 14px; }
+    button, input {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--glass);
+      color: var(--text);
+      padding: 12px 14px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      transition: transform 0.08s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    button { cursor: pointer; }
+    button.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #05060c;
+      border: none;
+      box-shadow: 0 12px 30px rgba(99,245,255,0.25);
+    }
+    button:hover { transform: translateY(-1px) scale(1.01); border-color: var(--accent); }
+    button:active { transform: translateY(0); }
+    input:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.97rem; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+    th { color: var(--muted); font-weight: 700; font-size: 0.92rem; }
+    tr:hover td { background: rgba(99,245,255,0.04); }
+    .mono { font-family: var(--mono); letter-spacing: 0.15px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 11px; border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--muted); font-size: 0.9rem; font-weight: 600;
+    }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .error { color: var(--error); font-weight: 700; min-height: 20px; }
+    .gate {
+      position: fixed; inset: 0; display: grid; place-items: center;
+      background: radial-gradient(circle at 50% 35%, rgba(99,245,255,0.08), rgba(5,6,12,0.92));
+      z-index: 5;
+      backdrop-filter: blur(4px);
+      padding: 20px;
+    }
+    .gate-card {
+      width: min(420px, 100%);
+      background: rgba(12,14,25,0.9);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    .gate-title { margin: 0 0 10px; font-size: 1.4rem; }
+    .gate-sub { margin: 0 0 18px; color: var(--muted); }
+    .gate .grid { gap: 12px; }
+    @media (max-width: 720px) {
+      th:nth-child(3), td:nth-child(3) { display: none; }
+      button, input { width: 100%; }
+      .controls { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="badge">◉ Painel Futurista • Gerador Gmail + Senha</div>
+    <h1>Painel de Geração</h1>
+    <p class="lead">Protegido por login. Gere emails Gmail aleatórios e senhas fortes, copie ou exporte CSV.</p>
+
+    <div class="card">
+      <div class="controls">
+        <button class="primary" id="btn-generate">Gerar 1</button>
+        <button id="btn-generate-10">Gerar 10</button>
+        <button id="btn-export">Exportar CSV</button>
+        <span class="pill">Domínio: gmail.com</span>
+        <span class="pill">Senha: 16-20 chars</span>
+      </div>
+
+      <div class="grid" id="current">
+        <div class="card" style="padding:16px; background:rgba(255,255,255,0.03); border-color:var(--border);">
+          <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 6px;">Email atual</div>
+          <div class="mono" id="current-email">—</div>
+          <div class="actions" style="margin-top:10px;">
+            <button id="copy-email">Copiar email</button>
+          </div>
+        </div>
+        <div class="card" style="padding:16px; background:rgba(255,255,255,0.03); border-color:var(--border);">
+          <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 6px;">Senha atual</div>
+          <div class="mono" id="current-pass">—</div>
+          <div class="actions" style="margin-top:10px;">
+            <button id="copy-pass">Copiar senha</button>
+          </div>
+        </div>
+      </div>
+
+      <table id="table">
+        <thead>
+          <tr><th>Email</th><th>Senha</th><th>Ações</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Login Gate -->
+  <div class="gate" id="gate">
+    <div class="gate-card">
+      <div class="badge">Acesso restrito</div>
+      <h2 class="gate-title">Digite suas credenciais</h2>
+      <p class="gate-sub">Somente usuários autorizados. (Edite ALLOWED_USERS no código.)</p>
+      <div class="grid">
+        <input id="login-user" placeholder="Usuário" autocomplete="off" />
+        <input id="login-pass" placeholder="Senha" type="password" />
+        <button class="primary" id="login-btn">Entrar</button>
+        <div class="error" id="login-error"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* LISTA DE USUÁRIOS E SENHAS PERMITIDOS */
+    const ALLOWED_USERS = {
+      "Rochxz": "30114818",
+      "neonflux": "Ar!7yX9cVdQ2",
+      "cyberline": "Me4!rV0aBqT9",
+      "stellarbit": "Hf6&Pz1kRuE8",
+      "quantumpulse": "Dx2$gL7tVoM5",
+      "lumenarc": "Wq9#fS3hNyJ1",
+      "iondrift": "Vk8@zD5pQaL7",
+      "prismnova": "Tb4*eH2mKsC6",
+      "vortexgrid": "Np7^cU4yRjB3",
+      "synapsewave": "Gm5!vQ9lXtD2",
+      "crystalmesh": "Zr3%hK6pBwF8",
+      "hyperglyph": "Yc1&nJ8sFeR4"
+    };
+
+    const adjectives = ["quantum","neon","cyber","stellar","lumen","ion","nova","hyper","velvet","crystal","photon","zenith","arctic","vortex","prism"];
+    const nouns = ["circuit","matrix","horizon","signal","vertex","orbit","cipher","drift","aurora","glyph","titan","radian","synapse","pulse","arc"];
+    const domains = ["gmail.com"];
+
+    const tableBody = document.querySelector("#table tbody");
+    const emailEl = document.getElementById("current-email");
+    const passEl = document.getElementById("current-pass");
+
+    const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+    function slugify(str) {
+      return str.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 12);
+    }
+    function randomEmail() {
+      const adj = rand(adjectives);
+      const noun = rand(nouns);
+      const num = randInt(10, 9999);
+      return `${slugify(adj)}.${slugify(noun)}${num}@${rand(domains)}`;
+    }
+    function randomPassword() {
+      const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*_-+=?";
+      const len = randInt(16, 20);
+      let out = "";
+      for (let i = 0; i < len; i++) out += chars.charAt(Math.floor(Math.random() * chars.length));
+      return out;
+    }
+    function addRow(email, pass) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="mono">${email}</td>
+        <td class="mono">${pass}</td>
+        <td class="actions">
+          <button data-copy="${email}" class="copy-email">Copiar email</button>
+          <button data-copy="${pass}" class="copy-pass">Copiar senha</button>
+        </td>
+      `;
+      tableBody.prepend(tr);
+    }
+    function setCurrent(email, pass) {
+      emailEl.textContent = email;
+      passEl.textContent = pass;
+    }
+    function generateOne() {
+      const email = randomEmail();
+      const pass = randomPassword();
+      setCurrent(email, pass);
+      addRow(email, pass);
+    }
+    function exportCSV() {
+      const rows = [["email","senha"]];
+      tableBody.querySelectorAll("tr").forEach(tr => {
+        const tds = tr.querySelectorAll("td");
+        if (tds.length >= 2) rows.push([tds[0].textContent, tds[1].textContent]);
+      });
+      const csv = rows.map(r => r.map(x => `"${x.replace(/"/g, '""')}"`).join(",")).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "gmails.csv"; a.click();
+      URL.revokeObjectURL(url);
+    }
+    async function copyText(text) {
+      try { await navigator.clipboard.writeText(text); alert("Copiado!"); }
+      catch { alert("Não foi possível copiar."); }
+    }
+
+    document.getElementById("btn-generate").onclick = () => generateOne();
+    document.getElementById("btn-generate-10").onclick = () => { for (let i=0;i<10;i++) generateOne(); };
+    document.getElementById("btn-export").onclick = exportCSV;
+    document.getElementById("copy-email").onclick = () => copyText(emailEl.textContent);
+    document.getElementById("copy-pass").onclick = () => copyText(passEl.textContent);
+    tableBody.addEventListener("click", (e) => {
+      if (e.target.dataset?.copy) copyText(e.target.dataset.copy);
+    });
+
+    // Login gate (multi-usuário)
+    const gate = document.getElementById("gate");
+    const loginBtn = document.getElementById("login-btn");
+    const loginError = document.getElementById("login-error");
+    const userInput = document.getElementById("login-user");
+    const passInput = document.getElementById("login-pass");
+
+    function checkLogin() {
+      const u = userInput.value.trim();
+      const p = passInput.value;
+      if (ALLOWED_USERS[u] && ALLOWED_USERS[u] === p) {
+        gate.style.display = "none";
+        generateOne();
+      } else {
+        loginError.textContent = "Credenciais inválidas.";
+      }
+    }
+    loginBtn.onclick = checkLogin;
+    passInput.addEventListener("keydown", (e) => { if (e.key === "Enter") checkLogin(); });
+    userInput.addEventListener("keydown", (e) => { if (e.key === "Enter") checkLogin(); });
+  </script>
+</body>
+</html>
