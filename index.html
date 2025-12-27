@@ -6,269 +6,405 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     : root {
-      --bg:  #08090f;
-      --panel:  rgba(12, 16, 28, 0.88);
-      --glass: rgba(255, 255, 255, 0.05);
-      --glass-2: rgba(255, 255, 255, 0.03);
-      --border: rgba(255, 255, 255, 0.08);
+      --bg:  #070810;
+      --bg-secondary: #0a0d16;
+      --panel:  rgba(10, 13, 24, 0.92);
+      --glass: rgba(255, 255, 255, 0.04);
+      --glass-2: rgba(255, 255, 255, 0.02);
+      --border: rgba(255, 255, 255, 0.09);
       --accent: #00d9ff;
       --accent-2: #00ff88;
       --accent-3: #ffad00;
-      --text: #f4f8ff;
-      --muted: #8fa3c6;
-      --error: #ff5555;
+      --accent-4: #ff3366;
+      --text: #f6f9ff;
+      --muted: #8a9fc8;
+      --error: #ff4757;
       --success: #00ff88;
-      --radius: 20px;
-      --shadow: 0 28px 120px rgba(0,0,0,0.7);
-      --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-      --sans: "Inter", "Roboto", system-ui, -apple-system, sans-serif;
+      --radius: 22px;
+      --shadow: 0 30px 130px rgba(0,0,0,0.75);
+      --shadow-soft: 0 15px 60px rgba(0,0,0,0.5);
+      --mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+      --sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--sans);
-      display: grid; place-items: center; padding: 28px; overflow:  auto;
+      min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--sans);
+      display: grid; place-items: center; padding: 32px 20px; overflow:  auto;
       background-image: 
-        radial-gradient(circle at 20% 15%, rgba(0,217,255,0.14), transparent 32%),
-        radial-gradient(circle at 78% 18%, rgba(0,255,136,0.14), transparent 34%),
-        radial-gradient(circle at 50% 85%, rgba(255,173,0,0.12), transparent 36%);
+        radial-gradient(circle at 18% 12%, rgba(0,217,255,0.16), transparent 28%),
+        radial-gradient(circle at 82% 15%, rgba(0,255,136,0.16), transparent 30%),
+        radial-gradient(circle at 50% 88%, rgba(255,173,0,0.14), transparent 32%),
+        radial-gradient(ellipse at 50% 50%, rgba(255,51,102,0.08), transparent 50%);
+      position: relative;
     }
-    body::after {
+    body::before {
       content: ""; position: fixed; inset: 0; pointer-events: none;
       background-image: 
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 50px 50px;
-      opacity: 0.35;
-      mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.95), transparent 68%);
+        repeating-linear-gradient(0deg, rgba(0,217,255,0.03) 0px, transparent 1px, transparent 50px, rgba(0,217,255,0.03) 51px),
+        repeating-linear-gradient(90deg, rgba(0,255,136,0.03) 0px, transparent 1px, transparent 50px, rgba(0,255,136,0.03) 51px);
+      opacity: 0.4;
       z-index: 0;
+      mask-image: radial-gradient(ellipse at 50% 40%, rgba(0,0,0,1), transparent 70%);
     }
-    .shell { width: min(1200px, 100%); position: relative; z-index: 1; }
+    body::after {
+      content: ""; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(0,217,255,0.08) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.15;
+      z-index: 0;
+      pointer-events: none;
+      animation: drift 120s linear infinite;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0) rotate(0deg); }
+      to { transform: translate(-50px, -50px) rotate(360deg); }
+    }
+    .shell { width: min(1280px, 100%); position: relative; z-index: 1; }
     .card {
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 24px;
-      backdrop-filter: blur(18px) saturate(1.3);
-      margin-bottom: 18px;
+      padding: 28px;
+      backdrop-filter:  blur(20px) saturate(1.4);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
     }
-    h1 { margin: 0 0 8px; letter-spacing: -0.7px; font-weight: 900; font-size: 2.2rem; }
-    h2 { margin: 0 0 12px; font-size: 1.4rem; font-weight: 800; }
-    h3 { margin: 0 0 10px; font-size: 1.15rem; font-weight: 750; }
-    . lead { margin: 0 0 20px; color: var(--muted); line-height: 1.6; }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+      opacity: 0.3;
+    }
+    h1 { margin:  0 0 10px; letter-spacing: -0.8px; font-weight: 900; font-size: 2.4rem; 
+         background: linear-gradient(135deg, var(--accent), var(--accent-2));
+         -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    h2 { margin: 0 0 14px; font-size: 1.5rem; font-weight: 850; }
+    h3 { margin:  0 0 12px; font-size: 1.2rem; font-weight: 800; }
+    h4 { margin: 0 0 8px; font-size: 1. 1rem; font-weight: 750; color: var(--accent); }
+    . lead { margin:  0 0 22px; color: var(--muted); line-height: 1.7; font-size: 1.05rem; }
     .badge {
-      display: inline-flex; align-items: center; gap:  8px;
-      padding: 10px 14px; border-radius: 999px;
-      background: linear-gradient(120deg, rgba(0,217,255,0.2), rgba(0,255,136,0.2));
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 11px 16px; border-radius: 999px;
+      background: linear-gradient(125deg, rgba(0,217,255,0.22), rgba(0,255,136,0.22));
       border: 1px solid var(--border);
-      color: var(--text); font-weight: 700; font-size: 0.98rem;
-      box-shadow: 0 14px 36px rgba(0,217,255,0.25);
+      color: var(--text); font-weight: 750; font-size: 1rem;
+      box-shadow: 0 16px 40px rgba(0,217,255,0.28);
     }
-    .grid { display: grid; gap: 16px; }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-    . row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .grid { display: grid; gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+    . grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
     button, input, textarea, select {
       border: 1px solid var(--border);
-      border-radius:  12px;
+      border-radius:  13px;
       background: var(--glass);
       color: var(--text);
-      padding: 12px 14px;
+      padding: 13px 16px;
       font-weight: 700;
-      letter-spacing: 0.2px;
-      transition: transform 0.09s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.3px;
+      transition: all 0.15s ease;
       font-family: var(--sans);
+      font-size: 0.95rem;
     }
     button { cursor: pointer; }
     button. primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #08090f;
+      color: #070810;
       border: none;
-      box-shadow: 0 18px 42px rgba(0,217,255,0.3);
+      box-shadow: 0 20px 45px rgba(0,217,255,0.32);
+      font-weight: 800;
+    }
+    button.primary:hover {
+      box-shadow: 0 24px 55px rgba(0,217,255,0.4);
+      transform: translateY(-2px);
     }
     button.secondary {
       background: linear-gradient(135deg, var(--accent-3), #ff6b35);
-      color: #08090f;
+      color: #070810;
       border: none;
-      box-shadow: 0 16px 38px rgba(255,173,0,0.28);
+      box-shadow: 0 18px 42px rgba(255,173,0,0.3);
+      font-weight: 800;
     }
     button.ghost {
       background: transparent;
       border: 1px dashed var(--border);
       color: var(--muted);
     }
-    button:hover { transform: translateY(-1px) scale(1.01); border-color: var(--accent); }
+    button: hover { transform: translateY(-1px); border-color: var(--accent); }
     button:active { transform: translateY(0); }
-    button:disabled {
+    button: disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
-    input: focus, textarea:focus, select: focus { outline: 1px solid var(--accent); border-color: var(--accent); }
-    . pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 12px; border-radius: 999px;
-      background: rgba(255,255,255,0.05);
+    input: focus, textarea:focus, select:focus { 
+      outline: 2px solid var(--accent); 
+      border-color: var(--accent); 
+      background: rgba(0,217,255,0.05);
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 14px; border-radius: 999px;
+      background: rgba(255,255,255,0.06);
       border: 1px solid var(--border);
-      color: var(--muted); font-size: 0.9rem; font-weight: 650;
+      color: var(--muted); font-size: 0.92rem; font-weight: 700;
     }
     .mini {
-      padding: 16px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      padding: 18px;
+      background: linear-gradient(145deg, rgba(0,217,255,0.06), rgba(0,255,136,0.04));
       border: 1px solid var(--border);
       border-radius: var(--radius);
     }
     .header-bar {
-      display: flex; align-items: center; justify-content: space-between; gap: 14px;
-      padding: 16px 20px; border-radius: 18px;
-      background: linear-gradient(120deg, rgba(0,217,255,0.1), rgba(0,255,136,0.1));
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 18px 24px; border-radius: 20px;
+      background: linear-gradient(125deg, rgba(0,217,255,0.12), rgba(0,255,136,0.12));
       border: 1px solid var(--border);
-      box-shadow: 0 14px 32px rgba(0,0,0,0.28);
-      margin-bottom: 18px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 22px;
     }
-    .status-dot {
-      width: 11px; height: 11px; border-radius: 50%; background: var(--success);
-      box-shadow: 0 0 14px rgba(0,255,136,0.9);
-      animation: pulse 2s infinite;
+    . status-dot {
+      width: 12px; height: 12px; border-radius: 50%; background: var(--success);
+      box-shadow: 0 0 16px rgba(0,255,136,1), 0 0 32px rgba(0,255,136,0.6);
+      animation: pulse 2.5s ease-in-out infinite;
     }
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.92); }
     }
-    . textarea {
+    .textarea {
       width: 100%;
-      min-height: 110px;
+      min-height: 120px;
       background: var(--glass);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px;
+      border-radius: 16px;
+      padding: 14px;
       color: var(--text);
       font-family: var(--sans);
       resize: vertical;
+      line-height: 1.6;
     }
     .file-label {
       display: inline-block;
-      padding: 12px 16px;
-      border:  1px dashed var(--border);
-      border-radius: 12px;
+      padding: 14px 18px;
+      border:  2px dashed var(--border);
+      border-radius: 14px;
       background: var(--glass);
       cursor: pointer;
-      font-weight: 700;
-      transition:  border-color 0.2s ease, background 0.2s ease;
+      font-weight: 750;
+      transition: all 0.2s ease;
     }
-    .file-label:hover { border-color: var(--accent); background: rgba(0,217,255,0.06); }
+    .file-label:hover { 
+      border-color: var(--accent); 
+      background: rgba(0,217,255,0.08);
+      box-shadow: 0 8px 24px rgba(0,217,255,0.2);
+    }
     input[type="file"] { display: none; }
-    . preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 12px; }
+    . preview-grid { 
+      display: grid; 
+      grid-template-columns:  repeat(auto-fill, minmax(150px, 1fr)); 
+      gap: 12px; 
+      margin-top: 16px; 
+    }
     .preview-item {
       position: relative;
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--border);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    . preview-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,217,255,0.3);
     }
     .preview-item img {
       width: 100%;
-      height: 140px;
+      height: 150px;
       object-fit:  cover;
       display: block;
     }
     .preview-item .remove-btn {
       position: absolute;
-      top: 6px;
-      right: 6px;
-      background: rgba(255,85,85,0.9);
+      top: 8px;
+      right: 8px;
+      background: rgba(255,71,87,0.95);
       border: none;
       border-radius: 50%;
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       color: #fff;
       font-weight: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 18px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(255,71,87,0.4);
+    }
+    .preview-item .remove-btn:hover {
+      background: #ff1744;
+      transform: scale(1.1);
     }
     .advice-box {
-      background: rgba(0,217,255,0.07);
+      background: rgba(0,217,255,0.08);
       border-left: 4px solid var(--accent);
-      border-radius: 10px;
-      padding: 14px;
-      margin-top: 12px;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px;
+      line-height: 1.7;
     }
-    .advice-box h4 { margin: 0 0 8px; font-size: 1.05rem; }
-    .advice-box p { margin: 6px 0; color: var(--muted); line-height: 1.5; }
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    .advice-box h4 { margin:  0 0 10px; font-size: 1.1rem; }
+    .advice-box p { margin: 8px 0; color: var(--muted); }
+    .advice-box strong { color: var(--text); }
+    .advice-box ul { margin: 8px 0 8px 20px; }
+    .advice-box li { margin: 6px 0; }
+    .stats-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      gap: 14px; 
+    }
     .stat-card {
-      background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08));
+      background: linear-gradient(135deg, rgba(0,217,255,0.1), rgba(0,255,136,0.1));
       border: 1px solid var(--border);
-      border-radius:  14px;
-      padding: 14px;
+      border-radius:  16px;
+      padding: 18px;
       text-align:  center;
+      transition: all 0.2s ease;
     }
-    .stat-card . label { font-size: 0.9rem; color: var(--muted); margin-bottom: 6px; }
-    .stat-card .value { font-size: 1.6rem; font-weight: 900; color: var(--accent-2); }
-    .tab-bar { display: flex; gap: 8px; margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-    .tab { padding: 10px 16px; border-radius: 10px 10px 0 0; background: var(--glass-2); border: 1px solid transparent; cursor: pointer; font-weight: 700; transition:  background 0.2s ease, border-color 0.2s ease; }
-    .tab. active { background: var(--glass); border-color: var(--border); border-bottom-color: transparent; color: var(--accent); }
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,217,255,0.25);
+    }
+    .stat-card . label { 
+      font-size: 0.92rem; 
+      color: var(--muted); 
+      margin-bottom: 8px; 
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .stat-card .value { 
+      font-size: 1.8rem; 
+      font-weight: 900; 
+      color: var(--accent-2);
+      text-shadow: 0 0 20px rgba(0,255,136,0.3);
+    }
+    .tab-bar { 
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 16px; 
+      border-bottom: 2px solid var(--border); 
+      padding-bottom: 10px; 
+      overflow-x: auto;
+    }
+    .tab { 
+      padding: 12px 18px; 
+      border-radius: 12px 12px 0 0; 
+      background: var(--glass-2); 
+      border: 1px solid transparent; 
+      cursor: pointer; 
+      font-weight: 750; 
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .tab.active { 
+      background: linear-gradient(135deg, rgba(0,217,255,0.15), rgba(0,255,136,0.15)); 
+      border-color: var(--border); 
+      border-bottom-color: transparent; 
+      color: var(--accent);
+      box-shadow: 0 -4px 16px rgba(0,217,255,0.2);
+    }
     .tab:hover { background: var(--glass); }
     .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity:  1; transform: translateY(0); }
+    }
     .loader {
       display: inline-block;
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border: 3px solid rgba(255,255,255,0.2);
       border-top-color: var(--accent);
       border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+      animation: spin 0.7s linear infinite;
+      margin-right: 8px;
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
     .api-key-box {
-      background: rgba(255,173,0,0.08);
-      border:  1px solid var(--accent-3);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom:  16px;
+      background: linear-gradient(135deg, rgba(255,173,0,0.1), rgba(255,107,53,0.08));
+      border: 1px solid var(--accent-3);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom:  20px;
     }
-    @media (max-width: 720px) {
+    .team-selector {
+      background: linear-gradient(135deg, rgba(255,51,102,0.1), rgba(138,91,255,0.1));
+      border: 1px solid rgba(255,51,102,0.3);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 768px) {
       .header-bar { flex-direction: column; align-items: flex-start; }
       button, input, select { width: 100%; }
-      h1 { font-size: 1.7rem; }
+      h1 { font-size: 1.9rem; }
+      . stats-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="shell">
     <div class="header-bar">
-      <div style="display: flex; align-items: center; gap:12px;">
+      <div style="display: flex; align-items: center; gap: 14px;">
         <div class="status-dot"></div>
         <div>
           <div class="badge">⚽ Painel do Proprietário • World Soccer Champs</div>
-          <div style="color:var(--muted); font-size:0.92rem; margin-top:5px;">Seu técnico IA com visão computacional está online</div>
+          <div style="color: var(--muted); font-size:0.94rem; margin-top:6px;">Técnico IA com Google Gemini Vision online</div>
         </div>
       </div>
       <div class="row">
-        <span class="pill">🤖 Google Gemini</span>
-        <span class="pill">📊 Análise IA</span>
+        <span class="pill">🤖 Gemini AI</span>
+        <span class="pill">📊 Análise Real</span>
         <span class="pill">🔄 Transferências</span>
       </div>
     </div>
 
     <h1>Bem-vindo, Proprietário</h1>
-    <p class="lead">Você é o dono do clube.  Envie prints (elenco, finanças, escalação) e defina seus objetivos.  Seu técnico IA com Google Gemini Vision vai analisar as imagens DE VERDADE e dar orientações completas.</p>
+    <p class="lead">Você é o dono do clube.   Envie prints (elenco, finanças, escalação) e defina seus objetivos.   Seu técnico IA vai analisar as imagens DE VERDADE com visão computacional e dar orientações completas.</p>
 
     <!-- API Key -->
     <div class="api-key-box">
-      <h3 style="margin: 0 0 8px;">🔑 Configurar API Key do Google Gemini</h3>
-      <p style="color:var(--muted); margin:0 0 10px; font-size:0.9rem;">
-        Obtenha gratuitamente em:  <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent);">https://aistudio.google.com/app/apikey</a>
+      <h3>🔑 Configurar API Key do Google Gemini</h3>
+      <p style="color:var(--muted); margin: 8px 0 12px; font-size:0.92rem;">
+        Obtenha gratuitamente em:  <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:  var(--accent); font-weight: 700;">Google AI Studio</a>
       </p>
       <div class="row">
-        <input type="password" id="api-key-input" placeholder="Cole sua API Key aqui" style="flex:1; min-width:250px;" />
-        <button id="btn-save-key">Salvar Key</button>
+        <input type="password" id="api-key-input" placeholder="Cole sua API Key aqui (ex: AIzaSy... )" style="flex: 1; min-width:250px;" />
+        <button id="btn-save-key" class="secondary">💾 Salvar Key</button>
       </div>
-      <p id="key-status" style="margin:8px 0 0; font-size:0.9rem; color:var(--muted);"></p>
+      <p id="key-status" style="margin: 10px 0 0; font-size:0.92rem; color:var(--muted);"></p>
+    </div>
+
+    <!-- Seletor de Time -->
+    <div class="team-selector">
+      <h3>🏆 Informações do Clube</h3>
+      <p style="color:var(--muted); margin:8px 0 12px; font-size: 0.92rem;">Digite o nome do seu time.  (Nota: dados do WSC não estão disponíveis via API pública, mas você pode informar manualmente)</p>
+      <div class="row">
+        <input type="text" id="team-name" placeholder="Nome do time (ex: Manchester United)" style="flex:1; min-width:250px;" />
+        <button id="btn-save-team">✅ Salvar Time</button>
+      </div>
+      <p id="team-status" style="margin:10px 0 0; font-size:0.92rem; color:var(--muted);"></p>
     </div>
 
     <!-- Estatísticas do Clube -->
@@ -287,45 +423,40 @@
           <div class="label">Vitórias</div>
           <div class="value" id="stat-wins">—</div>
         </div>
-        <div class="stat-card">
-          <div class="label">Moral Geral</div>
-          <div class="value" id="stat-morale">—</div>
-        </div>
       </div>
-      <p style="color:var(--muted); margin-top:12px; font-size:0.9rem;">💡 Atualize esses valores manualmente (opcional).</p>
-      <div class="row" style="margin-top:10px;">
-        <input type="number" id="input-players" placeholder="Nº jogadores" style="width:140px;" />
-        <input type="text" id="input-budget" placeholder="Orçamento" style="width:180px;" />
-        <input type="number" id="input-wins" placeholder="Vitórias" style="width:120px;" />
-        <input type="text" id="input-morale" placeholder="Moral" style="width:140px;" />
-        <button id="btn-update-stats">Atualizar Status</button>
+      <p style="color:var(--muted); margin-top:14px; font-size:0.92rem;">💡 Atualize esses valores manualmente (ex: orçamento em milhões será convertido automaticamente)</p>
+      <div class="row" style="margin-top:12px;">
+        <input type="number" id="input-players" placeholder="Nº jogadores" style="width:150px;" />
+        <input type="text" id="input-budget" placeholder="Orçamento (ex: 5000000 ou 5M)" style="width:200px;" />
+        <input type="number" id="input-wins" placeholder="Vitórias" style="width:130px;" />
+        <button id="btn-update-stats">🔄 Atualizar</button>
       </div>
     </div>
 
-    <!-- Upload múltiplo de imagens -->
+    <!-- Upload múltiplo -->
     <div class="card">
-      <h3>📸 Enviar Prints do Jogo (IA vai analisar DE VERDADE)</h3>
-      <p style="color:var(--muted); margin-bottom:12px;">Envie múltiplas imagens:  elenco, escalação, finanças, resultados.  O Gemini Vision vai ler e analisar cada uma.</p>
-      <label class="file-label" for="file-input">📂 Escolher imagens (múltiplas)</label>
+      <h3>📸 Enviar Prints do Jogo</h3>
+      <p style="color:var(--muted); margin-bottom:14px;">Envie múltiplas imagens:  elenco, escalação, finanças, resultados.  O Gemini Vision vai ler e analisar cada uma.</p>
+      <label class="file-label" for="file-input">📂 Escolher múltiplas imagens</label>
       <input type="file" id="file-input" accept="image/*" multiple />
       <div class="preview-grid" id="preview-grid"></div>
     </div>
 
-    <!-- Objetivos do proprietário -->
+    <!-- Objetivos -->
     <div class="card">
       <h3>🎯 Defina seus Objetivos</h3>
-      <p style="color:var(--muted); margin-bottom:12px;">Diga ao técnico o que você quer alcançar. A IA vai combinar sua descrição com a análise das imagens.</p>
-      <textarea class="textarea" id="user-objectives" placeholder="Ex: Preciso ganhar a próxima copa.  Time está fraco no meio-campo. Tenho R$ 8M para gastar.  Quero vender jogadores velhos... "></textarea>
+      <p style="color:var(--muted); margin-bottom:14px;">Diga ao técnico o que você quer alcançar.  A IA combinará sua descrição com a análise das imagens.</p>
+      <textarea class="textarea" id="user-objectives" placeholder="Ex: Preciso ganhar a próxima copa.  Time está fraco no meio-campo.  Tenho 8M para gastar.  Quero vender jogadores velhos... "></textarea>
     </div>
 
-    <!-- Abas de consulta rápida -->
+    <!-- Consultas rápidas -->
     <div class="card">
       <h3>⚙️ Consultas Rápidas</h3>
       <div class="tab-bar">
-        <div class="tab active" data-tab="tactics">Táticas</div>
-        <div class="tab" data-tab="transfers">Transferências</div>
-        <div class="tab" data-tab="training">Treinamento</div>
-        <div class="tab" data-tab="finance">Finanças</div>
+        <div class="tab active" data-tab="tactics">⚡ Táticas</div>
+        <div class="tab" data-tab="transfers">🔄 Transferências</div>
+        <div class="tab" data-tab="training">🏋️ Treinamento</div>
+        <div class="tab" data-tab="finance">💰 Finanças</div>
       </div>
 
       <div class="tab-content active" id="tactics">
@@ -340,81 +471,81 @@
       <div class="tab-content" id="transfers">
         <h4>🔄 Dicas de Transferências</h4>
         <p>• Contrate jogadores jovens (18-23 anos) com 4-5 estrelas de potencial. </p>
-        <p>• Venda reservas com salários altos e baixa moral.</p>
+        <p>• Venda reservas com salários altos. </p>
         <p>• Use scouts para encontrar talentos baratos em ligas menores.</p>
-        <p>• Priorize posições fracas:  se defesa está ruim, contrate zagueiros de qualidade.</p>
-        <p>• Negocie valores:  ofereça abaixo do pedido inicial e ajuste conforme necessário.</p>
+        <p>• Priorize posições fracas. </p>
+        <p>• Negocie valores:  ofereça abaixo do pedido inicial.</p>
       </div>
 
       <div class="tab-content" id="training">
         <h4>🏋️ Treinamento Eficaz</h4>
-        <p>• Treine atributos-chave: <strong>Velocidade</strong> (atacantes), <strong>Defesa</strong> (zagueiros), <strong>Passes</strong> (meio-campo).</p>
-        <p>• Foque em jogadores jovens (maior margem de crescimento).</p>
-        <p>• Sessões especializadas: "Chute", "Defesa", "Físico", "Técnica", "Passes".</p>
-        <p>• Treine antes de jogos importantes para aumentar moral e atributos.</p>
-        <p>• Evite overtraining: jogadores cansados têm menor desempenho.</p>
+        <p>• <strong>Velocidade</strong> (atacantes), <strong>Defesa</strong> (zagueiros), <strong>Passes</strong> (meio-campo).</p>
+        <p>• Foque em jogadores jovens (maior crescimento).</p>
+        <p>• Sessões:  "Chute", "Defesa", "Físico", "Técnica", "Passes".</p>
+        <p>• Treine antes de jogos importantes.</p>
+        <p>• Evite overtraining:  jogadores cansados rendem menos.</p>
       </div>
 
       <div class="tab-content" id="finance">
         <h4>💰 Gestão Financeira</h4>
-        <p>• Mantenha sempre reserva para salários (pelo menos 3 meses).</p>
-        <p>• Venda jogadores que não jogam e consomem salário alto.</p>
-        <p>• Negocie patrocinadores e ganhe copas/ligas para aumentar receita.</p>
-        <p>• Reduza folha salarial:  renegocie contratos ou venda "peso morto".</p>
-        <p>• Invista em infraestrutura (se disponível) para melhorar receitas a longo prazo.</p>
+        <p>• Mantenha reserva para salários (mínimo 3 meses).</p>
+        <p>• Venda jogadores que não jogam. </p>
+        <p>• Negocie patrocinadores e ganhe copas/ligas.</p>
+        <p>• Reduza folha salarial:  renegocie contratos.</p>
+        <p>• Invista em infraestrutura (se disponível).</p>
       </div>
     </div>
 
-    <!-- Botão de análise -->
+    <!-- Botão análise -->
     <div class="card" style="text-align:center;">
-      <button class="primary" id="btn-analyze" style="font-size:1.1rem; padding:16px 28px;">
-        <span id="analyze-text">🧠 Analisar com IA e Receber Orientações do Técnico</span>
-        <span id="analyze-loader" style="display:none;"><div class="loader"></div> Analisando...</span>
+      <button class="primary" id="btn-analyze" style="font-size:1.15rem; padding:18px 32px;">
+        <span id="analyze-text">🧠 Analisar com IA e Receber Orientações</span>
+        <span id="analyze-loader" style="display:none;"><div class="loader"></div> Analisando com Gemini Vision...</span>
       </button>
-      <button class="ghost" id="btn-clear" style="margin-left:10px;">Limpar Tudo</button>
+      <button class="ghost" id="btn-clear" style="margin-left:12px;">🗑️ Limpar Tudo</button>
     </div>
 
-    <!-- Resultado da análise -->
+    <!-- Resultado -->
     <div class="card" id="result-card" style="display:none;">
       <h2>📋 Relatório do Técnico IA</h2>
-      <p style="color:var(--muted); margin-bottom:14px;">Análise completa por Google Gemini Vision baseada nos prints e objetivos fornecidos.</p>
+      <p style="color:var(--muted); margin-bottom:16px;">Análise completa por Google Gemini Vision baseada nos prints e objetivos fornecidos. </p>
       <div id="advice-output"></div>
     </div>
 
     <!-- Dicas gerais -->
-    <div class="card" style="background:  linear-gradient(135deg, rgba(0,217,255,0.06), rgba(0,255,136,0.06));">
+    <div class="card" style="background:  linear-gradient(135deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08));">
       <h3>💡 Dicas Gerais – World Soccer Champs</h3>
-      <div class="grid-2">
+      <div class="grid-3">
         <div class="mini">
-          <strong>⚽ Táticas:</strong>
-          <p>Ajuste formação conforme adversário. Use 4-4-2 como padrão, 5-3-2 para defesa, 4-3-3 para ataque.</p>
+          <strong>⚽ Táticas: </strong>
+          <p>Ajuste formação conforme adversário. 4-4-2 padrão, 5-3-2 defesa, 4-3-3 ataque.</p>
         </div>
         <div class="mini">
           <strong>💰 Finanças:</strong>
-          <p>Venda reservas, contrate jovens, mantenha reserva salarial de 3+ meses.</p>
+          <p>Venda reservas, contrate jovens, reserve 3+ meses de salários.</p>
         </div>
         <div class="mini">
           <strong>🔄 Transferências:</strong>
-          <p>Priorize jovens (⭐⭐⭐⭐+), use scouts, negocie valores.  Evite velhos com salário alto.</p>
+          <p>Jovens ⭐⭐⭐⭐+, scouts, negocie.  Evite velhos caros.</p>
         </div>
         <div class="mini">
           <strong>🏋️ Treinamento:</strong>
-          <p>Foque em jovens.  Treine velocidade (atacantes), defesa (zagueiros), passes (meio).</p>
-        </div>
-        <div class="mini">
-          <strong>😊 Moral:</strong>
-          <p>Ganhe jogos, faça rotação, descanse jogadores.  Moral alta = melhor desempenho.</p>
+          <p>Foque jovens.  Velocidade (atacantes), defesa (zagueiros), passes (meio).</p>
         </div>
         <div class="mini">
           <strong>📊 Escalação:</strong>
-          <p>Priorize stamina alta e moral. Jogadores cansados rendem menos.</p>
+          <p>Priorize stamina alta.  Jogadores cansados rendem menos.</p>
+        </div>
+        <div class="mini">
+          <strong>🎯 Objetivos:</strong>
+          <p>Defina metas claras:  ganhar liga, reforçar defesa, equilibrar finanças.</p>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    const API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+    const API_ENDPOINT = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent";
     
     const fileInput = document.getElementById("file-input");
     const previewGrid = document.getElementById("preview-grid");
@@ -423,8 +554,11 @@
     const btnClear = document.getElementById("btn-clear");
     const btnUpdateStats = document.getElementById("btn-update-stats");
     const btnSaveKey = document.getElementById("btn-save-key");
+    const btnSaveTeam = document.getElementById("btn-save-team");
     const apiKeyInput = document.getElementById("api-key-input");
+    const teamNameInput = document.getElementById("team-name");
     const keyStatus = document.getElementById("key-status");
+    const teamStatus = document.getElementById("team-status");
     const resultCard = document.getElementById("result-card");
     const adviceOutput = document.getElementById("advice-output");
     const analyzeText = document.getElementById("analyze-text");
@@ -433,45 +567,62 @@
     const inputPlayers = document.getElementById("input-players");
     const inputBudget = document.getElementById("input-budget");
     const inputWins = document.getElementById("input-wins");
-    const inputMorale = document.getElementById("input-morale");
 
     const statPlayers = document.getElementById("stat-players");
     const statBudget = document.getElementById("stat-budget");
     const statWins = document.getElementById("stat-wins");
-    const statMorale = document.getElementById("stat-morale");
 
     let uploadedImages = [];
     let apiKey = localStorage.getItem("gemini_api_key") || "";
+    let teamName = localStorage.getItem("team_name") || "";
 
-    // Carregar API key salva
+    // Carregar API key e time salvos
     if (apiKey) {
       apiKeyInput.value = apiKey;
       keyStatus.textContent = "✅ API Key salva e carregada";
       keyStatus.style.color = "var(--success)";
     }
+    if (teamName) {
+      teamNameInput.value = teamName;
+      teamStatus.textContent = `✅ Time:  ${teamName}`;
+      teamStatus.style.color = "var(--success)";
+    }
 
     // Salvar API key
     btnSaveKey.addEventListener("click", () => {
-      const key = apiKeyInput.value.trim();
+      const key = apiKeyInput.value. trim();
       if (!key) {
         keyStatus.textContent = "❌ Cole uma API Key válida";
         keyStatus.style.color = "var(--error)";
         return;
       }
       apiKey = key;
-      localStorage.setItem("gemini_api_key", key);
+      localStorage. setItem("gemini_api_key", key);
       keyStatus.textContent = "✅ API Key salva com sucesso";
       keyStatus.style.color = "var(--success)";
     });
 
-    // Upload múltiplo de imagens
+    // Salvar time
+    btnSaveTeam. addEventListener("click", () => {
+      const name = teamNameInput.value.trim();
+      if (!name) {
+        teamStatus.textContent = "❌ Digite o nome do time";
+        teamStatus.style.color = "var(--error)";
+        return;
+      }
+      teamName = name;
+      localStorage.setItem("team_name", name);
+      teamStatus.textContent = `✅ Time salvo: ${name}`;
+      teamStatus.style.color = "var(--success)";
+    });
+
+    // Upload múltiplo
     fileInput.addEventListener("change", (e) => {
       const files = Array.from(e.target.files);
       files.forEach(file => {
         const reader = new FileReader();
         reader.onload = (ev) => {
-          const src = ev.target.result;
-          uploadedImages.push(src);
+          uploadedImages.push(ev.target.result);
           renderPreviews();
         };
         reader.readAsDataURL(file);
@@ -494,22 +645,35 @@
 
     previewGrid.addEventListener("click", (e) => {
       if (e.target.classList.contains("remove-btn")) {
-        const idx = parseInt(e.target. dataset.idx, 10);
+        const idx = parseInt(e.target.dataset.idx, 10);
         uploadedImages.splice(idx, 1);
         renderPreviews();
       }
     });
 
-    // Atualizar estatísticas
-    btnUpdateStats. addEventListener("click", () => {
+    // Formatar números em milhões
+    function formatMoney(value) {
+      if (! value) return "—";
+      const num = parseFloat(value. toString().replace(/[^0-9.]/g, ""));
+      if (isNaN(num)) return value;
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1) + "M";
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1) + "K";
+      }
+      return num.toString();
+    }
+
+    // Atualizar stats
+    btnUpdateStats.addEventListener("click", () => {
       statPlayers.textContent = inputPlayers.value || "—";
-      statBudget.textContent = inputBudget.value || "—";
+      statBudget.textContent = formatMoney(inputBudget. value);
       statWins.textContent = inputWins.value || "—";
-      statMorale. textContent = inputMorale. value || "—";
     });
 
-    // Análise com IA REAL
-    btnAnalyze. addEventListener("click", async () => {
+    // Análise com IA
+    btnAnalyze.addEventListener("click", async () => {
       const objectives = userObjectives.value.trim();
       
       if (!apiKey) {
@@ -517,12 +681,11 @@
         return;
       }
 
-      if (uploadedImages.length === 0 && ! objectives) {
+      if (uploadedImages.length === 0 && !objectives) {
         alert("Por favor, envie pelo menos uma imagem ou descreva seus objetivos.");
         return;
       }
 
-      // Desabilitar botão e mostrar loader
       btnAnalyze.disabled = true;
       analyzeText.style.display = "none";
       analyzeLoader.style.display = "inline-flex";
@@ -533,12 +696,13 @@
         resultCard.style.display = "block";
         resultCard.scrollIntoView({ behavior: "smooth" });
       } catch (error) {
-        adviceOutput.innerHTML = `<div class="advice-box" style="border-left-color: var(--error); background:rgba(255,85,85,0.1);">
+        adviceOutput.innerHTML = `<div class="advice-box" style="border-left-color: var(--error); background: rgba(255,71,87,0.1);">
           <h4>❌ Erro na Análise</h4>
-          <p>${error.message}</p>
-          <p>Verifique se sua API Key está correta e se você tem créditos disponíveis.</p>
+          <p><strong>Mensagem:</strong> ${error.message}</p>
+          <p><strong>Dica:</strong> Verifique se sua API Key está correta em <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent);">Google AI Studio</a></p>
         </div>`;
         resultCard.style.display = "block";
+        console.error("Erro:", error);
       } finally {
         btnAnalyze.disabled = false;
         analyzeText.style.display = "inline";
@@ -546,46 +710,44 @@
       }
     });
 
-    // Função para chamar API do Gemini Vision
+    // Chamar Gemini API
     async function analyzeWithGemini(images, objectives) {
       const parts = [];
 
-      // Adicionar prompt do técnico
       parts.push({
-        text: `Você é um técnico experiente de futebol analisando o jogo World Soccer Champs para o proprietário do clube. 
+        text: `Você é um técnico experiente de futebol analisando o jogo World Soccer Champs para o proprietário do clube "${teamName || "não especificado"}". 
 
-CONTEXTO:  O usuário é o DONO do clube, você é o TÉCNICO. Analise as imagens enviadas (prints do jogo) e os objetivos dele. 
+CONTEXTO:  O usuário é o DONO do clube, você é o TÉCNICO.  Analise as imagens (prints do jogo) e objetivos dele. 
 
 OBJETIVOS DO PROPRIETÁRIO:
 ${objectives || "Não especificado.  Faça análise geral. "}
 
 INFORMAÇÕES DO CLUBE:
-- Jogadores: ${statPlayers.textContent}
+- Time: ${teamName || "Não informado"}
+- Jogadores:  ${statPlayers. textContent}
 - Orçamento: ${statBudget.textContent}
 - Vitórias: ${statWins.textContent}
-- Moral: ${statMorale.textContent}
 
-INSTRUÇÕES: 
-1. Analise CADA imagem em DETALHES (elenco, escalação, finanças, resultados, estatísticas).
+INSTRUÇÕES:
+1. Analise CADA imagem em DETALHES (elenco, escalação, finanças, resultados).
 2. Identifique pontos fortes e fracos do time.
-3. Dê recomendações ESPECÍFICAS e PRÁTICAS sobre: 
-   - Contratações (nomes de posições, atributos ideais, faixa de preço)
-   - Vendas (quais jogadores vender e por quê)
-   - Táticas (formação ideal, ajustes táticos)
-   - Treinamento (quais atributos focar, quais jogadores treinar)
-   - Gestão financeira (como melhorar receita e reduzir gastos)
-   - Escalação (time titular ideal baseado nas imagens)
+3. Dê recomendações ESPECÍFICAS sobre: 
+   - Contratações (posições, atributos, preço)
+   - Vendas (quais jogadores dispensar)
+   - Táticas (formação ideal)
+   - Treinamento (atributos e jogadores a focar)
+   - Finanças (como melhorar receita)
+   - Escalação (time titular ideal)
 
-4. Seja DETALHADO e use dados das imagens (nomes de jogadores, valores, ratings, etc.).
-5. Formate sua resposta em HTML com tags <h4>, <p>, <strong>, <ul>, <li>. 
-6. Organize em seções claras:  "Análise das Imagens", "Pontos Fortes", "Pontos Fracos", "Recomendações Imediatas", "Plano de Transferências", "Tática e Escalação", "Treinamento", "Gestão Financeira", "Resumo Executivo". 
+4. Seja DETALHADO.  Use dados das imagens (nomes, valores, ratings).
+5. Use HTML:  <h4>, <p>, <strong>, <ul>, <li>.  NÃO use markdown (**).
+6. Organize em:  "Análise das Imagens", "Pontos Fortes", "Pontos Fracos", "Recomendações Imediatas", "Transferências", "Tática", "Treinamento", "Finanças", "Resumo Executivo". 
 
-Seja como um técnico profissional dando orientações ao dono do clube. `
+Seja profissional como um técnico real. `
       });
 
-      // Adicionar imagens
       images.forEach(imgData => {
-        const base64 = imgData.split(',')[1]; // Remover prefixo data:image/... 
+        const base64 = imgData.split(',')[1];
         const mimeType = imgData.match(/data:([^;]+);/)[1];
         parts.push({
           inline_data: {
@@ -601,35 +763,40 @@ Seja como um técnico profissional dando orientações ao dono do clube. `
         body: JSON.stringify({
           contents: [{ parts }],
           generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 4096,
+            temperature:  0.7,
+            maxOutputTokens: 8192,
           }
         })
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error?.message || "Erro na API do Gemini");
+        const errorData = await response.json();
+        throw new Error(errorData.error?. message || `Erro HTTP ${response.status}`);
       }
 
       const data = await response.json();
-      return data.candidates[0].content.parts[0].text;
+      
+      if (! data.candidates || ! data.candidates[0] || !data.candidates[0]. content) {
+        throw new Error("Resposta da API inválida.  Tente novamente.");
+      }
+
+      return data.candidates[0].content. parts[0].text;
     }
 
-    // Formatar análise da IA
     function formatAnalysis(text) {
-      // Converter markdown para HTML básico se necessário
       let html = text
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n\n/g, '</p><p>')
         .replace(/\n/g, '<br/>');
       
-      return `<div class="advice-box" style="background:rgba(0,217,255,0.06);">
-        ${html}
+      return `<div class="advice-box">
+        <p>${html}</p>
       </div>`;
     }
 
     // Limpar tudo
     btnClear.addEventListener("click", () => {
+      if (! confirm("Limpar todos os dados e imagens? ")) return;
       fileInput.value = "";
       previewGrid.innerHTML = "";
       userObjectives.value = "";
@@ -639,11 +806,10 @@ Seja como um técnico profissional dando orientações ao dono do clube. `
       inputPlayers.value = "";
       inputBudget.value = "";
       inputWins.value = "";
-      inputMorale. value = "";
     });
 
-    // Sistema de abas
-    const tabs = document.querySelectorAll(". tab");
+    // Abas
+    const tabs = document.querySelectorAll(".tab");
     const tabContents = document.querySelectorAll(".tab-content");
     tabs.forEach(tab => {
       tab.addEventListener("click", () => {
