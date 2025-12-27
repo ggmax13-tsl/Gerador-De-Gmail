@@ -5,10 +5,10 @@
   <title>Painel do Proprietário – World Soccer Champs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    : root {
-      --bg:  #070810;
+    :  root {
+      --bg:   #070810;
       --bg-secondary: #0a0d16;
-      --panel: rgba(10, 13, 24, 0.92);
+      --panel:  rgba(10, 13, 24, 0.92);
       --glass: rgba(255, 255, 255, 0.04);
       --glass-2: rgba(255, 255, 255, 0.02);
       --border: rgba(255, 255, 255, 0.09);
@@ -29,7 +29,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--sans);
-      display: grid; place-items: center; padding: 32px 20px; overflow:  auto;
+      display: grid; place-items: center; padding: 32px 20px; overflow:   auto;
       background-image: 
         radial-gradient(circle at 18% 12%, rgba(0,217,255,0.16), transparent 28%),
         radial-gradient(circle at 82% 15%, rgba(0,255,136,0.16), transparent 30%),
@@ -47,7 +47,7 @@
       mask-image: radial-gradient(ellipse at 50% 40%, rgba(0,0,0,1), transparent 70%);
     }
     body::after {
-      content: ""; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+      content: ""; position: fixed; top: -50%; left: -50%; width:  200%; height: 200%;
       background: radial-gradient(circle, rgba(0,217,255,0.08) 1px, transparent 1px);
       background-size: 80px 80px;
       opacity: 0.15;
@@ -59,7 +59,7 @@
       from { transform: translate(0, 0) rotate(0deg); }
       to { transform: translate(-50px, -50px) rotate(360deg); }
     }
-    .shell { width: min(1280px, 100%); position: relative; z-index: 1; }
+    . shell { width: min(1280px, 100%); position: relative; z-index: 1; }
     .card {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -81,15 +81,15 @@
       background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
       opacity: 0.3;
     }
-    h1 { margin:  0 0 10px; letter-spacing: -0.8px; font-weight: 900; font-size: 2.4rem; 
+    h1 { margin:   0 0 10px; letter-spacing: -0.8px; font-weight: 900; font-size: 2.4rem; 
          background: linear-gradient(135deg, var(--accent), var(--accent-2));
          -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     h2 { margin: 0 0 14px; font-size: 1.5rem; font-weight: 850; }
-    h3 { margin: 0 0 12px; font-size: 1.2rem; font-weight: 800; }
-    h4 { margin: 0 0 8px; font-size: 1. 1rem; font-weight: 750; color: var(--accent); }
-    .lead { margin: 0 0 22px; color: var(--muted); line-height: 1.7; font-size: 1.05rem; }
+    h3 { margin:  0 0 12px; font-size: 1.2rem; font-weight: 800; }
+    h4 { margin: 0 0 8px; font-size: 1.  1rem; font-weight: 750; color: var(--accent); }
+    . lead { margin: 0 0 22px; color: var(--muted); line-height: 1.7; font-size: 1.05rem; }
     .badge {
-      display: inline-flex; align-items: center; gap:  10px;
+      display: inline-flex; align-items: center; gap:   10px;
       padding: 11px 16px; border-radius: 999px;
       background: linear-gradient(125deg, rgba(0,217,255,0.22), rgba(0,255,136,0.22));
       border: 1px solid var(--border);
@@ -98,11 +98,11 @@
     }
     .grid { display: grid; gap: 18px; }
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
-    . grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .  grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
     .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
     button, input, textarea, select {
       border: 1px solid var(--border);
-      border-radius:  13px;
+      border-radius:   13px;
       background: var(--glass);
       color: var(--text);
       padding: 13px 16px;
@@ -113,14 +113,14 @@
       font-size: 0.95rem;
     }
     button { cursor: pointer; }
-    button. primary {
+    button.  primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       color: #070810;
       border: none;
       box-shadow: 0 20px 45px rgba(0,217,255,0.32);
       font-weight: 800;
     }
-    button.primary:hover {
+    button. primary:hover {
       box-shadow: 0 24px 55px rgba(0,217,255,0.4);
       transform: translateY(-2px);
     }
@@ -136,20 +136,20 @@
       border: 1px dashed var(--border);
       color: var(--muted);
     }
-    button: hover { transform: translateY(-1px); border-color: var(--accent); }
-    button:active { transform: translateY(0); }
-    button: disabled {
+    button:  hover { transform: translateY(-1px); border-color: var(--accent); }
+    button: active { transform: translateY(0); }
+    button:  disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
-    input: focus, textarea:focus, select:focus { 
+    input:  focus, textarea: focus, select:focus { 
       outline: 2px solid var(--accent); 
       border-color: var(--accent); 
       background: rgba(0,217,255,0.05);
     }
-    .pill {
-      display: inline-flex; align-items: center; gap: 7px;
+    . pill {
+      display: inline-flex; align-items: center; gap:  7px;
       padding: 9px 14px; border-radius: 999px;
       background: rgba(255,255,255,0.06);
       border: 1px solid var(--border);
@@ -169,7 +169,7 @@
       box-shadow: var(--shadow-soft);
       margin-bottom: 22px;
     }
-    . status-dot {
+    .  status-dot {
       width: 12px; height: 12px; border-radius: 50%; background: var(--success);
       box-shadow: 0 0 16px rgba(0,255,136,1), 0 0 32px rgba(0,255,136,0.6);
       animation: pulse 2.5s ease-in-out infinite;
@@ -193,7 +193,7 @@
     .file-label {
       display: inline-block;
       padding: 14px 18px;
-      border:  2px dashed var(--border);
+      border:   2px dashed var(--border);
       border-radius: 14px;
       background: var(--glass);
       cursor: pointer;
@@ -206,7 +206,7 @@
       box-shadow: 0 8px 24px rgba(0,217,255,0.2);
     }
     input[type="file"] { display: none; }
-    . preview-grid { 
+    .  preview-grid { 
       display: grid; 
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
       gap: 12px; 
@@ -219,14 +219,14 @@
       border: 1px solid var(--border);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    . preview-item:hover {
+    .  preview-item:hover {
       transform: translateY(-2px);
       box-shadow: 0 12px 32px rgba(0,217,255,0.3);
     }
     .preview-item img {
       width: 100%;
       height: 150px;
-      object-fit:  cover;
+      object-fit:   cover;
       display: block;
     }
     .preview-item .remove-btn {
@@ -236,10 +236,10 @@
       background: rgba(255,71,87,0.95);
       border: none;
       border-radius: 50%;
-      width:  30px;
+      width: 30px;
       height: 30px;
       color: #fff;
-      font-weight:  900;
+      font-weight: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -260,12 +260,12 @@
       margin-top: 14px;
       line-height: 1.7;
     }
-    .advice-box h4 { margin:  0 0 10px; font-size: 1.1rem; }
+    .advice-box h4 { margin:   0 0 10px; font-size: 1.1rem; }
     .advice-box p { margin: 8px 0; color: var(--muted); }
     .advice-box strong { color: var(--text); }
     .advice-box ul { margin: 8px 0 8px 20px; }
     .advice-box li { margin: 6px 0; }
-    .stats-grid { 
+    . stats-grid { 
       display: grid; 
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
       gap: 14px; 
@@ -273,16 +273,16 @@
     .stat-card {
       background: linear-gradient(135deg, rgba(0,217,255,0.1), rgba(0,255,136,0.1));
       border: 1px solid var(--border);
-      border-radius:  16px;
-      padding:  18px;
-      text-align:  center;
+      border-radius:   16px;
+      padding: 18px;
+      text-align:   center;
       transition: all 0.2s ease;
     }
     .stat-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 16px 40px rgba(0,217,255,0.25);
     }
-    .stat-card . label { 
+    .stat-card .  label { 
       font-size: 0.92rem; 
       color: var(--muted); 
       margin-bottom: 8px; 
@@ -290,7 +290,7 @@
       letter-spacing: 1px;
       font-weight: 700;
     }
-    .stat-card .value { 
+    .stat-card . value { 
       font-size: 1.8rem; 
       font-weight: 900; 
       color: var(--accent-2);
@@ -314,7 +314,7 @@
       transition: all 0.2s ease;
       white-space: nowrap;
     }
-    .tab.active { 
+    .tab. active { 
       background: linear-gradient(135deg, rgba(0,217,255,0.15), rgba(0,255,136,0.15)); 
       border-color: var(--border); 
       border-bottom-color: transparent; 
@@ -326,7 +326,7 @@
     .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
-      to { opacity:  1; transform: translateY(0); }
+      to { opacity: 1; transform:   translateY(0); }
     }
     .loader {
       display: inline-block;
@@ -344,15 +344,15 @@
     .api-key-box {
       background: linear-gradient(135deg, rgba(255,173,0,0.1), rgba(255,107,53,0.08));
       border: 1px solid var(--accent-3);
-      border-radius:  16px;
-      padding:  20px;
-      margin-bottom:  20px;
+      border-radius:   16px;
+      padding:   20px;
+      margin-bottom:   20px;
     }
     .team-selector {
       background: linear-gradient(135deg, rgba(255,51,102,0.1), rgba(138,91,255,0.1));
       border: 1px solid rgba(255,51,102,0.3);
-      border-radius: 16px;
-      padding: 20px;
+      border-radius:  16px;
+      padding:  20px;
       margin-bottom: 20px;
     }
     .alert {
@@ -360,14 +360,14 @@
       border-left: 4px solid var(--accent);
       border-radius: 10px;
       padding: 14px;
-      margin:  12px 0;
+      margin:   12px 0;
       line-height: 1.6;
     }
-    .alert. error {
+    .alert.  error {
       background: rgba(255,71,87,0.15);
       border-left-color: var(--error);
     }
-    .alert.success {
+    .alert. success {
       background: rgba(0,255,136,0.15);
       border-left-color: var(--success);
     }
@@ -375,7 +375,7 @@
       .header-bar { flex-direction: column; align-items: flex-start; }
       button, input, select { width: 100%; }
       h1 { font-size: 1.9rem; }
-      . stats-grid { grid-template-columns: 1fr 1fr; }
+      .  stats-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -386,48 +386,48 @@
         <div class="status-dot"></div>
         <div>
           <div class="badge">⚽ Painel do Proprietário • World Soccer Champs</div>
-          <div style="color: var(--muted); font-size: 0.94rem; margin-top: 6px;">Técnico IA com OpenAI GPT-4 Vision ($5 grátis)</div>
+          <div style="color: var(--muted); font-size: 0.94rem; margin-top: 6px;">Técnico IA com Hugging Face (100% GRÁTIS)</div>
         </div>
       </div>
       <div class="row">
-        <span class="pill">🤖 OpenAI</span>
-        <span class="pill">📊 Análise Real</span>
+        <span class="pill">🤗 Hugging Face</span>
+        <span class="pill">📊 Análise IA</span>
         <span class="pill">🔄 Transferências</span>
       </div>
     </div>
 
     <h1>Bem-vindo, Proprietário</h1>
-    <p class="lead">Você é o dono do clube.  Envie prints (elenco, finanças, escalação) e defina seus objetivos.  Seu técnico IA vai analisar as imagens DE VERDADE com visão computacional. </p>
+    <p class="lead">Você é o dono do clube.   Envie prints (elenco, finanças, escalação) e defina seus objetivos.   Seu técnico IA vai analisar e dar orientações completas.  </p>
 
-    <!-- OpenAI API Key -->
+    <!-- Hugging Face Token -->
     <div class="api-key-box">
-      <h3>🔑 Configurar OpenAI API Key ($5 grátis ao criar conta)</h3>
+      <h3>🤗 Configurar Token do Hugging Face (100% Grátis)</h3>
       <div class="alert">
-        <strong>💰 Como obter $5 grátis:</strong>
-        <ol style="margin:  10px 0 0 20px; line-height: 1.8;">
-          <li>Acesse:  <a href="https://platform.openai.com/signup" target="_blank" style="color: var(--accent); font-weight: 700;">https://platform.openai.com/signup</a></li>
-          <li>Crie uma conta (você ganha $5 grátis para testar)</li>
-          <li>Vá em:  <a href="https://platform.openai.com/api-keys" target="_blank" style="color: var(--accent); font-weight: 700;">API Keys</a></li>
-          <li>Clique em "Create new secret key"</li>
-          <li>Copie a key e cole abaixo</li>
+        <strong>💚 Como obter seu token gratuito:</strong>
+        <ol style="margin:   10px 0 0 20px; line-height: 1.8;">
+          <li>Acesse:   <a href="https://huggingface.co/join" target="_blank" style="color: var(--accent); font-weight: 700;">https://huggingface.co/join</a></li>
+          <li>Crie uma conta (100% grátis, sem cartão)</li>
+          <li>Vá em:   <a href="https://huggingface.co/settings/tokens" target="_blank" style="color: var(--accent); font-weight: 700;">Settings → Tokens</a></li>
+          <li>Clique em "New token" → Role: <strong>Read</strong></li>
+          <li>Copie o token e cole abaixo</li>
         </ol>
       </div>
       <div class="row" style="margin-top: 12px;">
-        <input type="password" id="api-key-input" placeholder="Cole sua OpenAI API Key (sk-...)" style="flex: 1; min-width: 250px;" />
-        <button id="btn-save-key" class="secondary">💾 Salvar Key</button>
+        <input type="password" id="api-key-input" placeholder="Cole seu token Hugging Face (hf_... )" style="flex: 1; min-width: 250px;" />
+        <button id="btn-save-key" class="secondary">💾 Salvar Token</button>
       </div>
-      <p id="key-status" style="margin:  10px 0 0; font-size: 0.92rem; color: var(--muted);"></p>
+      <p id="key-status" style="margin:   10px 0 0; font-size: 0.92rem; color: var(--muted);"></p>
     </div>
 
     <!-- Seletor de Time -->
     <div class="team-selector">
       <h3>🏆 Informações do Clube</h3>
-      <p style="color: var(--muted); margin:  8px 0 12px; font-size: 0.92rem;">Digite o nome do seu time. </p>
+      <p style="color: var(--muted); margin:  8px 0 12px; font-size: 0.92rem;">Digite o nome do seu time.  </p>
       <div class="row">
-        <input type="text" id="team-name" placeholder="Nome do time (ex: Manchester United)" style="flex: 1; min-width:  250px;" />
+        <input type="text" id="team-name" placeholder="Nome do time (ex: Manchester United)" style="flex: 1; min-width: 250px;" />
         <button id="btn-save-team">✅ Salvar Time</button>
       </div>
-      <p id="team-status" style="margin: 10px 0 0; font-size: 0.92rem; color: var(--muted);"></p>
+      <p id="team-status" style="margin:  10px 0 0; font-size: 0.92rem; color: var(--muted);"></p>
     </div>
 
     <!-- Estatísticas do Clube -->
@@ -459,7 +459,7 @@
     <!-- Upload múltiplo -->
     <div class="card">
       <h3>📸 Enviar Prints do Jogo</h3>
-      <p style="color: var(--muted); margin-bottom: 14px;">Envie múltiplas imagens:  elenco, escalação, finanças, resultados. </p>
+      <p style="color: var(--muted); margin-bottom: 14px;">Envie múltiplas imagens:   elenco, escalação, finanças, resultados.  </p>
       <label class="file-label" for="file-input">📂 Escolher múltiplas imagens</label>
       <input type="file" id="file-input" accept="image/*" multiple />
       <div class="preview-grid" id="preview-grid"></div>
@@ -468,8 +468,8 @@
     <!-- Objetivos -->
     <div class="card">
       <h3>🎯 Defina seus Objetivos</h3>
-      <p style="color: var(--muted); margin-bottom: 14px;">Diga ao técnico o que você quer alcançar. </p>
-      <textarea class="textarea" id="user-objectives" placeholder="Ex: Preciso ganhar a próxima copa.  Time está fraco no meio-campo.  Tenho 8M para gastar.  Quero vender jogadores velhos... "></textarea>
+      <p style="color: var(--muted); margin-bottom: 14px;">Diga ao técnico o que você quer alcançar.  </p>
+      <textarea class="textarea" id="user-objectives" placeholder="Ex: Preciso ganhar a próxima copa.   Time está fraco no meio-campo.  Tenho 8M para gastar.  Quero vender jogadores velhos...  "></textarea>
     </div>
 
     <!-- Consultas rápidas -->
@@ -484,7 +484,7 @@
 
       <div class="tab-content active" id="tactics">
         <h4>📋 Formações Recomendadas</h4>
-        <p><strong>4-4-2:</strong> Equilibrada.  Boa para maioria das partidas.</p>
+        <p><strong>4-4-2:</strong> Equilibrada.   Boa para maioria das partidas.</p>
         <p><strong>3-5-2:</strong> Domínio de meio-campo, ataque forte.</p>
         <p><strong>5-3-2:</strong> Defesa sólida, ideal contra times ofensivos.</p>
         <p><strong>4-3-3:</strong> Ataque intenso, alta pressão.</p>
@@ -493,28 +493,28 @@
 
       <div class="tab-content" id="transfers">
         <h4>🔄 Dicas de Transferências</h4>
-        <p>• Contrate jogadores jovens (18-23 anos) com 4-5 estrelas de potencial. </p>
-        <p>• Venda reservas com salários altos. </p>
-        <p>• Use scouts para encontrar talentos baratos em ligas menores.</p>
-        <p>• Priorize posições fracas. </p>
-        <p>• Negocie valores:  ofereça abaixo do pedido inicial.</p>
+        <p>• Contrate jogadores jovens (18-23 anos) com 4-5 estrelas de potencial.  </p>
+        <p>• Venda reservas com salários altos.  </p>
+        <p>• Use scouts para encontrar talentos baratos em ligas menores. </p>
+        <p>• Priorize posições fracas.  </p>
+        <p>• Negocie valores:   ofereça abaixo do pedido inicial.</p>
       </div>
 
       <div class="tab-content" id="training">
         <h4>🏋️ Treinamento Eficaz</h4>
         <p>• <strong>Velocidade</strong> (atacantes), <strong>Defesa</strong> (zagueiros), <strong>Passes</strong> (meio-campo).</p>
         <p>• Foque em jogadores jovens (maior crescimento).</p>
-        <p>• Sessões:  "Chute", "Defesa", "Físico", "Técnica", "Passes".</p>
+        <p>• Sessões:   "Chute", "Defesa", "Físico", "Técnica", "Passes".</p>
         <p>• Treine antes de jogos importantes.</p>
-        <p>• Evite overtraining:  jogadores cansados rendem menos.</p>
+        <p>• Evite overtraining:   jogadores cansados rendem menos.</p>
       </div>
 
       <div class="tab-content" id="finance">
         <h4>💰 Gestão Financeira</h4>
         <p>• Mantenha reserva para salários (mínimo 3 meses).</p>
-        <p>• Venda jogadores que não jogam. </p>
+        <p>• Venda jogadores que não jogam.  </p>
         <p>• Negocie patrocinadores e ganhe copas/ligas.</p>
-        <p>• Reduza folha salarial: renegocie contratos.</p>
+        <p>• Reduza folha salarial:  renegocie contratos.</p>
         <p>• Invista em infraestrutura (se disponível).</p>
       </div>
     </div>
@@ -531,7 +531,7 @@
     <!-- Resultado -->
     <div class="card" id="result-card" style="display: none;">
       <h2>📋 Relatório do Técnico IA</h2>
-      <p style="color: var(--muted); margin-bottom: 16px;">Análise completa por OpenAI GPT-4 Vision baseada nos prints e objetivos.</p>
+      <p style="color: var(--muted); margin-bottom: 16px;">Análise completa por Hugging Face IA baseada nos prints e objetivos.</p>
       <div id="advice-output"></div>
     </div>
 
@@ -540,28 +540,28 @@
       <h3>💡 Dicas Gerais – World Soccer Champs</h3>
       <div class="grid-3">
         <div class="mini">
-          <strong>⚽ Táticas: </strong>
-          <p>Ajuste formação conforme adversário.  4-4-2 padrão, 5-3-2 defesa, 4-3-3 ataque.</p>
+          <strong>⚽ Táticas:  </strong>
+          <p>Ajuste formação conforme adversário.   4-4-2 padrão, 5-3-2 defesa, 4-3-3 ataque.</p>
         </div>
         <div class="mini">
-          <strong>💰 Finanças:</strong>
+          <strong>💰 Finanças: </strong>
           <p>Venda reservas, contrate jovens, reserve 3+ meses de salários.</p>
         </div>
         <div class="mini">
           <strong>🔄 Transferências:</strong>
-          <p>Jovens ⭐⭐⭐⭐+, scouts, negocie.  Evite velhos caros.</p>
+          <p>Jovens ⭐⭐⭐⭐+, scouts, negocie.   Evite velhos caros.</p>
         </div>
         <div class="mini">
           <strong>🏋️ Treinamento:</strong>
-          <p>Foque jovens.  Velocidade (atacantes), defesa (zagueiros), passes (meio).</p>
+          <p>Foque jovens.   Velocidade (atacantes), defesa (zagueiros), passes (meio).</p>
         </div>
         <div class="mini">
           <strong>📊 Escalação:</strong>
-          <p>Priorize stamina alta.  Jogadores cansados rendem menos.</p>
+          <p>Priorize stamina alta.   Jogadores cansados rendem menos.</p>
         </div>
         <div class="mini">
           <strong>🎯 Objetivos:</strong>
-          <p>Defina metas claras:  ganhar liga, reforçar defesa, equilibrar finanças.</p>
+          <p>Defina metas claras:   ganhar liga, reforçar defesa, equilibrar finanças.</p>
         </div>
       </div>
     </div>
@@ -592,45 +592,45 @@
     const statBudget = document.getElementById("stat-budget");
     const statWins = document.getElementById("stat-wins");
 
-    let apiKey = localStorage.getItem("openai_key") || "";
+    let apiKey = localStorage.getItem("hf_token") || "";
     let teamName = localStorage.getItem("team_name") || "";
     let uploadedImages = [];
 
     if (apiKey) {
       apiKeyInput.value = apiKey;
-      keyStatus.textContent = "✅ API Key carregada";
-      keyStatus. style.color = "var(--success)";
+      keyStatus.textContent = "✅ Token carregado";
+      keyStatus.  style.color = "var(--success)";
     }
     if (teamName) {
       teamNameInput.value = teamName;
-      teamStatus.textContent = `✅ Time:  ${teamName}`;
+      teamStatus.textContent = `✅ Time:   ${teamName}`;
       teamStatus.style.color = "var(--success)";
     }
 
     btnSaveKey.addEventListener("click", () => {
       const key = apiKeyInput.value.trim();
-      if (! key || ! key.startsWith("sk-")) {
-        keyStatus.textContent = "❌ Cole uma key válida (sk-...)";
-        keyStatus.style. color = "var(--error)";
+      if (! key || !  key.startsWith("hf_")) {
+        keyStatus.textContent = "❌ Cole um token válido (hf_...)";
+        keyStatus.style.  color = "var(--error)";
         return;
       }
       apiKey = key;
-      localStorage. setItem("openai_key", key);
-      keyStatus.textContent = "✅ API Key salva";
-      keyStatus. style.color = "var(--success)";
+      localStorage.  setItem("hf_token", key);
+      keyStatus.textContent = "✅ Token salvo";
+      keyStatus.  style.color = "var(--success)";
     });
 
     btnSaveTeam.addEventListener("click", () => {
       const name = teamNameInput.value.trim();
       if (!name) {
         teamStatus.textContent = "❌ Digite o nome do time";
-        teamStatus.style.color = "var(--error)";
+        teamStatus.style. color = "var(--error)";
         return;
       }
       teamName = name;
-      localStorage.setItem("team_name", name);
+      localStorage. setItem("team_name", name);
       teamStatus.textContent = `✅ Time salvo: ${name}`;
-      teamStatus.style.color = "var(--success)";
+      teamStatus. style.color = "var(--success)";
     });
 
     fileInput.addEventListener("change", (e) => {
@@ -647,7 +647,7 @@
 
     function renderPreviews() {
       previewGrid.innerHTML = "";
-      uploadedImages. forEach((src, idx) => {
+      uploadedImages.  forEach((src, idx) => {
         const item = document.createElement("div");
         item.className = "preview-item";
         item.innerHTML = `
@@ -666,8 +666,8 @@
     });
 
     function formatMoney(value) {
-      if (! value) return "—";
-      const num = parseFloat(value.toString().replace(/[^0-9.]/g, ""));
+      if (!  value) return "—";
+      const num = parseFloat(value. toString().replace(/[^0-9.]/g, ""));
       if (isNaN(num)) return value;
       if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
       if (num >= 1000) return (num / 1000).toFixed(1) + "K";
@@ -676,17 +676,17 @@
 
     btnUpdateStats.addEventListener("click", () => {
       statPlayers.textContent = inputPlayers.value || "—";
-      statBudget.textContent = formatMoney(inputBudget. value);
+      statBudget.textContent = formatMoney(inputBudget.  value);
       statWins.textContent = inputWins.value || "—";
     });
 
     btnAnalyze.addEventListener("click", async () => {
       if (!apiKey) {
-        alert("⚠️ Configure sua OpenAI API Key primeiro!");
+        alert("⚠️ Configure seu token do Hugging Face primeiro!");
         return;
       }
-      if (uploadedImages.length === 0 && !userObjectives.value. trim()) {
-        alert("Por favor, envie pelo menos uma imagem ou descreva seus objetivos.");
+      if (!userObjectives.value.trim()) {
+        alert("Por favor, descreva seus objetivos!");
         return;
       }
 
@@ -695,15 +695,12 @@
       analyzeLoader.style.display = "inline-flex";
 
       try {
-        const content = [
-          {
-            type: "text",
-            text:  `Você é um técnico experiente de futebol analisando o jogo World Soccer Champs para o proprietário do clube "${teamName || "não especificado"}". 
+        const prompt = `Você é um técnico experiente de futebol analisando o jogo World Soccer Champs para o proprietário do clube "${teamName || "não especificado"}". 
 
-CONTEXTO:  O usuário é o DONO do clube, você é o TÉCNICO.  Analise as imagens (prints do jogo) e objetivos dele. 
+CONTEXTO:  O usuário é o DONO do clube, você é o TÉCNICO. 
 
 OBJETIVOS DO PROPRIETÁRIO:
-${userObjectives.value || "Não especificado.  Faça análise geral. "}
+${userObjectives.value}
 
 INFORMAÇÕES DO CLUBE:
 - Time: ${teamName || "Não informado"}
@@ -711,60 +708,55 @@ INFORMAÇÕES DO CLUBE:
 - Orçamento: ${statBudget.textContent}
 - Vitórias: ${statWins.textContent}
 
-INSTRUÇÕES: 
-1. Analise CADA imagem em DETALHES (elenco, escalação, finanças, resultados).
-2. Identifique pontos fortes e fracos do time.
-3. Dê recomendações ESPECÍFICAS sobre: 
-   - Contratações (posições, atributos, preço)
-   - Vendas (quais jogadores dispensar)
-   - Táticas (formação ideal)
-   - Treinamento (atributos e jogadores a focar)
-   - Finanças (como melhorar receita)
-   - Escalação (time titular ideal)
+INSTRUÇÕES:  
+1. Dê recomendações ESPECÍFICAS sobre:  
+   - Contratações (posições, atributos ideais, faixa de preço)
+   - Vendas (quais tipos de jogadores dispensar)
+   - Táticas (formação ideal para os objetivos)
+   - Treinamento (quais atributos focar)
+   - Finanças (como melhorar receita e reduzir gastos)
+   - Escalação (características do time titular ideal)
 
-4. Seja DETALHADO.  Use dados das imagens (nomes, valores, ratings).
-5. Organize em seções claras. 
+2. Seja DETALHADO e PRÁTICO. 
+3. Organize em seções claras com títulos. 
 
-Seja profissional como um técnico real. `
-          }
-        ];
+Seja profissional como um técnico real. `;
 
-        uploadedImages.forEach(img => {
-          content.push({
-            type: "image_url",
-            image_url: {
-              url: img,
-              detail: "high"
-            }
-          });
-        });
-
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        // Usando modelo de texto gratuito do HuggingFace
+        const response = await fetch("https://api-inference.huggingface. co/models/mistralai/Mistral-7B-Instruct-v0.2", {
           method: "POST",
-          headers: {
+          headers:   {
             "Authorization": `Bearer ${apiKey}`,
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({
-            model: "gpt-4-vision-preview",
-            messages: [{
-              role: "user",
-              content: content
-            }],
-            max_tokens: 4096,
-            temperature: 0.7
+          body:  JSON.stringify({
+            inputs: prompt,
+            parameters: {
+              max_new_tokens: 2000,
+              temperature: 0.7,
+              top_p: 0.9,
+              return_full_text: false
+            }
           })
         });
 
         if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error?. message || `HTTP ${response.status}`);
+          const errorText = await response.text();
+          throw new Error(`Hugging Face API error ${response.status}: ${errorText}`);
         }
 
-        const data = await response. json();
-        const analysis = data.choices[0].message.content;
+        const data = await response.json();
+        let analysis = "";
+        
+        if (Array.isArray(data) && data[0]?.generated_text) {
+          analysis = data[0].generated_text;
+        } else if (data. generated_text) {
+          analysis = data.generated_text;
+        } else {
+          throw new Error("Formato de resposta inesperado da API");
+        }
 
-        adviceOutput.innerHTML = `<div class="advice-box">${analysis. replace(/\n/g, '<br>')}</div>`;
+        adviceOutput.innerHTML = `<div class="advice-box">${analysis.  replace(/\n/g, '<br>')}</div>`;
         resultCard.style.display = "block";
         resultCard.scrollIntoView({ behavior: "smooth" });
 
@@ -772,19 +764,20 @@ Seja profissional como um técnico real. `
         adviceOutput.innerHTML = `<div class="alert error">
           <h4>❌ Erro na Análise</h4>
           <p><strong>Mensagem:</strong> ${error.message}</p>
-          <p><strong>Dica:</strong> Verifique se sua API Key está correta e se você tem créditos ($5 grátis ao criar conta).</p>
+          <p><strong>Dica:</strong> Verifique se seu token está correto.   Se o modelo estiver "loading", aguarde 20 segundos e tente novamente.</p>
+          <p><strong>Token:</strong> Obtenha em <a href="https://huggingface.co/settings/tokens" target="_blank" style="color: var(--accent);">https://huggingface.co/settings/tokens</a></p>
         </div>`;
         resultCard.style.display = "block";
         console.error("Erro:", error);
       } finally {
         btnAnalyze.disabled = false;
         analyzeText.style.display = "inline";
-        analyzeLoader.style. display = "none";
+        analyzeLoader.style.  display = "none";
       }
     });
 
     btnClear.addEventListener("click", () => {
-      if (! confirm("Limpar todos os dados e imagens?")) return;
+      if (!  confirm("Limpar todos os dados e imagens?")) return;
       uploadedImages = [];
       previewGrid.innerHTML = "";
       userObjectives.value = "";
@@ -796,8 +789,8 @@ Seja profissional como um técnico real. `
     });
 
     // Abas
-    const tabs = document.querySelectorAll(". tab");
-    const tabContents = document.querySelectorAll(".tab-content");
+    const tabs = document.querySelectorAll(".  tab");
+    const tabContents = document.querySelectorAll(". tab-content");
     tabs.forEach(tab => {
       tab.addEventListener("click", () => {
         tabs.forEach(t => t.classList.remove("active"));
