@@ -89,7 +89,7 @@
     h4 { margin: 0 0 8px; font-size: 1. 1rem; font-weight: 750; color: var(--accent); }
     . lead { margin: 0 0 22px; color: var(--muted); line-height: 1.7; font-size: 1.05rem; }
     .badge {
-      display: inline-flex; align-items: center; gap: 10px;
+      display: inline-flex; align-items: center; gap:  10px;
       padding: 11px 16px; border-radius: 999px;
       background: linear-gradient(125deg, rgba(0,217,255,0.22), rgba(0,255,136,0.22));
       border: 1px solid var(--border);
@@ -98,7 +98,7 @@
     }
     .grid { display: grid; gap: 18px; }
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    . grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
     .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
     button, input, textarea, select {
       border: 1px solid var(--border);
@@ -148,8 +148,8 @@
       border-color: var(--accent); 
       background: rgba(0,217,255,0.05);
     }
-    .pill {
-      display: inline-flex; align-items: center; gap: 7px;
+    . pill {
+      display: inline-flex; align-items: center; gap:  7px;
       padding: 9px 14px; border-radius: 999px;
       background: rgba(255,255,255,0.06);
       border: 1px solid var(--border);
@@ -172,7 +172,7 @@
     . status-dot {
       width: 12px; height: 12px; border-radius: 50%; background: var(--success);
       box-shadow: 0 0 16px rgba(0,255,136,1), 0 0 32px rgba(0,255,136,0.6);
-      animation: pulse 2. 5s ease-in-out infinite;
+      animation: pulse 2.5s ease-in-out infinite;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
@@ -208,7 +208,7 @@
     input[type="file"] { display: none; }
     . preview-grid { 
       display: grid; 
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+      grid-template-columns:  repeat(auto-fill, minmax(150px, 1fr)); 
       gap: 12px; 
       margin-top: 16px; 
     }
@@ -224,7 +224,7 @@
       box-shadow: 0 12px 32px rgba(0,217,255,0.3);
     }
     .preview-item img {
-      width:  100%;
+      width: 100%;
       height: 150px;
       object-fit:  cover;
       display: block;
@@ -236,10 +236,10 @@
       background: rgba(255,71,87,0.95);
       border: none;
       border-radius: 50%;
-      width:  30px;
+      width: 30px;
       height: 30px;
       color: #fff;
-      font-weight:  900;
+      font-weight: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -260,12 +260,12 @@
       margin-top: 14px;
       line-height: 1.7;
     }
-    .advice-box h4 { margin:  0 0 10px; font-size: 1.1rem; }
+    .advice-box h4 { margin: 0 0 10px; font-size: 1.1rem; }
     .advice-box p { margin: 8px 0; color: var(--muted); }
     .advice-box strong { color: var(--text); }
-    .advice-box ul { margin:  8px 0 8px 20px; }
+    .advice-box ul { margin: 8px 0 8px 20px; }
     .advice-box li { margin: 6px 0; }
-    .stats-grid { 
+    . stats-grid { 
       display: grid; 
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
       gap: 14px; 
@@ -282,7 +282,7 @@
       transform: translateY(-3px);
       box-shadow: 0 16px 40px rgba(0,217,255,0.25);
     }
-    .stat-card . label { 
+    .stat-card .label { 
       font-size: 0.92rem; 
       color: var(--muted); 
       margin-bottom: 8px; 
@@ -332,7 +332,7 @@
       display: inline-block;
       width: 20px;
       height: 20px;
-      border: 3px solid rgba(255,255,255,0.2);
+      border:  3px solid rgba(255,255,255,0.2);
       border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
@@ -344,7 +344,7 @@
     .api-key-box {
       background: linear-gradient(135deg, rgba(255,173,0,0.1), rgba(255,107,53,0.08));
       border: 1px solid var(--accent-3);
-      border-radius:  16px;
+      border-radius: 16px;
       padding: 20px;
       margin-bottom:  20px;
     }
@@ -355,13 +355,19 @@
       padding: 20px;
       margin-bottom: 20px;
     }
-    .model-selector {
-      background: linear-gradient(135deg, rgba(138,91,255,0.1), rgba(0,217,255,0.1));
-      border: 1px solid rgba(138,91,255,0.3);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
+    .model-list {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+      max-height: 200px;
+      overflow-y:  auto;
+      font-family: var(--mono);
+      font-size: 0.85rem;
     }
+    . model-list div { padding: 6px; border-bottom: 1px solid var(--border); }
+    .model-list div:last-child { border-bottom: none; }
     @media (max-width: 768px) {
       .header-bar { flex-direction: column; align-items: flex-start; }
       button, input, select { width: 100%; }
@@ -377,7 +383,7 @@
         <div class="status-dot"></div>
         <div>
           <div class="badge">⚽ Painel do Proprietário • World Soccer Champs</div>
-          <div style="color: var(--muted); font-size: 0.94rem; margin-top: 6px;">Técnico IA com Google Gemini Vision online</div>
+          <div style="color: var(--muted); font-size: 0.94rem; margin-top: 6px;">Técnico IA com Google Gemini Vision</div>
         </div>
       </div>
       <div class="row">
@@ -388,49 +394,35 @@
     </div>
 
     <h1>Bem-vindo, Proprietário</h1>
-    <p class="lead">Você é o dono do clube.  Envie prints (elenco, finanças, escalação) e defina seus objetivos.  Seu técnico IA vai analisar as imagens DE VERDADE com visão computacional e dar orientações completas.</p>
+    <p class="lead">Você é o dono do clube.  Envie prints (elenco, finanças, escalação) e defina seus objetivos.  Seu técnico IA vai analisar as imagens DE VERDADE com visão computacional. </p>
 
     <!-- API Key -->
     <div class="api-key-box">
       <h3>🔑 Configurar API Key do Google Gemini</h3>
-      <p style="color: var(--muted); margin:  8px 0 12px; font-size:0.92rem;">
-        Obtenha gratuitamente em: <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent); font-weight: 700;">Google AI Studio</a>
+      <p style="color: var(--muted); margin:  8px 0 12px; font-size: 0.92rem;">
+        Obtenha gratuitamente em:  <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent); font-weight: 700;">Google AI Studio</a>
       </p>
       <div class="row">
-        <input type="password" id="api-key-input" placeholder="Cole sua API Key aqui (ex: AIzaSy... )" style="flex: 1; min-width: 250px;" />
+        <input type="password" id="api-key-input" placeholder="Cole sua API Key aqui" style="flex: 1; min-width: 250px;" />
         <button id="btn-save-key" class="secondary">💾 Salvar Key</button>
+        <button id="btn-test-key">🧪 Testar & Listar Modelos</button>
       </div>
-      <p id="key-status" style="margin:  10px 0 0; font-size:0.92rem; color:var(--muted);"></p>
-    </div>
-
-    <!-- Seletor de Modelo -->
-    <div class="model-selector">
-      <h3>🤖 Escolher Modelo da IA</h3>
-      <p style="color:var(--muted); margin:8px 0 12px; font-size:0.92rem;">Selecione o modelo do Gemini.  Se um não funcionar, teste outro.</p>
-      <div class="row">
-        <select id="model-select" style="flex: 1; min-width:250px;">
-          <option value="gemini-1.5-pro">Gemini 1.5 Pro (Recomendado - Melhor qualidade)</option>
-          <option value="gemini-1.5-flash-latest">Gemini 1.5 Flash Latest (Rápido)</option>
-          <option value="gemini-pro-vision">Gemini Pro Vision (Legado)</option>
-          <option value="gemini-1.5-pro-latest">Gemini 1.5 Pro Latest</option>
-        </select>
-        <button id="btn-save-model">✅ Salvar Modelo</button>
-      </div>
-      <p id="model-status" style="margin: 10px 0 0; font-size:0.92rem; color:var(--muted);"></p>
+      <p id="key-status" style="margin:  10px 0 0; font-size: 0.92rem; color: var(--muted);"></p>
+      <div id="model-list" class="model-list" style="display: none;"></div>
     </div>
 
     <!-- Seletor de Time -->
     <div class="team-selector">
       <h3>🏆 Informações do Clube</h3>
-      <p style="color:var(--muted); margin:8px 0 12px; font-size: 0.92rem;">Digite o nome do seu time. </p>
+      <p style="color: var(--muted); margin: 8px 0 12px; font-size: 0.92rem;">Digite o nome do seu time. </p>
       <div class="row">
-        <input type="text" id="team-name" placeholder="Nome do time (ex: Manchester United)" style="flex:1; min-width:250px;" />
+        <input type="text" id="team-name" placeholder="Nome do time (ex: Manchester United)" style="flex: 1; min-width: 250px;" />
         <button id="btn-save-team">✅ Salvar Time</button>
       </div>
-      <p id="team-status" style="margin:10px 0 0; font-size:0.92rem; color:var(--muted);"></p>
+      <p id="team-status" style="margin: 10px 0 0; font-size: 0.92rem; color: var(--muted);"></p>
     </div>
 
-    <!-- Estatísticas do Clube -->
+    <!-- Estatísticas -->
     <div class="card">
       <h3>📈 Status do Clube</h3>
       <div class="stats-grid">
@@ -447,19 +439,19 @@
           <div class="value" id="stat-wins">—</div>
         </div>
       </div>
-      <p style="color:var(--muted); margin-top:14px; font-size:0.92rem;">💡 Atualize esses valores manualmente (ex: orçamento em milhões será convertido automaticamente)</p>
-      <div class="row" style="margin-top:12px;">
-        <input type="number" id="input-players" placeholder="Nº jogadores" style="width:150px;" />
-        <input type="text" id="input-budget" placeholder="Orçamento (ex: 5000000 ou 5M)" style="width:200px;" />
-        <input type="number" id="input-wins" placeholder="Vitórias" style="width:130px;" />
+      <p style="color: var(--muted); margin-top: 14px; font-size: 0.92rem;">💡 Atualize manualmente (ex: 5000000 → 5.0M)</p>
+      <div class="row" style="margin-top: 12px;">
+        <input type="number" id="input-players" placeholder="Nº jogadores" style="width: 150px;" />
+        <input type="text" id="input-budget" placeholder="Orçamento" style="width: 200px;" />
+        <input type="number" id="input-wins" placeholder="Vitórias" style="width: 130px;" />
         <button id="btn-update-stats">🔄 Atualizar</button>
       </div>
     </div>
 
-    <!-- Upload múltiplo -->
+    <!-- Upload -->
     <div class="card">
       <h3>📸 Enviar Prints do Jogo</h3>
-      <p style="color:var(--muted); margin-bottom:14px;">Envie múltiplas imagens:  elenco, escalação, finanças, resultados.  O Gemini Vision vai ler e analisar cada uma.</p>
+      <p style="color: var(--muted); margin-bottom: 14px;">Envie múltiplas imagens:  elenco, escalação, finanças, resultados. </p>
       <label class="file-label" for="file-input">📂 Escolher múltiplas imagens</label>
       <input type="file" id="file-input" accept="image/*" multiple />
       <div class="preview-grid" id="preview-grid"></div>
@@ -468,8 +460,8 @@
     <!-- Objetivos -->
     <div class="card">
       <h3>🎯 Defina seus Objetivos</h3>
-      <p style="color:var(--muted); margin-bottom:14px;">Diga ao técnico o que você quer alcançar. A IA combinará sua descrição com a análise das imagens.</p>
-      <textarea class="textarea" id="user-objectives" placeholder="Ex: Preciso ganhar a próxima copa.  Time está fraco no meio-campo. Tenho 8M para gastar.  Quero vender jogadores velhos... "></textarea>
+      <p style="color: var(--muted); margin-bottom: 14px;">Diga ao técnico o que você quer alcançar. </p>
+      <textarea class="textarea" id="user-objectives" placeholder="Ex: Preciso ganhar a próxima copa.  Time está fraco no meio-campo.  Tenho 8M para gastar... "></textarea>
     </div>
 
     <!-- Consultas rápidas -->
@@ -493,45 +485,43 @@
 
       <div class="tab-content" id="transfers">
         <h4>🔄 Dicas de Transferências</h4>
-        <p>• Contrate jogadores jovens (18-23 anos) com 4-5 estrelas de potencial. </p>
+        <p>• Contrate jovens (18-23 anos) com 4-5 estrelas. </p>
         <p>• Venda reservas com salários altos. </p>
-        <p>• Use scouts para encontrar talentos baratos em ligas menores.</p>
+        <p>• Use scouts em ligas menores.</p>
         <p>• Priorize posições fracas. </p>
-        <p>• Negocie valores:  ofereça abaixo do pedido inicial.</p>
+        <p>• Negocie valores. </p>
       </div>
 
       <div class="tab-content" id="training">
         <h4>🏋️ Treinamento Eficaz</h4>
-        <p>• <strong>Velocidade</strong> (atacantes), <strong>Defesa</strong> (zagueiros), <strong>Passes</strong> (meio-campo).</p>
-        <p>• Foque em jogadores jovens (maior crescimento).</p>
-        <p>• Sessões:  "Chute", "Defesa", "Físico", "Técnica", "Passes".</p>
+        <p>• <strong>Velocidade</strong> (atacantes), <strong>Defesa</strong> (zagueiros), <strong>Passes</strong> (meio).</p>
+        <p>• Foque em jovens. </p>
+        <p>• Sessões:  "Chute", "Defesa", "Físico", "Técnica".</p>
         <p>• Treine antes de jogos importantes.</p>
-        <p>• Evite overtraining:  jogadores cansados rendem menos.</p>
       </div>
 
       <div class="tab-content" id="finance">
         <h4>💰 Gestão Financeira</h4>
-        <p>• Mantenha reserva para salários (mínimo 3 meses).</p>
-        <p>• Venda jogadores que não jogam. </p>
-        <p>• Negocie patrocinadores e ganhe copas/ligas.</p>
-        <p>• Reduza folha salarial: renegocie contratos.</p>
-        <p>• Invista em infraestrutura (se disponível).</p>
+        <p>• Mantenha reserva (3 meses de salários).</p>
+        <p>• Venda jogadores que não jogam.</p>
+        <p>• Negocie patrocinadores.</p>
+        <p>• Reduza folha salarial.</p>
       </div>
     </div>
 
     <!-- Botão análise -->
-    <div class="card" style="text-align:center;">
-      <button class="primary" id="btn-analyze" style="font-size:1.15rem; padding:18px 32px;">
+    <div class="card" style="text-align: center;">
+      <button class="primary" id="btn-analyze" style="font-size: 1.15rem; padding: 18px 32px;">
         <span id="analyze-text">🧠 Analisar com IA e Receber Orientações</span>
-        <span id="analyze-loader" style="display:none;"><div class="loader"></div> Analisando com Gemini Vision...</span>
+        <span id="analyze-loader" style="display: none;"><div class="loader"></div> Analisando...</span>
       </button>
-      <button class="ghost" id="btn-clear" style="margin-left:12px;">🗑️ Limpar Tudo</button>
+      <button class="ghost" id="btn-clear" style="margin-left: 12px;">🗑️ Limpar Tudo</button>
     </div>
 
     <!-- Resultado -->
-    <div class="card" id="result-card" style="display:none;">
+    <div class="card" id="result-card" style="display: none;">
       <h2>📋 Relatório do Técnico IA</h2>
-      <p style="color:var(--muted); margin-bottom:16px;">Análise completa por Google Gemini Vision baseada nos prints e objetivos fornecidos.</p>
+      <p style="color: var(--muted); margin-bottom: 16px;">Análise completa por Google Gemini Vision. </p>
       <div id="advice-output"></div>
     </div>
 
@@ -540,37 +530,34 @@
       <h3>💡 Dicas Gerais – World Soccer Champs</h3>
       <div class="grid-3">
         <div class="mini">
-          <strong>⚽ Táticas: </strong>
-          <p>Ajuste formação conforme adversário. 4-4-2 padrão, 5-3-2 defesa, 4-3-3 ataque.</p>
+          <strong>⚽ Táticas:</strong>
+          <p>Ajuste formação.  4-4-2 padrão, 5-3-2 defesa, 4-3-3 ataque.</p>
         </div>
         <div class="mini">
           <strong>💰 Finanças:</strong>
-          <p>Venda reservas, contrate jovens, reserve 3+ meses de salários.</p>
+          <p>Venda reservas, contrate jovens, reserve 3+ meses.</p>
         </div>
         <div class="mini">
           <strong>🔄 Transferências:</strong>
-          <p>Jovens ⭐⭐⭐⭐+, scouts, negocie.  Evite velhos caros.</p>
+          <p>Jovens ⭐⭐⭐⭐+, scouts, negocie. </p>
         </div>
         <div class="mini">
           <strong>🏋️ Treinamento:</strong>
-          <p>Foque jovens.  Velocidade (atacantes), defesa (zagueiros), passes (meio).</p>
+          <p>Foque jovens.  Velocidade, defesa, passes.</p>
         </div>
         <div class="mini">
           <strong>📊 Escalação:</strong>
-          <p>Priorize stamina alta.  Jogadores cansados rendem menos.</p>
+          <p>Priorize stamina alta. </p>
         </div>
         <div class="mini">
           <strong>🎯 Objetivos:</strong>
-          <p>Defina metas claras:  ganhar liga, reforçar defesa, equilibrar finanças.</p>
+          <p>Defina metas claras.</p>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    let selectedModel = localStorage.getItem("gemini_model") || "gemini-1.5-pro";
-    const API_BASE = "https://generativelanguage.googleapis.com/v1beta/models/";
-    
     const fileInput = document.getElementById("file-input");
     const previewGrid = document.getElementById("preview-grid");
     const userObjectives = document.getElementById("user-objectives");
@@ -578,14 +565,13 @@
     const btnClear = document.getElementById("btn-clear");
     const btnUpdateStats = document.getElementById("btn-update-stats");
     const btnSaveKey = document.getElementById("btn-save-key");
+    const btnTestKey = document.getElementById("btn-test-key");
     const btnSaveTeam = document.getElementById("btn-save-team");
-    const btnSaveModel = document.getElementById("btn-save-model");
     const apiKeyInput = document.getElementById("api-key-input");
     const teamNameInput = document.getElementById("team-name");
-    const modelSelect = document.getElementById("model-select");
     const keyStatus = document.getElementById("key-status");
     const teamStatus = document.getElementById("team-status");
-    const modelStatus = document.getElementById("model-status");
+    const modelListDiv = document.getElementById("model-list");
     const resultCard = document.getElementById("result-card");
     const adviceOutput = document.getElementById("advice-output");
     const analyzeText = document.getElementById("analyze-text");
@@ -602,25 +588,23 @@
     let uploadedImages = [];
     let apiKey = localStorage.getItem("gemini_api_key") || "";
     let teamName = localStorage.getItem("team_name") || "";
+    let availableModels = [];
 
-    // Carregar configs salvas
+    // Carregar configs
     if (apiKey) {
       apiKeyInput.value = apiKey;
-      keyStatus.textContent = "✅ API Key salva e carregada";
+      keyStatus.textContent = "✅ API Key carregada";
       keyStatus.style.color = "var(--success)";
     }
     if (teamName) {
       teamNameInput.value = teamName;
-      teamStatus.textContent = `✅ Time:  ${teamName}`;
+      teamStatus. textContent = `✅ Time: ${teamName}`;
       teamStatus.style.color = "var(--success)";
     }
-    modelSelect.value = selectedModel;
-    modelStatus.textContent = `✅ Modelo selecionado: ${selectedModel}`;
-    modelStatus.style.color = "var(--success)";
 
-    // Salvar API key
+    // Salvar key
     btnSaveKey.addEventListener("click", () => {
-      const key = apiKeyInput.value.trim();
+      const key = apiKeyInput.value. trim();
       if (!key) {
         keyStatus.textContent = "❌ Cole uma API Key válida";
         keyStatus.style.color = "var(--error)";
@@ -628,12 +612,55 @@
       }
       apiKey = key;
       localStorage. setItem("gemini_api_key", key);
-      keyStatus.textContent = "✅ API Key salva com sucesso";
-      keyStatus. style.color = "var(--success)";
+      keyStatus.textContent = "✅ API Key salva";
+      keyStatus.style.color = "var(--success)";
+    });
+
+    // Testar key e listar modelos
+    btnTestKey.addEventListener("click", async () => {
+      if (!apiKey) {
+        keyStatus.textContent = "❌ Salve a API Key primeiro";
+        keyStatus.style.color = "var(--error)";
+        return;
+      }
+
+      keyStatus.textContent = "🔄 Testando API Key...";
+      keyStatus.style.color = "var(--muted)";
+      modelListDiv.style.display = "none";
+
+      try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models? key=${apiKey}`);
+        
+        if (!response.ok) {
+          throw new Error(`Erro HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        availableModels = data.models. filter(m => 
+          m.supportedGenerationMethods.includes("generateContent")
+        );
+
+        if (availableModels.length === 0) {
+          throw new Error("Nenhum modelo disponível para generateContent");
+        }
+
+        keyStatus.textContent = `✅ Key válida!  ${availableModels.length} modelos disponíveis`;
+        keyStatus.style.color = "var(--success)";
+
+        modelListDiv.innerHTML = "<strong>Modelos disponíveis: </strong><br>" + 
+          availableModels.map(m => `<div>✓ ${m.name. replace('models/', '')}</div>`).join("");
+        modelListDiv.style.display = "block";
+
+        console.log("Modelos disponíveis:", availableModels);
+      } catch (error) {
+        keyStatus.textContent = `❌ Erro:  ${error.message}`;
+        keyStatus.style.color = "var(--error)";
+        console.error("Erro ao testar API:", error);
+      }
     });
 
     // Salvar time
-    btnSaveTeam. addEventListener("click", () => {
+    btnSaveTeam.addEventListener("click", () => {
       const name = teamNameInput.value.trim();
       if (!name) {
         teamStatus.textContent = "❌ Digite o nome do time";
@@ -646,15 +673,7 @@
       teamStatus.style.color = "var(--success)";
     });
 
-    // Salvar modelo
-    btnSaveModel.addEventListener("click", () => {
-      selectedModel = modelSelect.value;
-      localStorage.setItem("gemini_model", selectedModel);
-      modelStatus.textContent = `✅ Modelo salvo: ${selectedModel}`;
-      modelStatus.style.color = "var(--success)";
-    });
-
-    // Upload múltiplo
+    // Upload
     fileInput.addEventListener("change", (e) => {
       const files = Array.from(e.target.files);
       files.forEach(file => {
@@ -683,7 +702,7 @@
 
     previewGrid.addEventListener("click", (e) => {
       if (e.target.classList.contains("remove-btn")) {
-        const idx = parseInt(e.target. dataset.idx, 10);
+        const idx = parseInt(e.target.dataset.idx, 10);
         uploadedImages.splice(idx, 1);
         renderPreviews();
       }
@@ -706,12 +725,17 @@
       statWins.textContent = inputWins.value || "—";
     });
 
-    // Análise com IA
+    // Análise
     btnAnalyze.addEventListener("click", async () => {
       const objectives = userObjectives.value.trim();
       
       if (!apiKey) {
-        alert("⚠️ Configure sua API Key do Google Gemini primeiro!");
+        alert("⚠️ Configure e teste sua API Key primeiro!");
+        return;
+      }
+
+      if (availableModels.length === 0) {
+        alert("⚠️ Clique em 'Testar & Listar Modelos' primeiro para verificar modelos disponíveis!");
         return;
       }
 
@@ -733,54 +757,42 @@
         adviceOutput.innerHTML = `<div class="advice-box" style="border-left-color: var(--error); background: rgba(255,71,87,0.1);">
           <h4>❌ Erro na Análise</h4>
           <p><strong>Mensagem:</strong> ${error.message}</p>
-          <p><strong>Modelo usado:</strong> ${selectedModel}</p>
-          <p><strong>Dica:</strong> Tente outro modelo no seletor acima.  Verifique também se sua API Key está ativa em <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent);">Google AI Studio</a></p>
-          <p><strong>Debug:</strong> Pressione F12 e veja o Console para mais detalhes.</p>
+          <p><strong>Dica:</strong> Clique em "Testar & Listar Modelos" para ver modelos disponíveis para sua Key. </p>
         </div>`;
         resultCard.style.display = "block";
-        console.error("Erro completo:", error);
+        console.error("Erro:", error);
       } finally {
         btnAnalyze.disabled = false;
-        analyzeText.style. display = "inline";
+        analyzeText.style.display = "inline";
         analyzeLoader.style. display = "none";
       }
     });
 
-    // Chamar Gemini API
+    // Chamar API
     async function analyzeWithGemini(images, objectives) {
-      const endpoint = `${API_BASE}${selectedModel}:generateContent`;
+      // Usar primeiro modelo disponível que suporta vision
+      const visionModel = availableModels. find(m => 
+        m.name.includes("pro-vision") || m.name.includes("1. 5-pro") || m.name.includes("1.5-flash")
+      ) || availableModels[0];
+
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/${visionModel.name}:generateContent`;
+      
       const parts = [];
 
       parts.push({
-        text: `Você é um técnico experiente de futebol analisando o jogo World Soccer Champs para o proprietário do clube "${teamName || "não especificado"}". 
+        text: `Você é um técnico experiente de futebol analisando World Soccer Champs para "${teamName || "o clube"}". 
 
-CONTEXTO:  O usuário é o DONO do clube, você é o TÉCNICO. Analise as imagens (prints do jogo) e objetivos dele. 
+OBJETIVOS: ${objectives || "Análise geral"}
 
-OBJETIVOS DO PROPRIETÁRIO:
-${objectives || "Não especificado.  Faça análise geral. "}
-
-INFORMAÇÕES DO CLUBE:
-- Time: ${teamName || "Não informado"}
+INFO DO CLUBE: 
+- Time: ${teamName || "—"}
 - Jogadores: ${statPlayers. textContent}
 - Orçamento: ${statBudget.textContent}
 - Vitórias: ${statWins.textContent}
 
-INSTRUÇÕES:
-1. Analise CADA imagem em DETALHES (elenco, escalação, finanças, resultados).
-2. Identifique pontos fortes e fracos do time.
-3. Dê recomendações ESPECÍFICAS sobre: 
-   - Contratações (posições, atributos, preço)
-   - Vendas (quais jogadores dispensar)
-   - Táticas (formação ideal)
-   - Treinamento (atributos e jogadores a focar)
-   - Finanças (como melhorar receita)
-   - Escalação (time titular ideal)
+Analise as imagens em DETALHES e dê recomendações ESPECÍFICAS sobre contratações, vendas, táticas, treinamento, finanças e escalação.
 
-4. Seja DETALHADO.  Use dados das imagens (nomes, valores, ratings).
-5. Use HTML:  <h4>, <p>, <strong>, <ul>, <li>. NÃO use markdown (**).
-6. Organize em:  "Análise das Imagens", "Pontos Fortes", "Pontos Fracos", "Recomendações Imediatas", "Transferências", "Tática", "Treinamento", "Finanças", "Resumo Executivo". 
-
-Seja profissional como um técnico real. `
+Use HTML:  <h4>, <p>, <strong>, <ul>, <li>. `
       });
 
       images.forEach(imgData => {
@@ -794,8 +806,7 @@ Seja profissional como um técnico real. `
         });
       });
 
-      console.log("Chamando API:", endpoint);
-      console.log("Número de imagens:", images.length);
+      console.log("Usando modelo:", visionModel.name);
 
       const response = await fetch(`${endpoint}?key=${apiKey}`, {
         method: "POST",
@@ -811,15 +822,13 @@ Seja profissional como um técnico real. `
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Erro da API:", errorData);
         throw new Error(errorData.error?. message || `Erro HTTP ${response.status}`);
       }
 
       const data = await response.json();
-      console.log("Resposta da API:", data);
       
-      if (! data.candidates || !data.candidates[0] || !data.candidates[0]. content) {
-        throw new Error("Resposta da API inválida.  Tente outro modelo.");
+      if (!data.candidates || !data. candidates[0] || !data.candidates[0]. content) {
+        throw new Error("Resposta inválida da API");
       }
 
       return data.candidates[0].content. parts[0].text;
@@ -831,14 +840,12 @@ Seja profissional como um técnico real. `
         .replace(/\n\n/g, '</p><p>')
         .replace(/\n/g, '<br/>');
       
-      return `<div class="advice-box">
-        <p>${html}</p>
-      </div>`;
+      return `<div class="advice-box"><p>${html}</p></div>`;
     }
 
-    // Limpar tudo
+    // Limpar
     btnClear.addEventListener("click", () => {
-      if (! confirm("Limpar todos os dados e imagens?")) return;
+      if (! confirm("Limpar todos os dados? ")) return;
       fileInput.value = "";
       previewGrid.innerHTML = "";
       userObjectives.value = "";
@@ -855,7 +862,7 @@ Seja profissional como um técnico real. `
     const tabContents = document.querySelectorAll(".tab-content");
     tabs.forEach(tab => {
       tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("active"));
+        tabs.forEach(t => t. classList.remove("active"));
         tabContents.forEach(tc => tc.classList.remove("active"));
         tab.classList.add("active");
         document.getElementById(tab.dataset.tab).classList.add("active");
