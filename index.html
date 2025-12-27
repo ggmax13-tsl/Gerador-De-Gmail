@@ -2,53 +2,45 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Painel Rochxz – Gerador de Gmail</title>
+  <title>Painel Técnico IA – World Soccer Champs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    :root {
-      --bg: #02030a;
-      --panel: rgba(10, 14, 30, 0.82);
+    : root {
+      --bg: #0a0e14;
+      --panel: rgba(15, 20, 32, 0.85);
       --glass: rgba(255, 255, 255, 0.06);
-      --glass-2: rgba(255, 255, 255, 0.03);
       --border: rgba(255, 255, 255, 0.08);
-      --accent: #7cf3ff;
-      --accent-2: #9a6bff;
-      --accent-3: #1cf0b5;
-      --text: #f6f8ff;
-      --muted: #9ab0d8;
-      --error: #ff6b6b;
-      --radius: 20px;
-      --shadow: 0 28px 120px rgba(0,0,0,0.7);
-      --mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Courier New", monospace;
-      --sans: "Inter", "Space Grotesk", system-ui, -apple-system, sans-serif;
+      --accent: #00d9ff;
+      --accent-2: #00ff88;
+      --accent-3: #ffad00;
+      --text: #f4f8ff;
+      --muted: #8fa3c6;
+      --error: #ff5555;
+      --radius: 18px;
+      --shadow: 0 25px 100px rgba(0,0,0,0.65);
+      --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+      --sans: "Inter", "Roboto", system-ui, -apple-system, sans-serif;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--sans);
-      display: grid; place-items: center; padding: 28px; overflow: hidden;
-    }
-    /* Fundo com luzes e rede */
-    body::before {
-      content: ""; position: fixed; inset: -12%; pointer-events: none;
-      background:
-        radial-gradient(circle at 18% 22%, rgba(124,243,255,0.15), transparent 32%),
-        radial-gradient(circle at 78% 18%, rgba(156,107,255,0.16), transparent 35%),
-        radial-gradient(circle at 65% 80%, rgba(28,240,181,0.14), transparent 36%),
-        radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.05), transparent 45%);
-      filter: blur(8px);
-      z-index: 0;
+      display: grid; place-items: center; padding: 28px; overflow: auto;
+      background-image: 
+        radial-gradient(circle at 22% 18%, rgba(0,217,255,0.12), transparent 32%),
+        radial-gradient(circle at 78% 22%, rgba(0,255,136,0.12), transparent 32%),
+        radial-gradient(circle at 50% 85%, rgba(255,173,0,0.1), transparent 35%);
     }
     body::after {
       content: ""; position: fixed; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 52px 52px;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
       opacity: 0.35;
       mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.95), transparent 68%);
       z-index: 0;
     }
-    .shell { width: min(1180px, 100%); position: relative; z-index: 1; }
+    .shell { width: min(1140px, 100%); position: relative; z-index: 1; }
     .card {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -56,351 +48,316 @@
       box-shadow: var(--shadow);
       padding: 24px;
       backdrop-filter: blur(16px) saturate(1.2);
+      margin-bottom: 16px;
     }
-    h1 { margin: 0 0 6px; letter-spacing: -0.6px; font-weight: 800; font-size: 1.9rem; }
-    .lead { margin: 0 0 18px; color: var(--muted); }
+    h1 { margin: 0 0 6px; letter-spacing: -0.6px; font-weight: 800; font-size: 2rem; }
+    . lead { margin: 0 0 18px; color: var(--muted); }
     .badge {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 9px 13px; border-radius: 999px;
-      background: linear-gradient(120deg, rgba(124,243,255,0.18), rgba(156,107,255,0.2));
+      background: linear-gradient(120deg, rgba(0,217,255,0.18), rgba(0,255,136,0.18));
       border: 1px solid var(--border);
       color: var(--text); font-weight: 650; font-size: 0.96rem;
-      box-shadow: 0 12px 32px rgba(124,243,255,0.2);
+      box-shadow: 0 12px 32px rgba(0,217,255,0.2);
     }
     .grid { display: grid; gap: 16px; }
-    .controls {
-      display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 14px;
-      padding: 10px; border-radius: 14px; background: var(--glass-2); border: 1px solid var(--border);
-    }
-    button, input {
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    button, input, textarea, select {
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius:  12px;
       background: var(--glass);
       color: var(--text);
       padding: 12px 14px;
       font-weight: 700;
       letter-spacing: 0.2px;
-      transition: transform 0.09s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      transition: transform 0.09s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
     button { cursor: pointer; }
-    button.primary {
+    button. primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #05060c;
+      color: #0a0e14;
       border: none;
-      box-shadow: 0 16px 40px rgba(124,243,255,0.28);
-    }
-    button.ghost {
-      background: transparent;
-      border: 1px dashed var(--border);
-      color: var(--muted);
+      box-shadow: 0 16px 40px rgba(0,217,255,0.28);
     }
     button:hover { transform: translateY(-1px) scale(1.01); border-color: var(--accent); }
-    button:active { transform: translateY(0); }
-    input:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
-    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.97rem; }
-    th, td { padding: 12px 12px; border-bottom: 1px solid var(--border); text-align: left; }
-    th { color: var(--muted); font-weight: 700; font-size: 0.92rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    tr:hover td { background: rgba(124,243,255,0.05); }
-    .mono { font-family: var(--mono); letter-spacing: 0.15px; }
-    .pill {
+    button: active { transform: translateY(0); }
+    input: focus, textarea:focus, select:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+    . pill {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 7px 11px; border-radius: 999px;
       background: rgba(255,255,255,0.05);
       border: 1px solid var(--border);
       color: var(--muted); font-size: 0.9rem; font-weight: 600;
     }
-    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .error { color: var(--error); font-weight: 700; min-height: 20px; }
     .mini {
       padding: 16px;
       background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
       border: 1px solid var(--border);
       border-radius: var(--radius);
     }
-    /* Barra superior */
     .header-bar {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       padding: 14px 18px; border-radius: 16px;
-      background: linear-gradient(120deg, rgba(124,243,255,0.08), rgba(156,107,255,0.08));
+      background: linear-gradient(120deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08));
       border: 1px solid var(--border);
       box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      margin-bottom: 16px;
     }
     .status-dot {
-      width: 10px; height: 10px; border-radius: 50%; background: var(--accent-3);
-      box-shadow: 0 0 12px rgba(28,240,181,0.8);
+      width: 10px; height: 10px; border-radius: 50%; background:  var(--accent-2);
+      box-shadow: 0 0 12px rgba(0,255,136,0.8);
     }
-    /* Modal CSV */
-    .overlay {
-      position: fixed; inset: 0; display: none; place-items: center;
-      background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
-      z-index: 10;
-    }
-    .modal {
-      width: min(720px, 92%);
-      background: rgba(10,12,22,0.94);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-    .modal h3 { margin: 0 0 10px; letter-spacing: -0.3px; }
-    .modal p { margin: 0 0 14px; color: var(--muted); }
     .textarea {
       width: 100%;
-      min-height: 180px;
-      background: var(--glass-2);
+      min-height: 120px;
+      background: var(--glass);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 12px;
       color: var(--text);
-      font-family: var(--mono);
+      font-family: var(--sans);
       resize: vertical;
     }
-    .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; margin-top: 12px; }
-    /* Login overlay */
-    .gate {
-      position: fixed; inset: 0; display: grid; place-items: center;
-      background: radial-gradient(circle at 50% 35%, rgba(124,243,255,0.1), rgba(3,4,11,0.94));
-      z-index: 20;
-      backdrop-filter: blur(5px);
-      padding: 20px;
+    .file-label {
+      display: inline-block;
+      padding: 12px 14px;
+      border:  1px dashed var(--border);
+      border-radius: 12px;
+      background: var(--glass);
+      cursor: pointer;
+      font-weight: 700;
+      transition:  border-color 0.2s ease;
     }
-    .gate-card {
-      width: min(420px, 100%);
-      background: rgba(10,12,22,0.95);
+    .file-label:hover { border-color: var(--accent); }
+    input[type="file"] { display:  none; }
+    .preview {
+      max-width: 100%;
+      border-radius: 14px;
       border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
+      margin-top: 10px;
     }
-    .gate-title { margin: 0 0 10px; font-size: 1.45rem; font-weight: 800; }
-    .gate-sub { margin: 0 0 18px; color: var(--muted); }
-    .gate .grid { gap: 12px; }
+    .tips {
+      background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08));
+      border: 1px solid var(--border);
+      border-radius:  var(--radius);
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .tips h3 { margin: 0 0 10px; font-size: 1.1rem; }
+    .tips p { margin: 6px 0; color: var(--muted); }
+    .advice-box {
+      background: rgba(0,217,255,0.06);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top:  10px;
+    }
     @media (max-width: 720px) {
-      th:nth-child(3), td:nth-child(3) { display: none; }
-      button, input { width: 100%; }
-      .controls { flex-direction: column; }
       .header-bar { flex-direction: column; align-items: flex-start; }
+      button, input, select { width: 100%; }
     }
   </style>
 </head>
 <body>
   <div class="shell">
     <div class="header-bar">
-      <div style="display:flex; align-items:center; gap:10px;">
+      <div style="display:flex; align-items: center; gap:10px;">
         <div class="status-dot"></div>
         <div>
-          <div class="badge">Painel Rochxz • Gerador Gmail + Senha</div>
-          <div style="color:var(--muted); font-size:0.9rem; margin-top:4px;">Acesso restrito • Neon Secure</div>
+          <div class="badge">⚽ Técnico IA • World Soccer Champs</div>
+          <div style="color:var(--muted); font-size:0.9rem; margin-top:4px;">Assistente tático inteligente</div>
         </div>
       </div>
-      <div class="actions">
-        <span class="pill">Domínio: gmail.com</span>
-        <span class="pill">Senha: 16-20 chars</span>
+      <div class="row">
+        <span class="pill">Táticas</span>
+        <span class="pill">Transferências</span>
+        <span class="pill">Escalação</span>
       </div>
     </div>
 
-    <h1 style="margin-top:16px;">Painel de Geração</h1>
-    <p class="lead">Gere emails Gmail aleatórios, senhas fortes, copie individualmente ou exporte CSV (visual bonito).</p>
+    <h1>Painel do Técnico</h1>
+    <p class="lead">Envie prints do seu time (elenco, escalação, finanças) e receba análises e dicas táticas para World Soccer Champs.</p>
 
     <div class="card">
-      <div class="controls">
-        <button class="primary" id="btn-generate">Gerar 1</button>
-        <button id="btn-generate-10">Gerar 10</button>
-        <button id="btn-export">Abrir CSV</button>
-        <button class="ghost" id="btn-clear">Limpar lista</button>
-      </div>
-
-      <div class="grid" id="current">
-        <div class="mini">
-          <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 6px;">Email atual</div>
-          <div class="mono" id="current-email">—</div>
-          <div class="actions" style="margin-top:10px;">
-            <button id="copy-email">Copiar email</button>
-          </div>
-        </div>
-        <div class="mini">
-          <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 6px;">Senha atual</div>
-          <div class="mono" id="current-pass">—</div>
-          <div class="actions" style="margin-top:10px;">
-            <button id="copy-pass">Copiar senha</button>
-          </div>
-        </div>
-      </div>
-
-      <table id="table">
-        <thead>
-          <tr><th>Email</th><th>Senha</th><th>Ações</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <h3 style="margin: 0 0 10px;">📸 Upload de Imagem</h3>
+      <p style="color:var(--muted); margin: 0 0 12px;">Tire print do elenco, escalação ou finanças e envie abaixo. </p>
+      <label class="file-label" for="file-input">Escolher imagem</label>
+      <input type="file" id="file-input" accept="image/*" />
+      <div id="preview-container"></div>
     </div>
-  </div>
 
-  <!-- Modal CSV -->
-  <div class="overlay" id="csv-overlay">
-    <div class="modal">
-      <h3>Exportar CSV</h3>
-      <p>Visualize, copie ou baixe o CSV com emails e senhas gerados.</p>
-      <textarea class="textarea" id="csv-text" readonly></textarea>
-      <div class="modal-actions">
-        <button id="csv-copy">Copiar CSV</button>
-        <button id="csv-download" class="primary">Baixar CSV</button>
-        <button id="csv-close" class="ghost">Fechar</button>
+    <div class="card">
+      <h3 style="margin:0 0 10px;">💬 Descreva sua situação</h3>
+      <textarea class="textarea" id="user-notes" placeholder="Ex: Time está perdendo muito, preciso melhorar defesa.  Tenho R$ 5M para contratar... "></textarea>
+      <div class="row" style="margin-top:10px;">
+        <button class="primary" id="btn-analyze">Analisar e dar dicas</button>
+        <button id="btn-clear">Limpar</button>
       </div>
     </div>
-  </div>
 
-  <!-- Login Gate -->
-  <div class="gate" id="gate">
-    <div class="gate-card">
-      <div class="badge">Acesso restrito</div>
-      <h2 class="gate-title">Digite suas credenciais</h2>
-      <p class="gate-sub">Somente usuários autorizados.</p>
-      <div class="grid">
-        <input id="login-user" placeholder="Usuário" autocomplete="off" />
-        <input id="login-pass" placeholder="Senha" type="password" />
-        <button class="primary" id="login-btn">Entrar</button>
-        <div class="error" id="login-error"></div>
-      </div>
+    <div class="card" id="result-card" style="display:none;">
+      <h3 style="margin: 0 0 10px;">📋 Análise e Recomendações</h3>
+      <div id="advice-output"></div>
+    </div>
+
+    <div class="tips">
+      <h3>💡 Dicas Gerais – World Soccer Champs</h3>
+      <p><strong>Finanças:</strong> Sempre mantenha reserva para salários e emergências. Venda jogadores reservas por valores altos.</p>
+      <p><strong>Escalação:</strong> Priorize jogadores com alta stamina para jogar mais partidas seguidas.</p>
+      <p><strong>Táticas:</strong> Use 4-4-2 para equilíbrio; 3-5-2 para ataque; 5-3-2 para defesa forte.</p>
+      <p><strong>Transferências:</strong> Contrate jovens com potencial alto (⭐⭐⭐⭐+) e treine constantemente.</p>
+      <p><strong>Treinamento:</strong> Foque em atributos-chave:  velocidade para atacantes, defesa para zagueiros, passes para meio-campo.</p>
+      <p><strong>Moral:</strong> Ganhar jogos aumenta moral. Evite derrotas seguidas e faça rotação de elenco.</p>
     </div>
   </div>
 
   <script>
-    /* Lista de usuários e senhas permitidos */
-    const ALLOWED_USERS = {
-      "Rochxz": "30114818",
-      "neonflux": "Ar!7yX9cVdQ2",
-      "cyberline": "Me4!rV0aBqT9",
-      "stellarbit": "Hf6&Pz1kRuE8",
-      "quantumpulse": "Dx2$gL7tVoM5",
-      "lumenarc": "Wq9#fS3hNyJ1",
-      "iondrift": "Vk8@zD5pQaL7",
-      "prismnova": "Tb4*eH2mKsC6",
-      "vortexgrid": "Np7^cU4yRjB3",
-      "synapsewave": "Gm5!vQ9lXtD2",
-      "crystalmesh": "Zr3%hK6pBwF8",
-      "hyperglyph": "Yc1&nJ8sFeR4"
-    };
+    const fileInput = document.getElementById("file-input");
+    const previewContainer = document.getElementById("preview-container");
+    const userNotes = document.getElementById("user-notes");
+    const btnAnalyze = document.getElementById("btn-analyze");
+    const btnClear = document.getElementById("btn-clear");
+    const resultCard = document.getElementById("result-card");
+    const adviceOutput = document.getElementById("advice-output");
 
-    const adjectives = ["quantum","neon","cyber","stellar","lumen","ion","nova","hyper","velvet","crystal","photon","zenith","arctic","vortex","prism"];
-    const nouns = ["circuit","matrix","horizon","signal","vertex","orbit","cipher","drift","aurora","glyph","titan","radian","synapse","pulse","arc"];
-    const domains = ["gmail.com"];
+    let uploadedImage = null;
 
-    const tableBody = document.querySelector("#table tbody");
-    const emailEl = document.getElementById("current-email");
-    const passEl = document.getElementById("current-pass");
-
-    const overlay = document.getElementById("csv-overlay");
-    const csvText = document.getElementById("csv-text");
-    const csvClose = document.getElementById("csv-close");
-    const csvCopy = document.getElementById("csv-copy");
-    const csvDownload = document.getElementById("csv-download");
-
-    const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
-    const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-    function slugify(str) { return str.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 12); }
-    function randomEmail() {
-      const adj = rand(adjectives);
-      const noun = rand(nouns);
-      const num = randInt(10, 9999);
-      return `${slugify(adj)}.${slugify(noun)}${num}@${rand(domains)}`;
-    }
-    function randomPassword() {
-      const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*_-+=?";
-      const len = randInt(16, 20);
-      let out = "";
-      for (let i = 0; i < len; i++) out += chars.charAt(Math.floor(Math.random() * chars.length));
-      return out;
-    }
-    function addRow(email, pass) {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td class="mono">${email}</td>
-        <td class="mono">${pass}</td>
-        <td class="actions">
-          <button data-copy="${email}" class="copy-email">Copiar email</button>
-          <button data-copy="${pass}" class="copy-pass">Copiar senha</button>
-        </td>
-      `;
-      tableBody.prepend(tr);
-    }
-    function setCurrent(email, pass) {
-      emailEl.textContent = email;
-      passEl.textContent = pass;
-    }
-    function generateOne() {
-      const email = randomEmail();
-      const pass = randomPassword();
-      setCurrent(email, pass);
-      addRow(email, pass);
-    }
-    function exportCSVText() {
-      const rows = [["email","senha"]];
-      tableBody.querySelectorAll("tr").forEach(tr => {
-        const tds = tr.querySelectorAll("td");
-        if (tds.length >= 2) rows.push([tds[0].textContent, tds[1].textContent]);
-      });
-      return rows.map(r => r.map(x => `"${x.replace(/"/g, '""')}"`).join(",")).join("\n");
-    }
-    function openCSVModal() {
-      const csv = exportCSVText();
-      csvText.value = csv || "email,senha";
-      overlay.style.display = "grid";
-    }
-    function closeCSVModal() {
-      overlay.style.display = "none";
-    }
-    async function copyText(text) {
-      try { await navigator.clipboard.writeText(text); alert("Copiado!"); }
-      catch { alert("Não foi possível copiar."); }
-    }
-    function downloadCSV(csv) {
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url; a.download = "gmails.csv"; a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    document.getElementById("btn-generate").onclick = () => generateOne();
-    document.getElementById("btn-generate-10").onclick = () => { for (let i=0;i<10;i++) generateOne(); };
-    document.getElementById("btn-export").onclick = openCSVModal;
-    document.getElementById("btn-clear").onclick = () => { tableBody.innerHTML = ""; emailEl.textContent = "—"; passEl.textContent = "—"; };
-
-    document.getElementById("copy-email").onclick = () => copyText(emailEl.textContent);
-    document.getElementById("copy-pass").onclick = () => copyText(passEl.textContent);
-    tableBody.addEventListener("click", (e) => {
-      if (e.target.dataset?.copy) copyText(e.target.dataset.copy);
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          uploadedImage = ev.target.result;
+          previewContainer.innerHTML = `<img class="preview" src="${uploadedImage}" alt="Preview" />`;
+        };
+        reader.readAsDataURL(file);
+      }
     });
 
-    csvClose.onclick = closeCSVModal;
-    csvCopy.onclick = () => copyText(csvText.value);
-    csvDownload.onclick = () => downloadCSV(csvText.value);
-    overlay.addEventListener("click", (e) => { if (e.target === overlay) closeCSVModal(); });
-
-    // Login gate (multi-usuário)
-    const gate = document.getElementById("gate");
-    const loginBtn = document.getElementById("login-btn");
-    const loginError = document.getElementById("login-error");
-    const userInput = document.getElementById("login-user");
-    const passInput = document.getElementById("login-pass");
-
-    function checkLogin() {
-      const u = userInput.value.trim();
-      const p = passInput.value;
-      if (ALLOWED_USERS[u] && ALLOWED_USERS[u] === p) {
-        gate.style.display = "none";
-        generateOne();
-      } else {
-        loginError.textContent = "Credenciais inválidas.";
+    btnAnalyze.addEventListener("click", () => {
+      const notes = userNotes.value.trim();
+      if (!uploadedImage && !notes) {
+        alert("Por favor, envie uma imagem ou descreva sua situação.");
+        return;
       }
+
+      // Simulação de análise IA (você pode integrar API real)
+      const advice = generateAdvice(notes);
+      adviceOutput.innerHTML = advice;
+      resultCard.style.display = "block";
+      resultCard.scrollIntoView({ behavior: "smooth" });
+    });
+
+    btnClear.addEventListener("click", () => {
+      fileInput.value = "";
+      previewContainer.innerHTML = "";
+      userNotes.value = "";
+      uploadedImage = null;
+      resultCard.style.display = "none";
+      adviceOutput.innerHTML = "";
+    });
+
+    function generateAdvice(notes) {
+      const lower = notes.toLowerCase();
+      let html = "";
+
+      // Defesa
+      if (lower.includes("defesa") || lower.includes("tomando gol") || lower.includes("perdendo")) {
+        html += `<div class="advice-box">
+          <strong>🛡️ Reforçar Defesa</strong>
+          <p>• Troque para formação 5-3-2 ou 4-5-1 (defesa reforçada). </p>
+          <p>• Contrate zagueiros com alta marcação (80+) e velocidade (70+).</p>
+          <p>• Treine "Defesa" e "Posicionamento" dos zagueiros e laterais.</p>
+          <p>• Ajuste tática:  jogue no contra-ataque e reduza pressão ofensiva.</p>
+        </div>`;
+      }
+
+      // Ataque
+      if (lower.includes("ataque") || lower.includes("gol") || lower.includes("marcar")) {
+        html += `<div class="advice-box">
+          <strong>⚡ Melhorar Ataque</strong>
+          <p>• Use formação 3-4-3 ou 4-3-3 (ataque forte).</p>
+          <p>• Contrate atacantes rápidos (velocidade 80+) e finalizadores (chute 75+).</p>
+          <p>• Treine "Finalização", "Velocidade" e "Drible" dos atacantes.</p>
+          <p>• Jogue posse de bola e pressione alto no campo adversário.</p>
+        </div>`;
+      }
+
+      // Finanças
+      if (lower. includes("dinheiro") || lower.includes("financ") || lower.includes("salar") || lower.includes("vender")) {
+        html += `<div class="advice-box">
+          <strong>💰 Gestão Financeira</strong>
+          <p>• Venda jogadores reservas com salários altos e baixa moral.</p>
+          <p>• Negocie jovens promessas (⭐⭐⭐⭐) por valores altos.</p>
+          <p>• Reduza salários renegociando contratos quando possível.</p>
+          <p>• Priorize patrocinadores e ganhe copas/ligas para aumentar receita.</p>
+        </div>`;
+      }
+
+      // Escalação
+      if (lower.includes("escalação") || lower.includes("time") || lower.includes("formação")) {
+        html += `<div class="advice-box">
+          <strong>📋 Escalação e Formação</strong>
+          <p>• <strong>4-4-2:</strong> Equilibrada, boa para maioria das partidas.</p>
+          <p>• <strong>3-5-2:</strong> Domínio de meio-campo, ataque forte.</p>
+          <p>• <strong>5-3-2:</strong> Defesa sólida, ideal contra times fortes.</p>
+          <p>• <strong>4-3-3:</strong> Ataque intenso, pressão constante.</p>
+          <p>• Escale jogadores com alta stamina e moral para partidas importantes.</p>
+        </div>`;
+      }
+
+      // Transferências
+      if (lower.includes("contratar") || lower.includes("comprar") || lower.includes("jogador")) {
+        html += `<div class="advice-box">
+          <strong>🔄 Transferências</strong>
+          <p>• Procure jogadores jovens (18-22 anos) com 4-5 estrelas de potencial.</p>
+          <p>• Priorize atributos-chave: velocidade (atacantes), defesa (zagueiros), passes (meio).</p>
+          <p>• Evite contratar jogadores velhos (30+) com salários altos.</p>
+          <p>• Use scouts para encontrar talentos baratos em ligas menores.</p>
+        </div>`;
+      }
+
+      // Treinamento
+      if (lower.includes("treinar") || lower.includes("treinamento") || lower.includes("evoluir")) {
+        html += `<div class="advice-box">
+          <strong>🏋️ Treinamento</strong>
+          <p>• Treine atributos principais: velocidade, finalização, defesa, passes.</p>
+          <p>• Foque em jogadores jovens (alto potencial de crescimento).</p>
+          <p>• Treine antes de jogos importantes para aumentar moral.</p>
+          <p>• Use sessões especializadas:  "Chute", "Defesa", "Físico", "Técnica".</p>
+        </div>`;
+      }
+
+      // Moral
+      if (lower. includes("moral") || lower.includes("motivação")) {
+        html += `<div class="advice-box">
+          <strong>😊 Moral e Motivação</strong>
+          <p>• Ganhe partidas para aumentar moral do elenco.</p>
+          <p>• Faça rotação:  jogadores descansados têm melhor moral.</p>
+          <p>• Evite derrotas seguidas; teste táticas em amistosos antes.</p>
+          <p>• Converse com jogadores (se disponível) e elogie bom desempenho.</p>
+        </div>`;
+      }
+
+      // Geral / fallback
+      if (! html) {
+        html = `<div class="advice-box">
+          <strong>⚽ Análise Geral</strong>
+          <p>• <strong>Escalação:</strong> Use 4-4-2 como base equilibrada.</p>
+          <p>• <strong>Finanças:</strong> Venda reservas, contrate jovens promessas.</p>
+          <p>• <strong>Treinamento:</strong> Foque velocidade (atacantes) e defesa (zagueiros).</p>
+          <p>• <strong>Táticas:</strong> Ajuste formação conforme adversário (ataque vs defesa).</p>
+          <p>• <strong>Moral:</strong> Ganhe partidas e faça rotação para manter stamina alta.</p>
+        </div>`;
+      }
+
+      // Se houver imagem, mencionar
+      if (uploadedImage) {
+        html = `<p style="color:var(--muted); margin-bottom:10px;">📸 Imagem analisada.  Recomendações baseadas em sua descrição: </p>` + html;
+      }
+
+      return html;
     }
-    loginBtn.onclick = checkLogin;
-    passInput.addEventListener("keydown", (e) => { if (e.key === "Enter") checkLogin(); });
-    userInput.addEventListener("keydown", (e) => { if (e.key === "Enter") checkLogin(); });
   </script>
 </body>
 </html>
