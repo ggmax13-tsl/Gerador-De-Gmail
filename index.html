@@ -2,13 +2,14 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Painel Técnico IA – World Soccer Champs</title>
+  <title>Painel do Proprietário – World Soccer Champs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     : root {
-      --bg: #0a0e14;
-      --panel: rgba(15, 20, 32, 0.85);
-      --glass: rgba(255, 255, 255, 0.06);
+      --bg:  #08090f;
+      --panel:  rgba(12, 16, 28, 0.88);
+      --glass: rgba(255, 255, 255, 0.05);
+      --glass-2: rgba(255, 255, 255, 0.03);
       --border: rgba(255, 255, 255, 0.08);
       --accent: #00d9ff;
       --accent-2: #00ff88;
@@ -16,52 +17,56 @@
       --text: #f4f8ff;
       --muted: #8fa3c6;
       --error: #ff5555;
-      --radius: 18px;
-      --shadow: 0 25px 100px rgba(0,0,0,0.65);
+      --success: #00ff88;
+      --radius: 20px;
+      --shadow: 0 28px 120px rgba(0,0,0,0.7);
       --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
       --sans: "Inter", "Roboto", system-ui, -apple-system, sans-serif;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--sans);
-      display: grid; place-items: center; padding: 28px; overflow: auto;
+      display: grid; place-items: center; padding: 28px; overflow:  auto;
       background-image: 
-        radial-gradient(circle at 22% 18%, rgba(0,217,255,0.12), transparent 32%),
-        radial-gradient(circle at 78% 22%, rgba(0,255,136,0.12), transparent 32%),
-        radial-gradient(circle at 50% 85%, rgba(255,173,0,0.1), transparent 35%);
+        radial-gradient(circle at 20% 15%, rgba(0,217,255,0.14), transparent 32%),
+        radial-gradient(circle at 78% 18%, rgba(0,255,136,0.14), transparent 34%),
+        radial-gradient(circle at 50% 85%, rgba(255,173,0,0.12), transparent 36%);
     }
     body::after {
       content: ""; position: fixed; inset: 0; pointer-events: none;
       background-image: 
         linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 48px 48px;
+      background-size: 50px 50px;
       opacity: 0.35;
       mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.95), transparent 68%);
       z-index: 0;
     }
-    .shell { width: min(1140px, 100%); position: relative; z-index: 1; }
+    .shell { width: min(1200px, 100%); position: relative; z-index: 1; }
     .card {
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 24px;
-      backdrop-filter: blur(16px) saturate(1.2);
-      margin-bottom: 16px;
+      backdrop-filter: blur(18px) saturate(1.3);
+      margin-bottom: 18px;
     }
-    h1 { margin: 0 0 6px; letter-spacing: -0.6px; font-weight: 800; font-size: 2rem; }
-    . lead { margin: 0 0 18px; color: var(--muted); }
+    h1 { margin: 0 0 8px; letter-spacing: -0.7px; font-weight: 900; font-size: 2.2rem; }
+    h2 { margin: 0 0 12px; font-size: 1.4rem; font-weight: 800; }
+    h3 { margin: 0 0 10px; font-size: 1.15rem; font-weight: 750; }
+    . lead { margin: 0 0 20px; color: var(--muted); line-height: 1.6; }
     .badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 9px 13px; border-radius: 999px;
-      background: linear-gradient(120deg, rgba(0,217,255,0.18), rgba(0,255,136,0.18));
+      display: inline-flex; align-items: center; gap:  8px;
+      padding: 10px 14px; border-radius: 999px;
+      background: linear-gradient(120deg, rgba(0,217,255,0.2), rgba(0,255,136,0.2));
       border: 1px solid var(--border);
-      color: var(--text); font-weight: 650; font-size: 0.96rem;
-      box-shadow: 0 12px 32px rgba(0,217,255,0.2);
+      color: var(--text); font-weight: 700; font-size: 0.98rem;
+      box-shadow: 0 14px 36px rgba(0,217,255,0.25);
     }
     .grid { display: grid; gap: 16px; }
-    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    . row { display: flex; gap: 12px; flex-wrap: wrap; }
     button, input, textarea, select {
       border: 1px solid var(--border);
       border-radius:  12px;
@@ -71,45 +76,67 @@
       font-weight: 700;
       letter-spacing: 0.2px;
       transition: transform 0.09s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      font-family: var(--sans);
     }
     button { cursor: pointer; }
     button. primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #0a0e14;
+      color: #08090f;
       border: none;
-      box-shadow: 0 16px 40px rgba(0,217,255,0.28);
+      box-shadow: 0 18px 42px rgba(0,217,255,0.3);
+    }
+    button.secondary {
+      background: linear-gradient(135deg, var(--accent-3), #ff6b35);
+      color: #08090f;
+      border: none;
+      box-shadow: 0 16px 38px rgba(255,173,0,0.28);
+    }
+    button.ghost {
+      background: transparent;
+      border: 1px dashed var(--border);
+      color: var(--muted);
     }
     button:hover { transform: translateY(-1px) scale(1.01); border-color: var(--accent); }
-    button: active { transform: translateY(0); }
-    input: focus, textarea:focus, select:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+    button:active { transform: translateY(0); }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    input: focus, textarea:focus, select: focus { outline: 1px solid var(--accent); border-color: var(--accent); }
     . pill {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 7px 11px; border-radius: 999px;
+      padding: 8px 12px; border-radius: 999px;
       background: rgba(255,255,255,0.05);
       border: 1px solid var(--border);
-      color: var(--muted); font-size: 0.9rem; font-weight: 600;
+      color: var(--muted); font-size: 0.9rem; font-weight: 650;
     }
     .mini {
       padding: 16px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
       border: 1px solid var(--border);
       border-radius: var(--radius);
     }
     .header-bar {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      padding: 14px 18px; border-radius: 16px;
-      background: linear-gradient(120deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08));
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 16px 20px; border-radius: 18px;
+      background: linear-gradient(120deg, rgba(0,217,255,0.1), rgba(0,255,136,0.1));
       border: 1px solid var(--border);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-      margin-bottom: 16px;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.28);
+      margin-bottom: 18px;
     }
     .status-dot {
-      width: 10px; height: 10px; border-radius: 50%; background:  var(--accent-2);
-      box-shadow: 0 0 12px rgba(0,255,136,0.8);
+      width: 11px; height: 11px; border-radius: 50%; background: var(--success);
+      box-shadow: 0 0 14px rgba(0,255,136,0.9);
+      animation: pulse 2s infinite;
     }
-    .textarea {
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    . textarea {
       width: 100%;
-      min-height: 120px;
+      min-height: 110px;
       background: var(--glass);
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -120,244 +147,512 @@
     }
     .file-label {
       display: inline-block;
-      padding: 12px 14px;
+      padding: 12px 16px;
       border:  1px dashed var(--border);
       border-radius: 12px;
       background: var(--glass);
       cursor: pointer;
       font-weight: 700;
-      transition:  border-color 0.2s ease;
+      transition:  border-color 0.2s ease, background 0.2s ease;
     }
-    .file-label:hover { border-color: var(--accent); }
-    input[type="file"] { display:  none; }
-    .preview {
-      max-width: 100%;
-      border-radius: 14px;
+    .file-label:hover { border-color: var(--accent); background: rgba(0,217,255,0.06); }
+    input[type="file"] { display: none; }
+    . preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 12px; }
+    .preview-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
       border: 1px solid var(--border);
-      margin-top: 10px;
     }
-    .tips {
-      background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08));
-      border: 1px solid var(--border);
-      border-radius:  var(--radius);
-      padding: 16px;
+    .preview-item img {
+      width: 100%;
+      height: 140px;
+      object-fit:  cover;
+      display: block;
+    }
+    .preview-item .remove-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(255,85,85,0.9);
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      color: #fff;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .advice-box {
+      background: rgba(0,217,255,0.07);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px;
       margin-top: 12px;
     }
-    .tips h3 { margin: 0 0 10px; font-size: 1.1rem; }
-    .tips p { margin: 6px 0; color: var(--muted); }
-    .advice-box {
-      background: rgba(0,217,255,0.06);
-      border-left: 4px solid var(--accent);
-      border-radius: 8px;
-      padding: 12px;
-      margin-top:  10px;
+    .advice-box h4 { margin: 0 0 8px; font-size: 1.05rem; }
+    .advice-box p { margin: 6px 0; color: var(--muted); line-height: 1.5; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    .stat-card {
+      background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08));
+      border: 1px solid var(--border);
+      border-radius:  14px;
+      padding: 14px;
+      text-align:  center;
+    }
+    .stat-card . label { font-size: 0.9rem; color: var(--muted); margin-bottom: 6px; }
+    .stat-card .value { font-size: 1.6rem; font-weight: 900; color: var(--accent-2); }
+    .tab-bar { display: flex; gap: 8px; margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .tab { padding: 10px 16px; border-radius: 10px 10px 0 0; background: var(--glass-2); border: 1px solid transparent; cursor: pointer; font-weight: 700; transition:  background 0.2s ease, border-color 0.2s ease; }
+    .tab. active { background: var(--glass); border-color: var(--border); border-bottom-color: transparent; color: var(--accent); }
+    .tab:hover { background: var(--glass); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .loader {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255,255,255,0.2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .api-key-box {
+      background: rgba(255,173,0,0.08);
+      border:  1px solid var(--accent-3);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom:  16px;
     }
     @media (max-width: 720px) {
       .header-bar { flex-direction: column; align-items: flex-start; }
       button, input, select { width: 100%; }
+      h1 { font-size: 1.7rem; }
     }
   </style>
 </head>
 <body>
   <div class="shell">
     <div class="header-bar">
-      <div style="display:flex; align-items: center; gap:10px;">
+      <div style="display: flex; align-items: center; gap:12px;">
         <div class="status-dot"></div>
         <div>
-          <div class="badge">⚽ Técnico IA • World Soccer Champs</div>
-          <div style="color:var(--muted); font-size:0.9rem; margin-top:4px;">Assistente tático inteligente</div>
+          <div class="badge">⚽ Painel do Proprietário • World Soccer Champs</div>
+          <div style="color:var(--muted); font-size:0.92rem; margin-top:5px;">Seu técnico IA com visão computacional está online</div>
         </div>
       </div>
       <div class="row">
-        <span class="pill">Táticas</span>
-        <span class="pill">Transferências</span>
-        <span class="pill">Escalação</span>
+        <span class="pill">🤖 Google Gemini</span>
+        <span class="pill">📊 Análise IA</span>
+        <span class="pill">🔄 Transferências</span>
       </div>
     </div>
 
-    <h1>Painel do Técnico</h1>
-    <p class="lead">Envie prints do seu time (elenco, escalação, finanças) e receba análises e dicas táticas para World Soccer Champs.</p>
+    <h1>Bem-vindo, Proprietário</h1>
+    <p class="lead">Você é o dono do clube.  Envie prints (elenco, finanças, escalação) e defina seus objetivos.  Seu técnico IA com Google Gemini Vision vai analisar as imagens DE VERDADE e dar orientações completas.</p>
 
-    <div class="card">
-      <h3 style="margin: 0 0 10px;">📸 Upload de Imagem</h3>
-      <p style="color:var(--muted); margin: 0 0 12px;">Tire print do elenco, escalação ou finanças e envie abaixo. </p>
-      <label class="file-label" for="file-input">Escolher imagem</label>
-      <input type="file" id="file-input" accept="image/*" />
-      <div id="preview-container"></div>
+    <!-- API Key -->
+    <div class="api-key-box">
+      <h3 style="margin: 0 0 8px;">🔑 Configurar API Key do Google Gemini</h3>
+      <p style="color:var(--muted); margin:0 0 10px; font-size:0.9rem;">
+        Obtenha gratuitamente em:  <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent);">https://aistudio.google.com/app/apikey</a>
+      </p>
+      <div class="row">
+        <input type="password" id="api-key-input" placeholder="Cole sua API Key aqui" style="flex:1; min-width:250px;" />
+        <button id="btn-save-key">Salvar Key</button>
+      </div>
+      <p id="key-status" style="margin:8px 0 0; font-size:0.9rem; color:var(--muted);"></p>
     </div>
 
+    <!-- Estatísticas do Clube -->
     <div class="card">
-      <h3 style="margin:0 0 10px;">💬 Descreva sua situação</h3>
-      <textarea class="textarea" id="user-notes" placeholder="Ex: Time está perdendo muito, preciso melhorar defesa.  Tenho R$ 5M para contratar... "></textarea>
+      <h3>📈 Status do Clube</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="label">Jogadores</div>
+          <div class="value" id="stat-players">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Orçamento</div>
+          <div class="value" id="stat-budget">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Vitórias</div>
+          <div class="value" id="stat-wins">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Moral Geral</div>
+          <div class="value" id="stat-morale">—</div>
+        </div>
+      </div>
+      <p style="color:var(--muted); margin-top:12px; font-size:0.9rem;">💡 Atualize esses valores manualmente (opcional).</p>
       <div class="row" style="margin-top:10px;">
-        <button class="primary" id="btn-analyze">Analisar e dar dicas</button>
-        <button id="btn-clear">Limpar</button>
+        <input type="number" id="input-players" placeholder="Nº jogadores" style="width:140px;" />
+        <input type="text" id="input-budget" placeholder="Orçamento" style="width:180px;" />
+        <input type="number" id="input-wins" placeholder="Vitórias" style="width:120px;" />
+        <input type="text" id="input-morale" placeholder="Moral" style="width:140px;" />
+        <button id="btn-update-stats">Atualizar Status</button>
       </div>
     </div>
 
+    <!-- Upload múltiplo de imagens -->
+    <div class="card">
+      <h3>📸 Enviar Prints do Jogo (IA vai analisar DE VERDADE)</h3>
+      <p style="color:var(--muted); margin-bottom:12px;">Envie múltiplas imagens:  elenco, escalação, finanças, resultados.  O Gemini Vision vai ler e analisar cada uma.</p>
+      <label class="file-label" for="file-input">📂 Escolher imagens (múltiplas)</label>
+      <input type="file" id="file-input" accept="image/*" multiple />
+      <div class="preview-grid" id="preview-grid"></div>
+    </div>
+
+    <!-- Objetivos do proprietário -->
+    <div class="card">
+      <h3>🎯 Defina seus Objetivos</h3>
+      <p style="color:var(--muted); margin-bottom:12px;">Diga ao técnico o que você quer alcançar. A IA vai combinar sua descrição com a análise das imagens.</p>
+      <textarea class="textarea" id="user-objectives" placeholder="Ex: Preciso ganhar a próxima copa.  Time está fraco no meio-campo. Tenho R$ 8M para gastar.  Quero vender jogadores velhos... "></textarea>
+    </div>
+
+    <!-- Abas de consulta rápida -->
+    <div class="card">
+      <h3>⚙️ Consultas Rápidas</h3>
+      <div class="tab-bar">
+        <div class="tab active" data-tab="tactics">Táticas</div>
+        <div class="tab" data-tab="transfers">Transferências</div>
+        <div class="tab" data-tab="training">Treinamento</div>
+        <div class="tab" data-tab="finance">Finanças</div>
+      </div>
+
+      <div class="tab-content active" id="tactics">
+        <h4>📋 Formações Recomendadas</h4>
+        <p><strong>4-4-2:</strong> Equilibrada.  Boa para maioria das partidas.</p>
+        <p><strong>3-5-2:</strong> Domínio de meio-campo, ataque forte.</p>
+        <p><strong>5-3-2:</strong> Defesa sólida, ideal contra times ofensivos.</p>
+        <p><strong>4-3-3:</strong> Ataque intenso, alta pressão.</p>
+        <p><strong>4-5-1:</strong> Defesa compacta, contra-ataque rápido.</p>
+      </div>
+
+      <div class="tab-content" id="transfers">
+        <h4>🔄 Dicas de Transferências</h4>
+        <p>• Contrate jogadores jovens (18-23 anos) com 4-5 estrelas de potencial. </p>
+        <p>• Venda reservas com salários altos e baixa moral.</p>
+        <p>• Use scouts para encontrar talentos baratos em ligas menores.</p>
+        <p>• Priorize posições fracas:  se defesa está ruim, contrate zagueiros de qualidade.</p>
+        <p>• Negocie valores:  ofereça abaixo do pedido inicial e ajuste conforme necessário.</p>
+      </div>
+
+      <div class="tab-content" id="training">
+        <h4>🏋️ Treinamento Eficaz</h4>
+        <p>• Treine atributos-chave: <strong>Velocidade</strong> (atacantes), <strong>Defesa</strong> (zagueiros), <strong>Passes</strong> (meio-campo).</p>
+        <p>• Foque em jogadores jovens (maior margem de crescimento).</p>
+        <p>• Sessões especializadas: "Chute", "Defesa", "Físico", "Técnica", "Passes".</p>
+        <p>• Treine antes de jogos importantes para aumentar moral e atributos.</p>
+        <p>• Evite overtraining: jogadores cansados têm menor desempenho.</p>
+      </div>
+
+      <div class="tab-content" id="finance">
+        <h4>💰 Gestão Financeira</h4>
+        <p>• Mantenha sempre reserva para salários (pelo menos 3 meses).</p>
+        <p>• Venda jogadores que não jogam e consomem salário alto.</p>
+        <p>• Negocie patrocinadores e ganhe copas/ligas para aumentar receita.</p>
+        <p>• Reduza folha salarial:  renegocie contratos ou venda "peso morto".</p>
+        <p>• Invista em infraestrutura (se disponível) para melhorar receitas a longo prazo.</p>
+      </div>
+    </div>
+
+    <!-- Botão de análise -->
+    <div class="card" style="text-align:center;">
+      <button class="primary" id="btn-analyze" style="font-size:1.1rem; padding:16px 28px;">
+        <span id="analyze-text">🧠 Analisar com IA e Receber Orientações do Técnico</span>
+        <span id="analyze-loader" style="display:none;"><div class="loader"></div> Analisando...</span>
+      </button>
+      <button class="ghost" id="btn-clear" style="margin-left:10px;">Limpar Tudo</button>
+    </div>
+
+    <!-- Resultado da análise -->
     <div class="card" id="result-card" style="display:none;">
-      <h3 style="margin: 0 0 10px;">📋 Análise e Recomendações</h3>
+      <h2>📋 Relatório do Técnico IA</h2>
+      <p style="color:var(--muted); margin-bottom:14px;">Análise completa por Google Gemini Vision baseada nos prints e objetivos fornecidos.</p>
       <div id="advice-output"></div>
     </div>
 
-    <div class="tips">
+    <!-- Dicas gerais -->
+    <div class="card" style="background:  linear-gradient(135deg, rgba(0,217,255,0.06), rgba(0,255,136,0.06));">
       <h3>💡 Dicas Gerais – World Soccer Champs</h3>
-      <p><strong>Finanças:</strong> Sempre mantenha reserva para salários e emergências. Venda jogadores reservas por valores altos.</p>
-      <p><strong>Escalação:</strong> Priorize jogadores com alta stamina para jogar mais partidas seguidas.</p>
-      <p><strong>Táticas:</strong> Use 4-4-2 para equilíbrio; 3-5-2 para ataque; 5-3-2 para defesa forte.</p>
-      <p><strong>Transferências:</strong> Contrate jovens com potencial alto (⭐⭐⭐⭐+) e treine constantemente.</p>
-      <p><strong>Treinamento:</strong> Foque em atributos-chave:  velocidade para atacantes, defesa para zagueiros, passes para meio-campo.</p>
-      <p><strong>Moral:</strong> Ganhar jogos aumenta moral. Evite derrotas seguidas e faça rotação de elenco.</p>
+      <div class="grid-2">
+        <div class="mini">
+          <strong>⚽ Táticas:</strong>
+          <p>Ajuste formação conforme adversário. Use 4-4-2 como padrão, 5-3-2 para defesa, 4-3-3 para ataque.</p>
+        </div>
+        <div class="mini">
+          <strong>💰 Finanças:</strong>
+          <p>Venda reservas, contrate jovens, mantenha reserva salarial de 3+ meses.</p>
+        </div>
+        <div class="mini">
+          <strong>🔄 Transferências:</strong>
+          <p>Priorize jovens (⭐⭐⭐⭐+), use scouts, negocie valores.  Evite velhos com salário alto.</p>
+        </div>
+        <div class="mini">
+          <strong>🏋️ Treinamento:</strong>
+          <p>Foque em jovens.  Treine velocidade (atacantes), defesa (zagueiros), passes (meio).</p>
+        </div>
+        <div class="mini">
+          <strong>😊 Moral:</strong>
+          <p>Ganhe jogos, faça rotação, descanse jogadores.  Moral alta = melhor desempenho.</p>
+        </div>
+        <div class="mini">
+          <strong>📊 Escalação:</strong>
+          <p>Priorize stamina alta e moral. Jogadores cansados rendem menos.</p>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
+    const API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+    
     const fileInput = document.getElementById("file-input");
-    const previewContainer = document.getElementById("preview-container");
-    const userNotes = document.getElementById("user-notes");
+    const previewGrid = document.getElementById("preview-grid");
+    const userObjectives = document.getElementById("user-objectives");
     const btnAnalyze = document.getElementById("btn-analyze");
     const btnClear = document.getElementById("btn-clear");
+    const btnUpdateStats = document.getElementById("btn-update-stats");
+    const btnSaveKey = document.getElementById("btn-save-key");
+    const apiKeyInput = document.getElementById("api-key-input");
+    const keyStatus = document.getElementById("key-status");
     const resultCard = document.getElementById("result-card");
     const adviceOutput = document.getElementById("advice-output");
+    const analyzeText = document.getElementById("analyze-text");
+    const analyzeLoader = document.getElementById("analyze-loader");
 
-    let uploadedImage = null;
+    const inputPlayers = document.getElementById("input-players");
+    const inputBudget = document.getElementById("input-budget");
+    const inputWins = document.getElementById("input-wins");
+    const inputMorale = document.getElementById("input-morale");
 
+    const statPlayers = document.getElementById("stat-players");
+    const statBudget = document.getElementById("stat-budget");
+    const statWins = document.getElementById("stat-wins");
+    const statMorale = document.getElementById("stat-morale");
+
+    let uploadedImages = [];
+    let apiKey = localStorage.getItem("gemini_api_key") || "";
+
+    // Carregar API key salva
+    if (apiKey) {
+      apiKeyInput.value = apiKey;
+      keyStatus.textContent = "✅ API Key salva e carregada";
+      keyStatus.style.color = "var(--success)";
+    }
+
+    // Salvar API key
+    btnSaveKey.addEventListener("click", () => {
+      const key = apiKeyInput.value.trim();
+      if (!key) {
+        keyStatus.textContent = "❌ Cole uma API Key válida";
+        keyStatus.style.color = "var(--error)";
+        return;
+      }
+      apiKey = key;
+      localStorage.setItem("gemini_api_key", key);
+      keyStatus.textContent = "✅ API Key salva com sucesso";
+      keyStatus.style.color = "var(--success)";
+    });
+
+    // Upload múltiplo de imagens
     fileInput.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (file) {
+      const files = Array.from(e.target.files);
+      files.forEach(file => {
         const reader = new FileReader();
         reader.onload = (ev) => {
-          uploadedImage = ev.target.result;
-          previewContainer.innerHTML = `<img class="preview" src="${uploadedImage}" alt="Preview" />`;
+          const src = ev.target.result;
+          uploadedImages.push(src);
+          renderPreviews();
         };
         reader.readAsDataURL(file);
+      });
+      fileInput.value = "";
+    });
+
+    function renderPreviews() {
+      previewGrid.innerHTML = "";
+      uploadedImages.forEach((src, idx) => {
+        const item = document.createElement("div");
+        item.className = "preview-item";
+        item.innerHTML = `
+          <img src="${src}" alt="Preview ${idx+1}" />
+          <button class="remove-btn" data-idx="${idx}">×</button>
+        `;
+        previewGrid.appendChild(item);
+      });
+    }
+
+    previewGrid.addEventListener("click", (e) => {
+      if (e.target.classList.contains("remove-btn")) {
+        const idx = parseInt(e.target. dataset.idx, 10);
+        uploadedImages.splice(idx, 1);
+        renderPreviews();
       }
     });
 
-    btnAnalyze.addEventListener("click", () => {
-      const notes = userNotes.value.trim();
-      if (!uploadedImage && !notes) {
-        alert("Por favor, envie uma imagem ou descreva sua situação.");
+    // Atualizar estatísticas
+    btnUpdateStats. addEventListener("click", () => {
+      statPlayers.textContent = inputPlayers.value || "—";
+      statBudget.textContent = inputBudget.value || "—";
+      statWins.textContent = inputWins.value || "—";
+      statMorale. textContent = inputMorale. value || "—";
+    });
+
+    // Análise com IA REAL
+    btnAnalyze. addEventListener("click", async () => {
+      const objectives = userObjectives.value.trim();
+      
+      if (!apiKey) {
+        alert("⚠️ Configure sua API Key do Google Gemini primeiro!");
         return;
       }
 
-      // Simulação de análise IA (você pode integrar API real)
-      const advice = generateAdvice(notes);
-      adviceOutput.innerHTML = advice;
-      resultCard.style.display = "block";
-      resultCard.scrollIntoView({ behavior: "smooth" });
+      if (uploadedImages.length === 0 && ! objectives) {
+        alert("Por favor, envie pelo menos uma imagem ou descreva seus objetivos.");
+        return;
+      }
+
+      // Desabilitar botão e mostrar loader
+      btnAnalyze.disabled = true;
+      analyzeText.style.display = "none";
+      analyzeLoader.style.display = "inline-flex";
+
+      try {
+        const analysis = await analyzeWithGemini(uploadedImages, objectives);
+        adviceOutput.innerHTML = formatAnalysis(analysis);
+        resultCard.style.display = "block";
+        resultCard.scrollIntoView({ behavior: "smooth" });
+      } catch (error) {
+        adviceOutput.innerHTML = `<div class="advice-box" style="border-left-color: var(--error); background:rgba(255,85,85,0.1);">
+          <h4>❌ Erro na Análise</h4>
+          <p>${error.message}</p>
+          <p>Verifique se sua API Key está correta e se você tem créditos disponíveis.</p>
+        </div>`;
+        resultCard.style.display = "block";
+      } finally {
+        btnAnalyze.disabled = false;
+        analyzeText.style.display = "inline";
+        analyzeLoader.style. display = "none";
+      }
     });
 
+    // Função para chamar API do Gemini Vision
+    async function analyzeWithGemini(images, objectives) {
+      const parts = [];
+
+      // Adicionar prompt do técnico
+      parts.push({
+        text: `Você é um técnico experiente de futebol analisando o jogo World Soccer Champs para o proprietário do clube. 
+
+CONTEXTO:  O usuário é o DONO do clube, você é o TÉCNICO. Analise as imagens enviadas (prints do jogo) e os objetivos dele. 
+
+OBJETIVOS DO PROPRIETÁRIO:
+${objectives || "Não especificado.  Faça análise geral. "}
+
+INFORMAÇÕES DO CLUBE:
+- Jogadores: ${statPlayers.textContent}
+- Orçamento: ${statBudget.textContent}
+- Vitórias: ${statWins.textContent}
+- Moral: ${statMorale.textContent}
+
+INSTRUÇÕES: 
+1. Analise CADA imagem em DETALHES (elenco, escalação, finanças, resultados, estatísticas).
+2. Identifique pontos fortes e fracos do time.
+3. Dê recomendações ESPECÍFICAS e PRÁTICAS sobre: 
+   - Contratações (nomes de posições, atributos ideais, faixa de preço)
+   - Vendas (quais jogadores vender e por quê)
+   - Táticas (formação ideal, ajustes táticos)
+   - Treinamento (quais atributos focar, quais jogadores treinar)
+   - Gestão financeira (como melhorar receita e reduzir gastos)
+   - Escalação (time titular ideal baseado nas imagens)
+
+4. Seja DETALHADO e use dados das imagens (nomes de jogadores, valores, ratings, etc.).
+5. Formate sua resposta em HTML com tags <h4>, <p>, <strong>, <ul>, <li>. 
+6. Organize em seções claras:  "Análise das Imagens", "Pontos Fortes", "Pontos Fracos", "Recomendações Imediatas", "Plano de Transferências", "Tática e Escalação", "Treinamento", "Gestão Financeira", "Resumo Executivo". 
+
+Seja como um técnico profissional dando orientações ao dono do clube. `
+      });
+
+      // Adicionar imagens
+      images.forEach(imgData => {
+        const base64 = imgData.split(',')[1]; // Remover prefixo data:image/... 
+        const mimeType = imgData.match(/data:([^;]+);/)[1];
+        parts.push({
+          inline_data: {
+            mime_type: mimeType,
+            data: base64
+          }
+        });
+      });
+
+      const response = await fetch(`${API_ENDPOINT}?key=${apiKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts }],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 4096,
+          }
+        })
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error?.message || "Erro na API do Gemini");
+      }
+
+      const data = await response.json();
+      return data.candidates[0].content.parts[0].text;
+    }
+
+    // Formatar análise da IA
+    function formatAnalysis(text) {
+      // Converter markdown para HTML básico se necessário
+      let html = text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br/>');
+      
+      return `<div class="advice-box" style="background:rgba(0,217,255,0.06);">
+        ${html}
+      </div>`;
+    }
+
+    // Limpar tudo
     btnClear.addEventListener("click", () => {
       fileInput.value = "";
-      previewContainer.innerHTML = "";
-      userNotes.value = "";
-      uploadedImage = null;
+      previewGrid.innerHTML = "";
+      userObjectives.value = "";
+      uploadedImages = [];
       resultCard.style.display = "none";
       adviceOutput.innerHTML = "";
+      inputPlayers.value = "";
+      inputBudget.value = "";
+      inputWins.value = "";
+      inputMorale. value = "";
     });
 
-    function generateAdvice(notes) {
-      const lower = notes.toLowerCase();
-      let html = "";
-
-      // Defesa
-      if (lower.includes("defesa") || lower.includes("tomando gol") || lower.includes("perdendo")) {
-        html += `<div class="advice-box">
-          <strong>🛡️ Reforçar Defesa</strong>
-          <p>• Troque para formação 5-3-2 ou 4-5-1 (defesa reforçada). </p>
-          <p>• Contrate zagueiros com alta marcação (80+) e velocidade (70+).</p>
-          <p>• Treine "Defesa" e "Posicionamento" dos zagueiros e laterais.</p>
-          <p>• Ajuste tática:  jogue no contra-ataque e reduza pressão ofensiva.</p>
-        </div>`;
-      }
-
-      // Ataque
-      if (lower.includes("ataque") || lower.includes("gol") || lower.includes("marcar")) {
-        html += `<div class="advice-box">
-          <strong>⚡ Melhorar Ataque</strong>
-          <p>• Use formação 3-4-3 ou 4-3-3 (ataque forte).</p>
-          <p>• Contrate atacantes rápidos (velocidade 80+) e finalizadores (chute 75+).</p>
-          <p>• Treine "Finalização", "Velocidade" e "Drible" dos atacantes.</p>
-          <p>• Jogue posse de bola e pressione alto no campo adversário.</p>
-        </div>`;
-      }
-
-      // Finanças
-      if (lower. includes("dinheiro") || lower.includes("financ") || lower.includes("salar") || lower.includes("vender")) {
-        html += `<div class="advice-box">
-          <strong>💰 Gestão Financeira</strong>
-          <p>• Venda jogadores reservas com salários altos e baixa moral.</p>
-          <p>• Negocie jovens promessas (⭐⭐⭐⭐) por valores altos.</p>
-          <p>• Reduza salários renegociando contratos quando possível.</p>
-          <p>• Priorize patrocinadores e ganhe copas/ligas para aumentar receita.</p>
-        </div>`;
-      }
-
-      // Escalação
-      if (lower.includes("escalação") || lower.includes("time") || lower.includes("formação")) {
-        html += `<div class="advice-box">
-          <strong>📋 Escalação e Formação</strong>
-          <p>• <strong>4-4-2:</strong> Equilibrada, boa para maioria das partidas.</p>
-          <p>• <strong>3-5-2:</strong> Domínio de meio-campo, ataque forte.</p>
-          <p>• <strong>5-3-2:</strong> Defesa sólida, ideal contra times fortes.</p>
-          <p>• <strong>4-3-3:</strong> Ataque intenso, pressão constante.</p>
-          <p>• Escale jogadores com alta stamina e moral para partidas importantes.</p>
-        </div>`;
-      }
-
-      // Transferências
-      if (lower.includes("contratar") || lower.includes("comprar") || lower.includes("jogador")) {
-        html += `<div class="advice-box">
-          <strong>🔄 Transferências</strong>
-          <p>• Procure jogadores jovens (18-22 anos) com 4-5 estrelas de potencial.</p>
-          <p>• Priorize atributos-chave: velocidade (atacantes), defesa (zagueiros), passes (meio).</p>
-          <p>• Evite contratar jogadores velhos (30+) com salários altos.</p>
-          <p>• Use scouts para encontrar talentos baratos em ligas menores.</p>
-        </div>`;
-      }
-
-      // Treinamento
-      if (lower.includes("treinar") || lower.includes("treinamento") || lower.includes("evoluir")) {
-        html += `<div class="advice-box">
-          <strong>🏋️ Treinamento</strong>
-          <p>• Treine atributos principais: velocidade, finalização, defesa, passes.</p>
-          <p>• Foque em jogadores jovens (alto potencial de crescimento).</p>
-          <p>• Treine antes de jogos importantes para aumentar moral.</p>
-          <p>• Use sessões especializadas:  "Chute", "Defesa", "Físico", "Técnica".</p>
-        </div>`;
-      }
-
-      // Moral
-      if (lower. includes("moral") || lower.includes("motivação")) {
-        html += `<div class="advice-box">
-          <strong>😊 Moral e Motivação</strong>
-          <p>• Ganhe partidas para aumentar moral do elenco.</p>
-          <p>• Faça rotação:  jogadores descansados têm melhor moral.</p>
-          <p>• Evite derrotas seguidas; teste táticas em amistosos antes.</p>
-          <p>• Converse com jogadores (se disponível) e elogie bom desempenho.</p>
-        </div>`;
-      }
-
-      // Geral / fallback
-      if (! html) {
-        html = `<div class="advice-box">
-          <strong>⚽ Análise Geral</strong>
-          <p>• <strong>Escalação:</strong> Use 4-4-2 como base equilibrada.</p>
-          <p>• <strong>Finanças:</strong> Venda reservas, contrate jovens promessas.</p>
-          <p>• <strong>Treinamento:</strong> Foque velocidade (atacantes) e defesa (zagueiros).</p>
-          <p>• <strong>Táticas:</strong> Ajuste formação conforme adversário (ataque vs defesa).</p>
-          <p>• <strong>Moral:</strong> Ganhe partidas e faça rotação para manter stamina alta.</p>
-        </div>`;
-      }
-
-      // Se houver imagem, mencionar
-      if (uploadedImage) {
-        html = `<p style="color:var(--muted); margin-bottom:10px;">📸 Imagem analisada.  Recomendações baseadas em sua descrição: </p>` + html;
-      }
-
-      return html;
-    }
+    // Sistema de abas
+    const tabs = document.querySelectorAll(". tab");
+    const tabContents = document.querySelectorAll(".tab-content");
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tabContents.forEach(tc => tc.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.tab).classList.add("active");
+      });
+    });
   </script>
 </body>
 </html>
