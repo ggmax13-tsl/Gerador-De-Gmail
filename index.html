@@ -7,19 +7,24 @@
   <style>
     : root {
       --bg:  #070810;
+      --bg-secondary: #0a0d16;
       --panel: rgba(10, 13, 24, 0.92);
       --glass: rgba(255, 255, 255, 0.04);
+      --glass-2: rgba(255, 255, 255, 0.02);
       --border: rgba(255, 255, 255, 0.09);
       --accent: #00d9ff;
       --accent-2: #00ff88;
       --accent-3: #ffad00;
+      --accent-4: #ff3366;
       --text: #f6f9ff;
       --muted: #8a9fc8;
       --error: #ff4757;
       --success: #00ff88;
       --radius: 22px;
       --shadow: 0 30px 130px rgba(0,0,0,0.75);
-      --sans: "Inter", system-ui, sans-serif;
+      --shadow-soft: 0 15px 60px rgba(0,0,0,0.5);
+      --mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+      --sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -28,25 +33,72 @@
       background-image: 
         radial-gradient(circle at 18% 12%, rgba(0,217,255,0.16), transparent 28%),
         radial-gradient(circle at 82% 15%, rgba(0,255,136,0.16), transparent 30%),
-        radial-gradient(circle at 50% 88%, rgba(255,173,0,0.14), transparent 32%);
+        radial-gradient(circle at 50% 88%, rgba(255,173,0,0.14), transparent 32%),
+        radial-gradient(ellipse at 50% 50%, rgba(255,51,102,0.08), transparent 50%);
+      position: relative;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none;
+      background-image: 
+        repeating-linear-gradient(0deg, rgba(0,217,255,0.03) 0px, transparent 1px, transparent 50px, rgba(0,217,255,0.03) 51px),
+        repeating-linear-gradient(90deg, rgba(0,255,136,0.03) 0px, transparent 1px, transparent 50px, rgba(0,255,136,0.03) 51px);
+      opacity: 0.4;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse at 50% 40%, rgba(0,0,0,1), transparent 70%);
+    }
+    body::after {
+      content: ""; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(0,217,255,0.08) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.15;
+      z-index: 0;
+      pointer-events: none;
+      animation: drift 120s linear infinite;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0) rotate(0deg); }
+      to { transform: translate(-50px, -50px) rotate(360deg); }
     }
     .shell { width: min(1280px, 100%); position: relative; z-index: 1; }
     .card {
       background: var(--panel);
-      border:  1px solid var(--border);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 28px;
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px) saturate(1.4);
       margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
     }
-    h1 { 
-      margin:  0 0 10px; letter-spacing: -0.8px; font-weight: 900; font-size: 2.4rem; 
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+      opacity: 0.3;
     }
+    h1 { margin:  0 0 10px; letter-spacing: -0.8px; font-weight: 900; font-size: 2.4rem; 
+         background: linear-gradient(135deg, var(--accent), var(--accent-2));
+         -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    h2 { margin: 0 0 14px; font-size: 1.5rem; font-weight: 850; }
     h3 { margin: 0 0 12px; font-size: 1.2rem; font-weight: 800; }
-    .lead { margin:  0 0 22px; color: var(--muted); line-height: 1.7; }
+    h4 { margin: 0 0 8px; font-size: 1. 1rem; font-weight: 750; color: var(--accent); }
+    .lead { margin: 0 0 22px; color: var(--muted); line-height: 1.7; font-size: 1.05rem; }
+    .badge {
+      display: inline-flex; align-items: center; gap:  10px;
+      padding: 11px 16px; border-radius: 999px;
+      background: linear-gradient(125deg, rgba(0,217,255,0.22), rgba(0,255,136,0.22));
+      border: 1px solid var(--border);
+      color: var(--text); font-weight: 750; font-size: 1rem;
+      box-shadow: 0 16px 40px rgba(0,217,255,0.28);
+    }
+    .grid { display: grid; gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+    . grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
     .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
     button, input, textarea, select {
       border: 1px solid var(--border);
@@ -55,8 +107,10 @@
       color: var(--text);
       padding: 13px 16px;
       font-weight: 700;
+      letter-spacing: 0.3px;
       transition: all 0.15s ease;
       font-family: var(--sans);
+      font-size: 0.95rem;
     }
     button { cursor: pointer; }
     button. primary {
@@ -64,40 +118,65 @@
       color: #070810;
       border: none;
       box-shadow: 0 20px 45px rgba(0,217,255,0.32);
+      font-weight: 800;
+    }
+    button.primary:hover {
+      box-shadow: 0 24px 55px rgba(0,217,255,0.4);
+      transform: translateY(-2px);
     }
     button.secondary {
       background: linear-gradient(135deg, var(--accent-3), #ff6b35);
       color: #070810;
       border: none;
+      box-shadow: 0 18px 42px rgba(255,173,0,0.3);
+      font-weight: 800;
     }
-    button: hover { transform: translateY(-1px); }
-    button:disabled { opacity: 0.5; cursor: not-allowed; }
-    input: focus, textarea:focus, select: focus { 
+    button.ghost {
+      background: transparent;
+      border: 1px dashed var(--border);
+      color: var(--muted);
+    }
+    button: hover { transform: translateY(-1px); border-color: var(--accent); }
+    button:active { transform: translateY(0); }
+    button: disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    input: focus, textarea:focus, select:focus { 
       outline: 2px solid var(--accent); 
       border-color: var(--accent); 
+      background: rgba(0,217,255,0.05);
     }
-    .api-box {
-      background: linear-gradient(135deg, rgba(255,173,0,0.1), rgba(255,107,53,0.08));
-      border: 1px solid var(--accent-3);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
+    .pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 14px; border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--muted); font-size: 0.92rem; font-weight: 700;
     }
-    .alert {
-      background: rgba(0,217,255,0.1);
-      border-left: 4px solid var(--accent);
-      border-radius: 10px;
-      padding: 16px;
-      margin: 16px 0;
-      line-height: 1.6;
+    .mini {
+      padding: 18px;
+      background: linear-gradient(145deg, rgba(0,217,255,0.06), rgba(0,255,136,0.04));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
     }
-    .alert. error {
-      background: rgba(255,71,87,0.15);
-      border-left-color: var(--error);
+    .header-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 18px 24px; border-radius: 20px;
+      background: linear-gradient(125deg, rgba(0,217,255,0.12), rgba(0,255,136,0.12));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 22px;
     }
-    .alert.success {
-      background: rgba(0,255,136,0.15);
-      border-left-color: var(--success);
+    . status-dot {
+      width: 12px; height: 12px; border-radius: 50%; background: var(--success);
+      box-shadow: 0 0 16px rgba(0,255,136,1), 0 0 32px rgba(0,255,136,0.6);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.92); }
     }
     .textarea {
       width: 100%;
@@ -107,10 +186,27 @@
       border-radius: 16px;
       padding: 14px;
       color: var(--text);
+      font-family: var(--sans);
       resize: vertical;
       line-height: 1.6;
     }
-    .preview-grid { 
+    .file-label {
+      display: inline-block;
+      padding: 14px 18px;
+      border:  2px dashed var(--border);
+      border-radius: 14px;
+      background: var(--glass);
+      cursor: pointer;
+      font-weight: 750;
+      transition: all 0.2s ease;
+    }
+    .file-label:hover { 
+      border-color: var(--accent); 
+      background: rgba(0,217,255,0.08);
+      box-shadow: 0 8px 24px rgba(0,217,255,0.2);
+    }
+    input[type="file"] { display: none; }
+    . preview-grid { 
       display: grid; 
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
       gap: 12px; 
@@ -121,6 +217,11 @@
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--border);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    . preview-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,217,255,0.3);
     }
     .preview-item img {
       width: 100%;
@@ -128,88 +229,208 @@
       object-fit:  cover;
       display: block;
     }
-    .preview-item . remove-btn {
-      position:  absolute;
+    .preview-item .remove-btn {
+      position: absolute;
       top: 8px;
       right: 8px;
       background: rgba(255,71,87,0.95);
       border: none;
       border-radius: 50%;
-      width: 30px;
+      width:  30px;
       height: 30px;
       color: #fff;
-      font-weight: 900;
+      font-weight:  900;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 18px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(255,71,87,0.4);
     }
-    .file-label {
-      display: inline-block;
-      padding: 14px 18px;
-      border: 2px dashed var(--border);
-      border-radius: 14px;
-      background: var(--glass);
-      cursor: pointer;
-      font-weight: 750;
+    .preview-item .remove-btn:hover {
+      background: #ff1744;
+      transform: scale(1.1);
     }
-    input[type="file"] { display: none; }
+    .advice-box {
+      background: rgba(0,217,255,0.08);
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px;
+      line-height: 1.7;
+    }
+    .advice-box h4 { margin:  0 0 10px; font-size: 1.1rem; }
+    .advice-box p { margin: 8px 0; color: var(--muted); }
+    .advice-box strong { color: var(--text); }
+    .advice-box ul { margin: 8px 0 8px 20px; }
+    .advice-box li { margin: 6px 0; }
     .stats-grid { 
       display: grid; 
-      grid-template-columns:  repeat(auto-fit, minmax(200px, 1fr)); 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
       gap: 14px; 
-      margin-bottom: 16px;
     }
     .stat-card {
       background: linear-gradient(135deg, rgba(0,217,255,0.1), rgba(0,255,136,0.1));
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
-      text-align: center;
+      border-radius:  16px;
+      padding:  18px;
+      text-align:  center;
+      transition: all 0.2s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,217,255,0.25);
     }
     .stat-card . label { 
       font-size: 0.92rem; 
       color: var(--muted); 
       margin-bottom: 8px; 
       text-transform: uppercase;
+      letter-spacing: 1px;
       font-weight: 700;
     }
     .stat-card .value { 
       font-size: 1.8rem; 
       font-weight: 900; 
       color: var(--accent-2);
+      text-shadow: 0 0 20px rgba(0,255,136,0.3);
+    }
+    .tab-bar { 
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 16px; 
+      border-bottom: 2px solid var(--border); 
+      padding-bottom: 10px; 
+      overflow-x: auto;
+    }
+    .tab { 
+      padding: 12px 18px; 
+      border-radius: 12px 12px 0 0; 
+      background: var(--glass-2); 
+      border: 1px solid transparent; 
+      cursor: pointer; 
+      font-weight: 750; 
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .tab.active { 
+      background: linear-gradient(135deg, rgba(0,217,255,0.15), rgba(0,255,136,0.15)); 
+      border-color: var(--border); 
+      border-bottom-color: transparent; 
+      color: var(--accent);
+      box-shadow: 0 -4px 16px rgba(0,217,255,0.2);
+    }
+    .tab:hover { background: var(--glass); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity:  1; transform: translateY(0); }
+    }
+    .loader {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin-right: 8px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .api-key-box {
+      background: linear-gradient(135deg, rgba(255,173,0,0.1), rgba(255,107,53,0.08));
+      border: 1px solid var(--accent-3);
+      border-radius:  16px;
+      padding:  20px;
+      margin-bottom:  20px;
+    }
+    .team-selector {
+      background: linear-gradient(135deg, rgba(255,51,102,0.1), rgba(138,91,255,0.1));
+      border: 1px solid rgba(255,51,102,0.3);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .alert {
+      background: rgba(0,217,255,0.1);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px;
+      margin:  12px 0;
+      line-height: 1.6;
+    }
+    .alert. error {
+      background: rgba(255,71,87,0.15);
+      border-left-color: var(--error);
+    }
+    .alert.success {
+      background: rgba(0,255,136,0.15);
+      border-left-color: var(--success);
+    }
+    @media (max-width: 768px) {
+      .header-bar { flex-direction: column; align-items: flex-start; }
+      button, input, select { width: 100%; }
+      h1 { font-size: 1.9rem; }
+      . stats-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="shell">
-    <h1>Painel do Proprietário – WSC</h1>
-    <p class="lead">Técnico IA com Hugging Face (100% gratuito, sem limites rígidos)</p>
-
-    <!-- API Selection -->
-    <div class="api-box">
-      <h3>🤖 Escolher API de IA</h3>
-      <div class="row">
-        <select id="api-provider" style="flex: 1;">
-          <option value="huggingface">Hugging Face (GRÁTIS - Recomendado)</option>
-          <option value="openai">OpenAI GPT-4 Vision ($5 trial)</option>
-          <option value="replicate">Replicate (créditos grátis)</option>
-        </select>
+    <div class="header-bar">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div class="status-dot"></div>
+        <div>
+          <div class="badge">⚽ Painel do Proprietário • World Soccer Champs</div>
+          <div style="color: var(--muted); font-size: 0.94rem; margin-top: 6px;">Técnico IA com OpenAI GPT-4 Vision ($5 grátis)</div>
+        </div>
       </div>
-      <div id="api-config" style="margin-top: 16px;"></div>
+      <div class="row">
+        <span class="pill">🤖 OpenAI</span>
+        <span class="pill">📊 Análise Real</span>
+        <span class="pill">🔄 Transferências</span>
+      </div>
     </div>
 
-    <!-- Time -->
-    <div class="card">
-      <h3>🏆 Clube</h3>
-      <div class="row">
-        <input type="text" id="team-name" placeholder="Nome do time" style="flex: 1;" />
-        <button id="btn-save-team">✅ Salvar</button>
+    <h1>Bem-vindo, Proprietário</h1>
+    <p class="lead">Você é o dono do clube.  Envie prints (elenco, finanças, escalação) e defina seus objetivos.  Seu técnico IA vai analisar as imagens DE VERDADE com visão computacional. </p>
+
+    <!-- OpenAI API Key -->
+    <div class="api-key-box">
+      <h3>🔑 Configurar OpenAI API Key ($5 grátis ao criar conta)</h3>
+      <div class="alert">
+        <strong>💰 Como obter $5 grátis:</strong>
+        <ol style="margin:  10px 0 0 20px; line-height: 1.8;">
+          <li>Acesse:  <a href="https://platform.openai.com/signup" target="_blank" style="color: var(--accent); font-weight: 700;">https://platform.openai.com/signup</a></li>
+          <li>Crie uma conta (você ganha $5 grátis para testar)</li>
+          <li>Vá em:  <a href="https://platform.openai.com/api-keys" target="_blank" style="color: var(--accent); font-weight: 700;">API Keys</a></li>
+          <li>Clique em "Create new secret key"</li>
+          <li>Copie a key e cole abaixo</li>
+        </ol>
       </div>
-      <p id="team-status" style="margin:  10px 0 0; color: var(--muted);"></p>
+      <div class="row" style="margin-top: 12px;">
+        <input type="password" id="api-key-input" placeholder="Cole sua OpenAI API Key (sk-...)" style="flex: 1; min-width: 250px;" />
+        <button id="btn-save-key" class="secondary">💾 Salvar Key</button>
+      </div>
+      <p id="key-status" style="margin:  10px 0 0; font-size: 0.92rem; color: var(--muted);"></p>
     </div>
 
-    <!-- Stats -->
+    <!-- Seletor de Time -->
+    <div class="team-selector">
+      <h3>🏆 Informações do Clube</h3>
+      <p style="color: var(--muted); margin:  8px 0 12px; font-size: 0.92rem;">Digite o nome do seu time. </p>
+      <div class="row">
+        <input type="text" id="team-name" placeholder="Nome do time (ex: Manchester United)" style="flex: 1; min-width:  250px;" />
+        <button id="btn-save-team">✅ Salvar Time</button>
+      </div>
+      <p id="team-status" style="margin: 10px 0 0; font-size: 0.92rem; color: var(--muted);"></p>
+    </div>
+
+    <!-- Estatísticas do Clube -->
     <div class="card">
       <h3>📈 Status do Clube</h3>
       <div class="stats-grid">
@@ -226,57 +447,143 @@
           <div class="value" id="stat-wins">—</div>
         </div>
       </div>
-      <div class="row">
+      <p style="color: var(--muted); margin-top: 14px; font-size: 0.92rem;">💡 Atualize manualmente (ex: 5000000 → 5.0M)</p>
+      <div class="row" style="margin-top: 12px;">
         <input type="number" id="input-players" placeholder="Nº jogadores" style="width: 150px;" />
         <input type="text" id="input-budget" placeholder="Orçamento" style="width: 200px;" />
-        <input type="number" id="input-wins" placeholder="Vitórias" style="width:  130px;" />
+        <input type="number" id="input-wins" placeholder="Vitórias" style="width: 130px;" />
         <button id="btn-update-stats">🔄 Atualizar</button>
       </div>
     </div>
 
-    <!-- Upload -->
+    <!-- Upload múltiplo -->
     <div class="card">
-      <h3>📸 Enviar Prints</h3>
-      <label class="file-label" for="file-input">📂 Escolher imagens</label>
+      <h3>📸 Enviar Prints do Jogo</h3>
+      <p style="color: var(--muted); margin-bottom: 14px;">Envie múltiplas imagens:  elenco, escalação, finanças, resultados. </p>
+      <label class="file-label" for="file-input">📂 Escolher múltiplas imagens</label>
       <input type="file" id="file-input" accept="image/*" multiple />
       <div class="preview-grid" id="preview-grid"></div>
     </div>
 
     <!-- Objetivos -->
     <div class="card">
-      <h3>🎯 Objetivos</h3>
-      <textarea class="textarea" id="user-objectives" placeholder="Ex:  Preciso ganhar a copa.  Time fraco no meio.  Tenho 8M... "></textarea>
+      <h3>🎯 Defina seus Objetivos</h3>
+      <p style="color: var(--muted); margin-bottom: 14px;">Diga ao técnico o que você quer alcançar. </p>
+      <textarea class="textarea" id="user-objectives" placeholder="Ex: Preciso ganhar a próxima copa.  Time está fraco no meio-campo.  Tenho 8M para gastar.  Quero vender jogadores velhos... "></textarea>
     </div>
 
-    <!-- Análise -->
+    <!-- Consultas rápidas -->
+    <div class="card">
+      <h3>⚙️ Consultas Rápidas</h3>
+      <div class="tab-bar">
+        <div class="tab active" data-tab="tactics">⚡ Táticas</div>
+        <div class="tab" data-tab="transfers">🔄 Transferências</div>
+        <div class="tab" data-tab="training">🏋️ Treinamento</div>
+        <div class="tab" data-tab="finance">💰 Finanças</div>
+      </div>
+
+      <div class="tab-content active" id="tactics">
+        <h4>📋 Formações Recomendadas</h4>
+        <p><strong>4-4-2:</strong> Equilibrada.  Boa para maioria das partidas.</p>
+        <p><strong>3-5-2:</strong> Domínio de meio-campo, ataque forte.</p>
+        <p><strong>5-3-2:</strong> Defesa sólida, ideal contra times ofensivos.</p>
+        <p><strong>4-3-3:</strong> Ataque intenso, alta pressão.</p>
+        <p><strong>4-5-1:</strong> Defesa compacta, contra-ataque rápido.</p>
+      </div>
+
+      <div class="tab-content" id="transfers">
+        <h4>🔄 Dicas de Transferências</h4>
+        <p>• Contrate jogadores jovens (18-23 anos) com 4-5 estrelas de potencial. </p>
+        <p>• Venda reservas com salários altos. </p>
+        <p>• Use scouts para encontrar talentos baratos em ligas menores.</p>
+        <p>• Priorize posições fracas. </p>
+        <p>• Negocie valores:  ofereça abaixo do pedido inicial.</p>
+      </div>
+
+      <div class="tab-content" id="training">
+        <h4>🏋️ Treinamento Eficaz</h4>
+        <p>• <strong>Velocidade</strong> (atacantes), <strong>Defesa</strong> (zagueiros), <strong>Passes</strong> (meio-campo).</p>
+        <p>• Foque em jogadores jovens (maior crescimento).</p>
+        <p>• Sessões:  "Chute", "Defesa", "Físico", "Técnica", "Passes".</p>
+        <p>• Treine antes de jogos importantes.</p>
+        <p>• Evite overtraining:  jogadores cansados rendem menos.</p>
+      </div>
+
+      <div class="tab-content" id="finance">
+        <h4>💰 Gestão Financeira</h4>
+        <p>• Mantenha reserva para salários (mínimo 3 meses).</p>
+        <p>• Venda jogadores que não jogam. </p>
+        <p>• Negocie patrocinadores e ganhe copas/ligas.</p>
+        <p>• Reduza folha salarial: renegocie contratos.</p>
+        <p>• Invista em infraestrutura (se disponível).</p>
+      </div>
+    </div>
+
+    <!-- Botão análise -->
     <div class="card" style="text-align: center;">
       <button class="primary" id="btn-analyze" style="font-size: 1.15rem; padding: 18px 32px;">
-        🧠 Analisar com IA
+        <span id="analyze-text">🧠 Analisar com IA e Receber Orientações</span>
+        <span id="analyze-loader" style="display: none;"><div class="loader"></div> Analisando...</span>
       </button>
-      <button class="secondary" id="btn-clear" style="margin-left: 12px;">🗑️ Limpar</button>
+      <button class="ghost" id="btn-clear" style="margin-left: 12px;">🗑️ Limpar Tudo</button>
     </div>
 
     <!-- Resultado -->
     <div class="card" id="result-card" style="display: none;">
-      <h3>📋 Relatório do Técnico IA</h3>
+      <h2>📋 Relatório do Técnico IA</h2>
+      <p style="color: var(--muted); margin-bottom: 16px;">Análise completa por OpenAI GPT-4 Vision baseada nos prints e objetivos.</p>
       <div id="advice-output"></div>
+    </div>
+
+    <!-- Dicas gerais -->
+    <div class="card" style="background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08));">
+      <h3>💡 Dicas Gerais – World Soccer Champs</h3>
+      <div class="grid-3">
+        <div class="mini">
+          <strong>⚽ Táticas: </strong>
+          <p>Ajuste formação conforme adversário.  4-4-2 padrão, 5-3-2 defesa, 4-3-3 ataque.</p>
+        </div>
+        <div class="mini">
+          <strong>💰 Finanças:</strong>
+          <p>Venda reservas, contrate jovens, reserve 3+ meses de salários.</p>
+        </div>
+        <div class="mini">
+          <strong>🔄 Transferências:</strong>
+          <p>Jovens ⭐⭐⭐⭐+, scouts, negocie.  Evite velhos caros.</p>
+        </div>
+        <div class="mini">
+          <strong>🏋️ Treinamento:</strong>
+          <p>Foque jovens.  Velocidade (atacantes), defesa (zagueiros), passes (meio).</p>
+        </div>
+        <div class="mini">
+          <strong>📊 Escalação:</strong>
+          <p>Priorize stamina alta.  Jogadores cansados rendem menos.</p>
+        </div>
+        <div class="mini">
+          <strong>🎯 Objetivos:</strong>
+          <p>Defina metas claras:  ganhar liga, reforçar defesa, equilibrar finanças.</p>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    const apiProviderSelect = document.getElementById("api-provider");
-    const apiConfig = document.getElementById("api-config");
-    const btnAnalyze = document.getElementById("btn-analyze");
-    const btnClear = document.getElementById("btn-clear");
+    const apiKeyInput = document.getElementById("api-key-input");
+    const btnSaveKey = document.getElementById("btn-save-key");
     const btnSaveTeam = document.getElementById("btn-save-team");
     const btnUpdateStats = document.getElementById("btn-update-stats");
+    const btnAnalyze = document.getElementById("btn-analyze");
+    const btnClear = document.getElementById("btn-clear");
     const fileInput = document.getElementById("file-input");
     const previewGrid = document.getElementById("preview-grid");
     const teamNameInput = document.getElementById("team-name");
     const userObjectives = document.getElementById("user-objectives");
+    const keyStatus = document.getElementById("key-status");
     const teamStatus = document.getElementById("team-status");
     const resultCard = document.getElementById("result-card");
     const adviceOutput = document.getElementById("advice-output");
+    const analyzeText = document.getElementById("analyze-text");
+    const analyzeLoader = document.getElementById("analyze-loader");
 
     const inputPlayers = document.getElementById("input-players");
     const inputBudget = document.getElementById("input-budget");
@@ -285,100 +592,44 @@
     const statBudget = document.getElementById("stat-budget");
     const statWins = document.getElementById("stat-wins");
 
+    let apiKey = localStorage.getItem("openai_key") || "";
     let teamName = localStorage.getItem("team_name") || "";
     let uploadedImages = [];
-    let apiKeys = {
-      huggingface: localStorage.getItem("hf_token") || "",
-      openai: localStorage.getItem("openai_key") || "",
-      replicate:  localStorage.getItem("replicate_key") || ""
-    };
 
+    if (apiKey) {
+      apiKeyInput.value = apiKey;
+      keyStatus.textContent = "✅ API Key carregada";
+      keyStatus. style.color = "var(--success)";
+    }
     if (teamName) {
       teamNameInput.value = teamName;
-      teamStatus.textContent = `✅ Time: ${teamName}`;
+      teamStatus.textContent = `✅ Time:  ${teamName}`;
       teamStatus.style.color = "var(--success)";
     }
 
-    // Configuração dinâmica por provider
-    function renderApiConfig() {
-      const provider = apiProviderSelect.value;
-      
-      if (provider === "huggingface") {
-        apiConfig.innerHTML = `
-          <div class="alert">
-            <strong>🤗 Hugging Face (100% Grátis)</strong>
-            <p>1. Acesse: <a href="https://huggingface.co/settings/tokens" target="_blank" style="color: var(--accent);">https://huggingface.co/settings/tokens</a></p>
-            <p>2. Crie uma conta (grátis)</p>
-            <p>3. Clique em "New token" → Copie o token</p>
-          </div>
-          <div class="row">
-            <input type="password" id="api-key" placeholder="Cole seu token Hugging Face" value="${apiKeys.huggingface}" style="flex: 1;" />
-            <button id="btn-save-key" class="secondary">💾 Salvar</button>
-          </div>
-          <p id="key-status" style="margin: 10px 0 0; color: var(--muted);"></p>
-        `;
-      } else if (provider === "openai") {
-        apiConfig. innerHTML = `
-          <div class="alert">
-            <strong>🔓 OpenAI GPT-4 Vision ($5 trial grátis)</strong>
-            <p>1. Acesse: <a href="https://platform.openai.com/api-keys" target="_blank" style="color: var(--accent);">https://platform.openai.com/api-keys</a></p>
-            <p>2. Crie conta → Ganhe $5 grátis</p>
-            <p>3. Create new secret key</p>
-          </div>
-          <div class="row">
-            <input type="password" id="api-key" placeholder="Cole sua OpenAI API Key" value="${apiKeys.openai}" style="flex: 1;" />
-            <button id="btn-save-key" class="secondary">💾 Salvar</button>
-          </div>
-          <p id="key-status" style="margin: 10px 0 0; color:  var(--muted);"></p>
-        `;
-      } else if (provider === "replicate") {
-        apiConfig.innerHTML = `
-          <div class="alert">
-            <strong>🔁 Replicate (Créditos grátis)</strong>
-            <p>1. Acesse: <a href="https://replicate.com/account/api-tokens" target="_blank" style="color: var(--accent);">https://replicate.com/account/api-tokens</a></p>
-            <p>2. Crie conta (GitHub login)</p>
-            <p>3. Copie o token</p>
-          </div>
-          <div class="row">
-            <input type="password" id="api-key" placeholder="Cole seu token Replicate" value="${apiKeys.replicate}" style="flex: 1;" />
-            <button id="btn-save-key" class="secondary">💾 Salvar</button>
-          </div>
-          <p id="key-status" style="margin: 10px 0 0; color:  var(--muted);"></p>
-        `;
-      }
-
-      document.getElementById("btn-save-key")?. addEventListener("click", saveApiKey);
-    }
-
-    function saveApiKey() {
-      const provider = apiProviderSelect. value;
-      const key = document.getElementById("api-key").value. trim();
-      const status = document.getElementById("key-status");
-      
-      if (!key) {
-        status.textContent = "❌ Cole uma key válida";
-        status.style. color = "var(--error)";
+    btnSaveKey.addEventListener("click", () => {
+      const key = apiKeyInput.value.trim();
+      if (! key || ! key.startsWith("sk-")) {
+        keyStatus.textContent = "❌ Cole uma key válida (sk-...)";
+        keyStatus.style. color = "var(--error)";
         return;
       }
-
-      const storageKey = provider === "huggingface" ? "hf_token" : 
-                         provider === "openai" ? "openai_key" : "replicate_key";
-      
-      localStorage.setItem(storageKey, key);
-      apiKeys[provider] = key;
-      status.textContent = "✅ Key salva";
-      status.style.color = "var(--success)";
-    }
-
-    apiProviderSelect.addEventListener("change", renderApiConfig);
-    renderApiConfig();
+      apiKey = key;
+      localStorage. setItem("openai_key", key);
+      keyStatus.textContent = "✅ API Key salva";
+      keyStatus. style.color = "var(--success)";
+    });
 
     btnSaveTeam.addEventListener("click", () => {
       const name = teamNameInput.value.trim();
-      if (!name) return;
+      if (!name) {
+        teamStatus.textContent = "❌ Digite o nome do time";
+        teamStatus.style.color = "var(--error)";
+        return;
+      }
       teamName = name;
-      localStorage. setItem("team_name", name);
-      teamStatus.textContent = `✅ Time: ${name}`;
+      localStorage.setItem("team_name", name);
+      teamStatus.textContent = `✅ Time salvo: ${name}`;
       teamStatus.style.color = "var(--success)";
     });
 
@@ -400,7 +651,7 @@
         const item = document.createElement("div");
         item.className = "preview-item";
         item.innerHTML = `
-          <img src="${src}" />
+          <img src="${src}" alt="Preview ${idx+1}" />
           <button class="remove-btn" data-idx="${idx}">×</button>
         `;
         previewGrid.appendChild(item);
@@ -416,7 +667,7 @@
 
     function formatMoney(value) {
       if (! value) return "—";
-      const num = parseFloat(value. toString().replace(/[^0-9.]/g, ""));
+      const num = parseFloat(value.toString().replace(/[^0-9.]/g, ""));
       if (isNaN(num)) return value;
       if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
       if (num >= 1000) return (num / 1000).toFixed(1) + "K";
@@ -430,119 +681,130 @@
     });
 
     btnAnalyze.addEventListener("click", async () => {
-      const provider = apiProviderSelect.value;
-      const key = apiKeys[provider];
-      
-      if (!key) {
-        alert("Configure a API Key primeiro!");
+      if (!apiKey) {
+        alert("⚠️ Configure sua OpenAI API Key primeiro!");
         return;
       }
       if (uploadedImages.length === 0 && !userObjectives.value. trim()) {
-        alert("Envie imagens ou descreva objetivos!");
+        alert("Por favor, envie pelo menos uma imagem ou descreva seus objetivos.");
         return;
       }
 
       btnAnalyze.disabled = true;
-      btnAnalyze.textContent = "🔄 Analisando...";
+      analyzeText.style.display = "none";
+      analyzeLoader.style.display = "inline-flex";
 
       try {
-        let analysis;
-        if (provider === "huggingface") {
-          analysis = await analyzeWithHuggingFace(key);
-        } else if (provider === "openai") {
-          analysis = await analyzeWithOpenAI(key);
-        } else {
-          analysis = await analyzeWithReplicate(key);
+        const content = [
+          {
+            type: "text",
+            text:  `Você é um técnico experiente de futebol analisando o jogo World Soccer Champs para o proprietário do clube "${teamName || "não especificado"}". 
+
+CONTEXTO:  O usuário é o DONO do clube, você é o TÉCNICO.  Analise as imagens (prints do jogo) e objetivos dele. 
+
+OBJETIVOS DO PROPRIETÁRIO:
+${userObjectives.value || "Não especificado.  Faça análise geral. "}
+
+INFORMAÇÕES DO CLUBE:
+- Time: ${teamName || "Não informado"}
+- Jogadores: ${statPlayers.textContent}
+- Orçamento: ${statBudget.textContent}
+- Vitórias: ${statWins.textContent}
+
+INSTRUÇÕES: 
+1. Analise CADA imagem em DETALHES (elenco, escalação, finanças, resultados).
+2. Identifique pontos fortes e fracos do time.
+3. Dê recomendações ESPECÍFICAS sobre: 
+   - Contratações (posições, atributos, preço)
+   - Vendas (quais jogadores dispensar)
+   - Táticas (formação ideal)
+   - Treinamento (atributos e jogadores a focar)
+   - Finanças (como melhorar receita)
+   - Escalação (time titular ideal)
+
+4. Seja DETALHADO.  Use dados das imagens (nomes, valores, ratings).
+5. Organize em seções claras. 
+
+Seja profissional como um técnico real. `
+          }
+        ];
+
+        uploadedImages.forEach(img => {
+          content.push({
+            type: "image_url",
+            image_url: {
+              url: img,
+              detail: "high"
+            }
+          });
+        });
+
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${apiKey}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            model: "gpt-4-vision-preview",
+            messages: [{
+              role: "user",
+              content: content
+            }],
+            max_tokens: 4096,
+            temperature: 0.7
+          })
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error?. message || `HTTP ${response.status}`);
         }
 
-        adviceOutput.innerHTML = `<div class="alert success">${analysis.replace(/\n/g, '<br>')}</div>`;
+        const data = await response. json();
+        const analysis = data.choices[0].message.content;
+
+        adviceOutput.innerHTML = `<div class="advice-box">${analysis. replace(/\n/g, '<br>')}</div>`;
         resultCard.style.display = "block";
         resultCard.scrollIntoView({ behavior: "smooth" });
 
       } catch (error) {
         adviceOutput.innerHTML = `<div class="alert error">
-          <strong>❌ Erro: </strong> ${error.message}
+          <h4>❌ Erro na Análise</h4>
+          <p><strong>Mensagem:</strong> ${error.message}</p>
+          <p><strong>Dica:</strong> Verifique se sua API Key está correta e se você tem créditos ($5 grátis ao criar conta).</p>
         </div>`;
         resultCard.style.display = "block";
-        console.error(error);
+        console.error("Erro:", error);
       } finally {
         btnAnalyze.disabled = false;
-        btnAnalyze.textContent = "🧠 Analisar com IA";
+        analyzeText.style.display = "inline";
+        analyzeLoader.style. display = "none";
       }
     });
 
-    // Hugging Face (GRÁTIS)
-    async function analyzeWithHuggingFace(token) {
-      const prompt = `Você é técnico de futebol analisando World Soccer Champs para "${teamName || "o clube"}". 
-
-OBJETIVOS:  ${userObjectives.value || "Análise geral"}
-JOGADORES:  ${statPlayers.textContent} | ORÇAMENTO: ${statBudget.textContent} | VITÓRIAS: ${statWins.textContent}
-
-Analise as imagens enviadas e dê recomendações sobre contratações, vendas, táticas, treinamento e finanças.  Seja específico e prático.`;
-
-      // Usa modelo multimodal gratuito da HF
-      const response = await fetch("https://api-inference.huggingface.co/models/llava-hf/llava-v1.6-mistral-7b-hf", {
-        method: "POST",
-        headers:  {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          inputs: prompt,
-          parameters: { max_new_tokens: 2000 }
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HuggingFace API error:  ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data[0]?.generated_text || "Análise não disponível";
-    }
-
-    // OpenAI GPT-4 Vision
-    async function analyzeWithOpenAI(key) {
-      const messages = [{
-        role: "user",
-        content: [
-          { type: "text", text: `Você é técnico de futebol analisando World Soccer Champs para "${teamName}".  OBJETIVOS: ${userObjectives. value}.  Analise as imagens e dê recomendações.` },
-          ... uploadedImages.map(img => ({ type: "image_url", image_url: { url: img } }))
-        ]
-      }];
-
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization":  `Bearer ${key}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "gpt-4-vision-preview",
-          messages,
-          max_tokens: 2000
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`OpenAI API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data.choices[0]. message.content;
-    }
-
-    // Replicate
-    async function analyzeWithReplicate(token) {
-      throw new Error("Replicate requer backend (webhooks). Use Hugging Face ou OpenAI.");
-    }
-
     btnClear.addEventListener("click", () => {
-      if (! confirm("Limpar tudo? ")) return;
+      if (! confirm("Limpar todos os dados e imagens?")) return;
       uploadedImages = [];
-      previewGrid. innerHTML = "";
+      previewGrid.innerHTML = "";
       userObjectives.value = "";
       resultCard.style.display = "none";
+      adviceOutput.innerHTML = "";
+      inputPlayers.value = "";
+      inputBudget.value = "";
+      inputWins.value = "";
+    });
+
+    // Abas
+    const tabs = document.querySelectorAll(". tab");
+    const tabContents = document.querySelectorAll(".tab-content");
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tabContents.forEach(tc => tc.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.tab).classList.add("active");
+      });
     });
   </script>
 </body>
