@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <title>Painel do Proprietário – World Soccer Champs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min. js"></script>
   <style>
-    : root {
-      --bg:  #070810;
-      --panel:  rgba(10, 13, 24, 0.92);
-      --glass: rgba(255, 255, 255, 0.04);
+    :  root {
+      --bg:   #070810;
+      --panel:   rgba(10, 13, 24, 0.92);
+      --glass:  rgba(255, 255, 255, 0.04);
       --border: rgba(255, 255, 255, 0.09);
       --accent: #00d9ff;
       --accent-2: #00ff88;
@@ -24,7 +25,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--sans);
-      display: grid; place-items: center; padding: 32px 20px; overflow: auto;
+      display: grid; place-items: center; padding: 32px 20px; overflow:  auto;
       background-image: 
         radial-gradient(circle at 18% 12%, rgba(0,217,255,0.16), transparent 28%),
         radial-gradient(circle at 82% 15%, rgba(0,255,136,0.16), transparent 30%),
@@ -49,14 +50,14 @@
       opacity: 0.3;
     }
     h1 { 
-      margin:  0 0 10px; letter-spacing: -0.8px; font-weight: 900; font-size: 2.4rem; 
+      margin:   0 0 10px; letter-spacing: -0.8px; font-weight: 900; font-size: 2.4rem; 
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
     }
     h2 { margin: 0 0 14px; font-size: 1.5rem; font-weight: 850; }
     h3 { margin: 0 0 12px; font-size: 1.2rem; font-weight: 800; }
-    h4 { margin: 0 0 8px; font-size: 1.1rem; font-weight: 750; color: var(--accent); }
-    .lead { margin: 0 0 22px; color: var(--muted); line-height: 1.7; font-size: 1.05rem; }
+    h4 { margin: 0 0 8px; font-size: 1. 1rem; font-weight: 750; color: var(--accent); }
+    . lead { margin: 0 0 22px; color: var(--muted); line-height: 1.7; font-size: 1.05rem; }
     .badge {
       display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 999px;
       background: linear-gradient(125deg, rgba(0,217,255,0.22), rgba(0,255,136,0.22));
@@ -71,18 +72,18 @@
       font-family: var(--sans); font-size: 0.95rem;
     }
     button { cursor: pointer; }
-    button. primary {
+    button.  primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #070810; border:  none; box-shadow: 0 20px 45px rgba(0,217,255,0.32);
+      color: #070810; border:   none; box-shadow: 0 20px 45px rgba(0,217,255,0.32);
       font-weight: 800;
     }
-    button.primary:hover { box-shadow: 0 24px 55px rgba(0,217,255,0.4); transform: translateY(-2px); }
+    button. primary:hover { box-shadow: 0 24px 55px rgba(0,217,255,0.4); transform: translateY(-2px); }
     button.ghost { background: transparent; border: 1px dashed var(--border); color: var(--muted); }
     button:hover { transform: translateY(-1px); }
-    button: disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    input: focus, textarea:focus { outline:  2px solid var(--accent); border-color: var(--accent); }
+    button:  disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    input:  focus, textarea: focus { outline:   2px solid var(--accent); border-color: var(--accent); }
     .pill {
-      display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; border-radius: 999px;
+      display: inline-flex; align-items: center; gap:  7px; padding: 9px 14px; border-radius: 999px;
       background: rgba(255,255,255,0.06); border: 1px solid var(--border);
       color: var(--muted); font-size: 0.92rem; font-weight: 700;
     }
@@ -97,10 +98,10 @@
       border: 1px solid var(--border); box-shadow: 0 15px 60px rgba(0,0,0,0.5);
       margin-bottom: 22px;
     }
-    . status-dot {
+    .  status-dot {
       width: 12px; height: 12px; border-radius: 50%; background: var(--success);
       box-shadow: 0 0 16px rgba(0,255,136,1), 0 0 32px rgba(0,255,136,0.6);
-      animation: pulse 2.5s ease-in-out infinite;
+      animation: pulse 2. 5s ease-in-out infinite;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
@@ -111,11 +112,11 @@
       border-radius: 16px; padding: 14px; color: var(--text); resize: vertical; line-height: 1.6;
     }
     .file-label {
-      display: inline-block; padding: 14px 18px; border:  2px dashed var(--border);
+      display: inline-block; padding: 14px 18px; border:   2px dashed var(--border);
       border-radius: 14px; background: var(--glass); cursor: pointer; font-weight: 750;
     }
     .file-label:hover { border-color: var(--accent); background: rgba(0,217,255,0.08); }
-    input[type="file"] { display: none; }
+    input[type="file"] { display:  none; }
     .preview-grid { 
       display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
       gap: 12px; margin-top: 16px; 
@@ -123,10 +124,10 @@
     .preview-item {
       position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--border);
     }
-    .preview-item img { width: 100%; height:  150px; object-fit: cover; display: block; }
+    .preview-item img { width: 100%; height:   150px; object-fit:  cover; display: block; }
     .preview-item .remove-btn {
-      position: absolute; top:  8px; right: 8px; background: rgba(255,71,87,0.95);
-      border: none; border-radius: 50%; width: 30px; height: 30px; color: #fff;
+      position: absolute; top:   8px; right: 8px; background: rgba(255,71,87,0.95);
+      border: none; border-radius: 50%; width:  30px; height: 30px; color: #fff;
       font-weight: 900; cursor: pointer; display: flex; align-items: center;
       justify-content: center; font-size: 18px;
     }
@@ -134,21 +135,21 @@
       background: rgba(0,217,255,0.08); border-left: 4px solid var(--accent);
       border-radius: 12px; padding: 16px; margin-top: 14px; line-height: 1.7;
     }
-    .advice-box h4 { margin:  0 0 10px; font-size: 1.1rem; }
+    .advice-box h4 { margin:   0 0 10px; font-size: 1.1rem; }
     .advice-box p { margin: 8px 0; color: var(--text); }
     .advice-box strong { color: var(--accent-2); }
-    .advice-box ul { margin:  8px 0 8px 20px; }
+    .advice-box ul { margin:   8px 0 8px 20px; }
     .advice-box li { margin: 6px 0; }
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
     .stat-card {
       background: linear-gradient(135deg, rgba(0,217,255,0.1), rgba(0,255,136,0.1));
       border: 1px solid var(--border); border-radius: 16px; padding: 18px; text-align: center;
     }
-    .stat-card . label { 
+    .stat-card .  label { 
       font-size: 0.92rem; color: var(--muted); margin-bottom: 8px; 
       text-transform: uppercase; font-weight: 700;
     }
-    .stat-card .value { 
+    .stat-card . value { 
       font-size: 1.8rem; font-weight: 900; color: var(--accent-2);
       text-shadow: 0 0 20px rgba(0,255,136,0.3);
     }
@@ -163,15 +164,28 @@
     }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    . team-selector {
+    .  loader {
+      display: inline-block; width: 20px; height: 20px;
+      border: 3px solid rgba(255,255,255,0.2); border-top-color: var(--accent);
+      border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .team-selector {
       background: linear-gradient(135deg, rgba(255,51,102,0.1), rgba(138,91,255,0.1));
       border: 1px solid rgba(255,51,102,0.3); border-radius: 16px; padding: 20px; margin-bottom: 20px;
+    }
+    .progress {
+      width: 100%; height: 6px; background: var(--glass); border-radius: 999px; overflow: hidden; margin:  10px 0;
+    }
+    .progress-bar {
+      height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width 0.3s ease;
     }
     @media (max-width: 768px) {
       .header-bar { flex-direction: column; align-items: flex-start; }
       button, input { width: 100%; }
       h1 { font-size: 1.9rem; }
-      . stats-grid { grid-template-columns: 1fr 1fr; }
+      .  stats-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -182,18 +196,18 @@
         <div class="status-dot"></div>
         <div>
           <div class="badge">⚽ Painel do Proprietário • World Soccer Champs</div>
-          <div style="color: var(--muted); font-size: 0.94rem; margin-top: 6px;">Técnico IA Especialista (Sistema Inteligente)</div>
+          <div style="color: var(--muted); font-size: 0.94rem; margin-top: 6px;">Técnico IA com OCR (Lê texto das imagens! )</div>
         </div>
       </div>
       <div class="row">
-        <span class="pill">🧠 IA Local</span>
+        <span class="pill">🔍 OCR Ativo</span>
         <span class="pill">📊 Análise</span>
         <span class="pill">🔄 Transferências</span>
       </div>
     </div>
 
     <h1>Bem-vindo, Proprietário</h1>
-    <p class="lead">Você é o dono do clube.  Envie prints e defina objetivos.  O técnico IA especialista vai analisar e dar orientações detalhadas.</p>
+    <p class="lead">Você é o dono do clube.   Envie prints (elenco, finanças, escalação) e defina objetivos.   O técnico IA vai **LER O TEXTO DAS IMAGENS** e dar orientações detalhadas.</p>
 
     <div class="team-selector">
       <h3>🏆 Clube</h3>
@@ -201,7 +215,7 @@
         <input type="text" id="team-name" placeholder="Nome do time" style="flex: 1;" />
         <button id="btn-save-team">✅ Salvar</button>
       </div>
-      <p id="team-status" style="margin:  10px 0 0; color: var(--muted);"></p>
+      <p id="team-status" style="margin:   10px 0 0; color: var(--muted);"></p>
     </div>
 
     <div class="card">
@@ -220,7 +234,8 @@
     </div>
 
     <div class="card">
-      <h3>📸 Enviar Prints</h3>
+      <h3>📸 Enviar Prints (OCR vai ler o texto!)</h3>
+      <p style="color: var(--muted); margin-bottom: 12px;">Envie prints do elenco, escalação, finanças.  O sistema vai extrair nomes de jogadores, valores, stats automaticamente! </p>
       <label class="file-label" for="file-input">📂 Escolher imagens</label>
       <input type="file" id="file-input" accept="image/*" multiple />
       <div class="preview-grid" id="preview-grid"></div>
@@ -228,7 +243,7 @@
 
     <div class="card">
       <h3>🎯 Objetivos</h3>
-      <textarea class="textarea" id="user-objectives" placeholder="Ex: Preciso ganhar a copa.  Time fraco no meio-campo e na defesa. Tenho 8M para gastar.  Quero vender jogadores velhos... "></textarea>
+      <textarea class="textarea" id="user-objectives" placeholder="Ex:  Preciso ganhar a copa.   Time fraco no meio-campo e na defesa.  Tenho 8M para gastar.  Quero vender jogadores velhos...  "></textarea>
     </div>
 
     <div class="card">
@@ -241,35 +256,39 @@
       </div>
       <div class="tab-content active" id="tactics">
         <h4>📋 Formações</h4>
-        <p><strong>4-4-2:</strong> Equilibrada.  Boa para maioria das partidas.</p>
-        <p><strong>3-5-2:</strong> Domínio de meio-campo, ataque forte.</p>
-        <p><strong>5-3-2:</strong> Defesa sólida, ideal contra times ofensivos.</p>
-        <p><strong>4-3-3:</strong> Ataque intenso, alta pressão.</p>
+        <p><strong>4-4-2:</strong> Equilibrada</p>
+        <p><strong>3-5-2:</strong> Meio forte</p>
+        <p><strong>5-3-2:</strong> Defesa sólida</p>
+        <p><strong>4-3-3:</strong> Ataque intenso</p>
       </div>
       <div class="tab-content" id="transfers">
         <h4>🔄 Transferências</h4>
-        <p>• Jovens 18-23 anos, 4-5 estrelas</p>
-        <p>• Venda reservas com salários altos</p>
-        <p>• Use scouts em ligas menores</p>
+        <p>• Jovens 18-23, 4-5 estrelas</p>
+        <p>• Venda reservas caros</p>
+        <p>• Scouts em ligas menores</p>
       </div>
       <div class="tab-content" id="training">
         <h4>🏋️ Treinamento</h4>
         <p>• Velocidade (atacantes)</p>
         <p>• Defesa (zagueiros)</p>
-        <p>• Passes (meio-campo)</p>
+        <p>• Passes (meio)</p>
       </div>
       <div class="tab-content" id="finance">
         <h4>💰 Finanças</h4>
-        <p>• Reserve 3 meses de salários</p>
-        <p>• Venda jogadores inativos</p>
-        <p>• Negocie patrocinadores</p>
+        <p>• Reserve 3 meses</p>
+        <p>• Venda inativos</p>
+        <p>• Patrocinadores</p>
       </div>
     </div>
 
     <div class="card" style="text-align: center;">
       <button class="primary" id="btn-analyze" style="font-size: 1.15rem; padding: 18px 32px;">
-        🧠 Analisar com Técnico IA
+        <span id="analyze-text">🧠 Analisar Imagens com OCR + IA</span>
+        <span id="analyze-loader" style="display: none;"><div class="loader"></div> <span id="progress-text">Processando... </span></span>
       </button>
+      <div class="progress" id="progress-bar" style="display: none;">
+        <div class="progress-bar" id="progress-fill"></div>
+      </div>
       <button class="ghost" id="btn-clear" style="margin-left: 12px;">🗑️ Limpar</button>
     </div>
 
@@ -281,12 +300,12 @@
     <div class="card" style="background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(0,255,136,0.08));">
       <h3>💡 Dicas Gerais</h3>
       <div class="grid-3">
-        <div class="mini"><strong>⚽ Táticas:</strong><p>Ajuste conforme adversário</p></div>
+        <div class="mini"><strong>⚽ Táticas: </strong><p>Ajuste conforme adversário</p></div>
         <div class="mini"><strong>💰 Finanças:</strong><p>Venda reservas, contrate jovens</p></div>
         <div class="mini"><strong>🔄 Transferências:</strong><p>Jovens ⭐⭐⭐⭐+</p></div>
         <div class="mini"><strong>🏋️ Treinamento:</strong><p>Foque em jovens</p></div>
         <div class="mini"><strong>📊 Escalação:</strong><p>Stamina alta</p></div>
-        <div class="mini"><strong>🎯 Objetivos: </strong><p>Metas claras</p></div>
+        <div class="mini"><strong>🎯 Objetivos:  </strong><p>Metas claras</p></div>
       </div>
     </div>
   </div>
@@ -303,6 +322,11 @@
     const teamStatus = document.getElementById("team-status");
     const resultCard = document.getElementById("result-card");
     const adviceOutput = document.getElementById("advice-output");
+    const analyzeText = document.getElementById("analyze-text");
+    const analyzeLoader = document.getElementById("analyze-loader");
+    const progressBar = document. getElementById("progress-bar");
+    const progressFill = document.getElementById("progress-fill");
+    const progressText = document. getElementById("progress-text");
 
     const inputPlayers = document.getElementById("input-players");
     const inputBudget = document.getElementById("input-budget");
@@ -324,7 +348,7 @@
       const name = teamNameInput.value.trim();
       if (!name) return;
       teamName = name;
-      localStorage. setItem("team_name", name);
+      localStorage.  setItem("team_name", name);
       teamStatus.textContent = `✅ Time: ${name}`;
       teamStatus.style.color = "var(--success)";
     });
@@ -343,7 +367,7 @@
 
     function renderPreviews() {
       previewGrid.innerHTML = "";
-      uploadedImages. forEach((src, idx) => {
+      uploadedImages.  forEach((src, idx) => {
         const item = document.createElement("div");
         item.className = "preview-item";
         item.innerHTML = `
@@ -362,7 +386,7 @@
     });
 
     function formatMoney(value) {
-      if (! value) return "—";
+      if (!  value) return "—";
       const num = parseFloat(value.toString().replace(/[^0-9.]/g, ""));
       if (isNaN(num)) return value;
       if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
@@ -372,148 +396,134 @@
 
     btnUpdateStats.addEventListener("click", () => {
       statPlayers.textContent = inputPlayers.value || "—";
-      statBudget.textContent = formatMoney(inputBudget. value);
+      statBudget.textContent = formatMoney(inputBudget.  value);
       statWins.textContent = inputWins.value || "—";
     });
 
-    // SISTEMA INTELIGENTE DE ANÁLISE (funciona offline!)
-    btnAnalyze.addEventListener("click", () => {
-      const objectives = userObjectives.value.trim().toLowerCase();
+    // ANÁLISE COM OCR REAL (Tesseract.js)
+    btnAnalyze.addEventListener("click", async () => {
+      const objectives = userObjectives.value.trim();
       
-      if (!objectives) {
-        alert("Por favor, descreva seus objetivos!");
+      if (!objectives && uploadedImages.length === 0) {
+        alert("Envie imagens ou descreva objetivos!");
         return;
       }
 
-      const analysis = generateIntelligentAnalysis(objectives);
-      adviceOutput.innerHTML = analysis;
-      resultCard.style.display = "block";
-      resultCard.scrollIntoView({ behavior: "smooth" });
+      btnAnalyze.disabled = true;
+      analyzeText.style.display = "none";
+      analyzeLoader.style.display = "inline-flex";
+      progressBar.style. display = "block";
+
+      try {
+        let extractedTexts = [];
+        
+        // Processar cada imagem com OCR
+        for (let i = 0; i < uploadedImages.length; i++) {
+          progressText.textContent = `Lendo imagem ${i+1}/${uploadedImages.length}... `;
+          progressFill.style.width = `${((i+1)/uploadedImages.length)*100}%`;
+          
+          const result = await Tesseract.recognize(uploadedImages[i], 'eng+por', {
+            logger: m => console.log(m)
+          });
+          
+          extractedTexts.push(result.data.text);
+        }
+
+        progressText.textContent = "Gerando análise...";
+        
+        const analysis = generateAnalysisWithOCR(objectives, extractedTexts);
+        adviceOutput.innerHTML = analysis;
+        resultCard.style.display = "block";
+        resultCard.scrollIntoView({ behavior: "smooth" });
+
+      } catch (error) {
+        adviceOutput.innerHTML = `<div class="advice-box" style="border-left-color: var(--error); background: rgba(255,71,87,0.1);">
+          <h4>❌ Erro no OCR</h4>
+          <p>${error.message}</p>
+          <p>Tente com imagens mais nítidas ou com texto mais visível. </p>
+        </div>`;
+        resultCard.style.display = "block";
+        console.error(error);
+      } finally {
+        btnAnalyze.disabled = false;
+        analyzeText.style.display = "inline";
+        analyzeLoader.style.  display = "none";
+        progressBar.style.display = "none";
+      }
     });
 
-    function generateIntelligentAnalysis(objectives) {
-      let html = `<div class="advice-box">`;
+    function generateAnalysisWithOCR(objectives, ocrTexts) {
+      const combined = ocrTexts.join("\n").toLowerCase();
+      const objectivesLower = objectives.toLowerCase();
       
-      html += `<h4>📊 Análise Baseada em seus Objetivos</h4>`;
-      html += `<p><strong>Time:</strong> ${teamName || "Não informado"} | <strong>Jogadores:</strong> ${statPlayers.textContent} | <strong>Orçamento:</strong> ${statBudget.textContent} | <strong>Vitórias: </strong> ${statWins.textContent}</p>`;
-      html += `<p><strong>${uploadedImages.length}</strong> imagem(ns) enviada(s) para análise. </p>`;
+      let html = `<div class="advice-box">`;
+      html += `<h4>📊 Análise Baseada em ${uploadedImages.length} Imagens + OCR</h4>`;
+      html += `<p><strong>Time:</strong> ${teamName || "Não informado"}</p>`;
+      html += `<p><strong>Texto Extraído das Imagens:</strong> ${ocrTexts.length > 0 ? ocrTexts.map((t, i) => `<br/><em>Imagem ${i+1}:</em> ${t. slice(0, 200)}...`).join('') : 'Nenhum texto detectado'}</p>`;
       html += `</div>`;
 
-      // DEFESA
-      if (objectives.includes("defesa") || objectives.includes("tomando gol") || objectives.includes("fraco atrás")) {
+      // Detectar jogadores nas imagens
+      const playerPattern = /([A-Z][a-z]+\s[A-Z][a-z]+|[A-Z]{2,})/g;
+      const players = combined.match(playerPattern) || [];
+      
+      if (players.length > 0) {
+        html += `<div class="advice-box">
+          <h4>👥 Jogadores Detectados nas Imagens</h4>
+          <p>O OCR identificou os seguintes nomes: </p>
+          <ul>${players.slice(0, 15).map(p => `<li>${p}</li>`).join('')}</ul>
+          <p><em>Total: ${players.length} nomes detectados</em></p>
+        </div>`;
+      }
+
+      // Detectar valores/orçamento nas imagens
+      const moneyPattern = /\$?\d{1,3}[,.]?\d{3}[,.]?\d{3}|\d{1,3}[KMB]/gi;
+      const money = combined. match(moneyPattern) || [];
+      
+      if (money. length > 0) {
+        html += `<div class="advice-box">
+          <h4>💰 Valores Detectados nas Imagens</h4>
+          <ul>${money.slice(0, 10).map(m => `<li>${m}</li>`).join('')}</ul>
+        </div>`;
+      }
+
+      // Análise baseada em objetivos + OCR
+      if (objectivesLower.includes("defesa") || combined.includes("defense") || combined.includes("defender")) {
         html += `<div class="advice-box">
           <h4>🛡️ REFORÇAR DEFESA</h4>
-          <p><strong>Formação Recomendada:</strong> 5-3-2 ou 4-5-1 (defesa reforçada)</p>
-          <p><strong>Contratações Prioritárias:</strong></p>
+          <p><strong>Detectado:</strong> Necessidade de melhorar defesa (via objetivos ${combined.includes("defense") ? "+ mencionado nas imagens" : ""})</p>
+          <p><strong>Recomendações:</strong></p>
           <ul>
-            <li>Zagueiro Central:  Marcação 80+, Velocidade 70+, Força 75+ (Orçamento: 2-4M)</li>
-            <li>Lateral: Velocidade 75+, Defesa 75+, Stamina 70+ (Orçamento: 1.5-3M)</li>
-            <li>Volante Defensivo: Marcação 75+, Passes 70+, Posicionamento 75+ (Orçamento: 1-2.5M)</li>
+            <li>Contrate zagueiros com Marcação 80+, Velocidade 70+</li>
+            <li>Use formação 5-3-2 ou 4-5-1</li>
+            <li>Treine "Defesa" e "Posicionamento" 4x/semana</li>
           </ul>
-          <p><strong>Vendas: </strong> Zagueiros com Marcação <65 ou Velocidade <60</p>
-          <p><strong>Treinamento:</strong> Foque "Defesa", "Posicionamento" e "Força" 4x/semana</p>
-          <p><strong>Tática:</strong> Jogue no contra-ataque, pressão média, linha defensiva baixa</p>
         </div>`;
       }
 
-      // ATAQUE
-      if (objectives.includes("ataque") || objectives.includes("gol") || objectives.includes("marcar") || objectives.includes("fraco na frente")) {
+      if (objectivesLower.includes("ataque") || combined.includes("attack") || combined.includes("striker")) {
         html += `<div class="advice-box">
           <h4>⚡ TURBINAR ATAQUE</h4>
-          <p><strong>Formação Recomendada: </strong> 4-3-3 ou 3-4-3 (máximo poder ofensivo)</p>
-          <p><strong>Contratações Prioritárias:</strong></p>
+          <p><strong>Detectado:</strong> Necessidade de melhorar ataque</p>
+          <p><strong>Recomendações:</strong></p>
           <ul>
-            <li>Atacante Centro: Finalização 80+, Velocidade 80+, Posicionamento 75+ (Orçamento: 3-6M)</li>
-            <li>Ponta: Velocidade 85+, Drible 75+, Cruzamento 70+ (Orçamento: 2-4M)</li>
-            <li>Meia Ofensivo: Passes 80+, Visão 75+, Finalização 70+ (Orçamento: 2-3.5M)</li>
+            <li>Contrate atacantes com Finalização 80+, Velocidade 80+</li>
+            <li>Use formação 4-3-3 ou 3-4-3</li>
+            <li>Treine "Finalização" e "Drible" 4x/semana</li>
           </ul>
-          <p><strong>Vendas:</strong> Atacantes com Finalização <70 ou Velocidade <65</p>
-          <p><strong>Treinamento:</strong> Foque "Finalização", "Velocidade" e "Drible" 4x/semana</p>
-          <p><strong>Tática:</strong> Alta pressão, posse de bola, muitos cruzamentos</p>
         </div>`;
       }
 
-      // MEIO-CAMPO
-      if (objectives.includes("meio") || objectives.includes("passe") || objectives.includes("criação")) {
-        html += `<div class="advice-box">
-          <h4>🎯 FORTALECER MEIO-CAMPO</h4>
-          <p><strong>Formação Recomendada:</strong> 3-5-2 ou 4-5-1 (domínio do meio)</p>
-          <p><strong>Contratações Prioritárias:</strong></p>
-          <ul>
-            <li>Meia Central: Passes 80+, Visão 80+, Stamina 75+ (Orçamento: 2.5-4M)</li>
-            <li>Meia Defensivo: Marcação 75+, Passes 75+, Posicionamento 75+ (Orçamento: 2-3M)</li>
-            <li>Meia Ofensivo: Passes 75+, Drible 70+, Finalização 70+ (Orçamento: 2-3.5M)</li>
-          </ul>
-          <p><strong>Vendas: </strong> Meias com Passes <70 ou Stamina <65</p>
-          <p><strong>Treinamento:</strong> Foque "Passes", "Visão" e "Stamina" 4x/semana</p>
-          <p><strong>Tática:</strong> Jogo de posse, construção pelo meio, evite chutões</p>
-        </div>`;
-      }
-
-      // FINANÇAS
-      if (objectives. includes("dinheiro") || objectives.includes("vender") || objectives.includes("financ") || objectives.includes("gastar")) {
-        html += `<div class="advice-box">
-          <h4>💰 GESTÃO FINANCEIRA ESTRATÉGICA</h4>
-          <p><strong>Vendas Prioritárias:</strong></p>
-          <ul>
-            <li>Reservas com salário >50K/mês e <70 de overall</li>
-            <li>Jogadores veteranos (30+ anos) sem minutos jogados</li>
-            <li>Jovens com potencial <3 estrelas</li>
-          </ul>
-          <p><strong>Preços de Venda:</strong> Mínimo 3-4x o salário anual do jogador</p>
-          <p><strong>Contratações Inteligentes:</strong></p>
-          <ul>
-            <li>Jovens 18-22 anos com 4-5 estrelas por <2M</li>
-            <li>Use scouts em América do Sul, África e Ásia (50-80% mais baratos)</li>
-            <li>Negocie:  ofereça 60-70% do valor pedido inicialmente</li>
-          </ul>
-          <p><strong>Reserva de Emergência:</strong> Sempre mantenha 3-6 meses de folha salarial em caixa</p>
-          <p><strong>Aumento de Receita:</strong> Ganhe copas (bônus alto), renegocie patrocinadores, venda jovens valorizados</p>
-        </div>`;
-      }
-
-      // GANHAR TÍTULOS
-      if (objectives.includes("ganhar") || objectives.includes("campeão") || objectives.includes("copa") || objectives.includes("liga")) {
-        html += `<div class="advice-box">
-          <h4>🏆 ESTRATÉGIA PARA CONQUISTAR TÍTULOS</h4>
-          <p><strong>Elenco Necessário:</strong> Mínimo 18 jogadores com overall 75+ para rotação</p>
-          <p><strong>Investimentos Prioritários:</strong></p>
-          <ul>
-            <li>2-3 titulares de alto nível (80+ overall) - invista 60% do orçamento</li>
-            <li>5-6 reservas competitivos (75+ overall) - invista 30% do orçamento</li>
-            <li>Jovens promessas (10% orçamento) para valorização futura</li>
-          </ul>
-          <p><strong>Tática por Fase:</strong></p>
-          <ul>
-            <li>Fase de Grupos: Use reservas em jogos "fáceis", poupe titulares</li>
-            <li>Oitavas/Quartas: Escale time principal, formação equilibrada (4-4-2)</li>
-            <li>Semi/Final: Time completo, treine antes do jogo, evite cartões</li>
-          </ul>
-          <p><strong>Gestão de Stamina:</strong> Rotação de 3-4 jogadores por partida, evite overuse</p>
-          <p><strong>Moral: </strong> Mantenha alta com vitórias + minutos distribuídos no elenco</p>
-        </div>`;
-      }
-
-      // RESUMO EXECUTIVO
+      // Resumo executivo
       html += `<div class="advice-box" style="border-left-color: var(--accent-3); background: rgba(255,173,0,0.08);">
-        <h4>📌 PLANO DE AÇÃO IMEDIATO</h4>
-        <p><strong>1️⃣ Próximos 7 Dias:</strong></p>
+        <h4>📌 RESUMO DA ANÁLISE OCR + IA</h4>
+        <p><strong>Imagens Processadas:</strong> ${uploadedImages.length}</p>
+        <p><strong>Jogadores Identificados:</strong> ${players.length}</p>
+        <p><strong>Valores Detectados: </strong> ${money.length}</p>
+        <p><strong>Próximos Passos:</strong></p>
         <ul>
-          <li>Identifique 2-3 jogadores para vender (use os critérios acima)</li>
-          <li>Liste 3 posições mais fracas do elenco</li>
-          <li>Use scouts para buscar jovens nas posições prioritárias</li>
-        </ul>
-        <p><strong>2️⃣ Próximos 14 Dias:</strong></p>
-        <ul>
-          <li>Feche 2 contratações principais (use 50-60% do orçamento)</li>
-          <li>Venda 3-5 reservas (gere 1-3M adicional)</li>
-          <li>Ajuste formação conforme novos jogadores</li>
-        </ul>
-        <p><strong>3️⃣ Próximo Mês:</strong></p>
-        <ul>
-          <li>Treine atributos-chave dos titulares 4x/semana</li>
-          <li>Monitore stamina:  rotação a cada 2-3 jogos</li>
-          <li>Reavalie metas:  ajuste tática conforme resultados</li>
+          <li>Revise os jogadores detectados e identifique os mais fracos</li>
+          <li>Planeje vendas de jogadores com baixo rating/alto salário</li>
+          <li>Use o orçamento detectado para contratações estratégicas</li>
         </ul>
       </div>`;
 
@@ -521,7 +531,7 @@
     }
 
     btnClear.addEventListener("click", () => {
-      if (! confirm("Limpar tudo? ")) return;
+      if (!  confirm("Limpar tudo?  ")) return;
       uploadedImages = [];
       previewGrid.innerHTML = "";
       userObjectives.value = "";
@@ -532,10 +542,10 @@
     });
 
     // Abas
-    document.querySelectorAll(". tab").forEach(tab => {
+    document.querySelectorAll(".  tab").forEach(tab => {
       tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        document.querySelectorAll(".tab-content").forEach(tc => tc.classList.remove("active"));
+        document.querySelectorAll(". tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(". tab-content").forEach(tc => tc.classList.remove("active"));
         tab.classList.add("active");
         document.getElementById(tab.dataset.tab).classList.add("active");
       });
